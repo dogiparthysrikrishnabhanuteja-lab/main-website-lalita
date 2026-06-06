@@ -1,0 +1,6 @@
+{
+  "name": "Lalita Financial Services",
+  "description": "Premium elite financial protection and milestone compounding advisory led by MDRT Advisor D T V S SWAMY.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

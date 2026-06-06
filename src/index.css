@@ -1,0 +1,250 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import "tailwindcss";
+
+@variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  
+  --color-navy-950: #040A18;
+  --color-navy-900: #071126;
+  --color-navy-800: #0D1D3A;
+  --color-navy-700: #14284F;
+  --color-gold-500: #D4AF37;
+  --color-gold-600: #C59C27;
+  --color-gold-400: #E5C358;
+  --color-gold-200: #F3E4A6;
+}
+
+/* Base resets & styling */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+body {
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  background-color: #ffffff; /* Crisp White Premium Canvas */
+  color: #1e293b; /* Premium Deep Slate */
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #e2e8f0;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #d97706;
+}
+
+/* Global transitions for a premium butter-smooth theme switch */
+body, main, header, footer, section, button, h1, h2, h3, h4, h5, h6, p, span, blockquote, input, select, textarea {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.2s ease, box-shadow 0.3s ease;
+}
+
+/* Premium Dark Aesthetic CSS Variables */
+html[data-theme='dark'] {
+  color-scheme: dark;
+}
+
+html[data-theme='dark'] body {
+  background-color: #040914 !important;
+  color: #cbd5e1 !important;
+}
+
+html[data-theme='dark'] .bg-white {
+  background-color: #0b111e !important;
+}
+
+html[data-theme='dark'] .bg-white\/95 {
+  background-color: rgba(11, 17, 30, 0.95) !important;
+}
+
+html[data-theme='dark'] .bg-white\/90 {
+  background-color: rgba(11, 17, 30, 0.90) !important;
+}
+
+html[data-theme='dark'] .bg-white\/80 {
+  background-color: rgba(11, 17, 30, 0.82) !important;
+}
+
+html[data-theme='dark'] .bg-white\/70 {
+  background-color: rgba(11, 17, 30, 0.72) !important;
+}
+
+html[data-theme='dark'] .bg-white\/50 {
+  background-color: rgba(11, 17, 30, 0.52) !important;
+}
+
+html[data-theme='dark'] .bg-slate-50 {
+  background-color: #0f1624 !important;
+}
+
+html[data-theme='dark'] .bg-slate-50\/50 {
+  background-color: rgba(15, 22, 36, 0.6) !important;
+}
+
+html[data-theme='dark'] .bg-slate-100 {
+  background-color: #161e2f !important;
+}
+
+html[data-theme='dark'] .text-slate-900 {
+  color: #ffffff !important;
+}
+
+html[data-theme='dark'] .text-slate-850,
+html[data-theme='dark'] .text-slate-800 {
+  color: #f8fafc !important;
+}
+
+html[data-theme='dark'] .text-slate-750,
+html[data-theme='dark'] .text-slate-705,
+html[data-theme='dark'] .text-slate-700 {
+  color: #e2e8f0 !important;
+}
+
+html[data-theme='dark'] .text-slate-605,
+html[data-theme='dark'] .text-slate-600 {
+  color: #cbd5e1 !important;
+}
+
+html[data-theme='dark'] .text-slate-500 {
+  color: #94a3b8 !important;
+}
+
+html[data-theme='dark'] .text-slate-450,
+html[data-theme='dark'] .text-slate-405,
+html[data-theme='dark'] .text-slate-400 {
+  color: #94a3b8 !important;
+}
+
+html[data-theme='dark'] .border-slate-100,
+html[data-theme='dark'] .border-slate-200,
+html[data-theme='dark'] .border-slate-250 {
+  border-color: #1e293b !important;
+}
+
+html[data-theme='dark'] .border-slate-200\/50 {
+  border-color: rgba(30, 41, 59, 0.5) !important;
+}
+
+html[data-theme='dark'] .border-slate-200\/80 {
+  border-color: rgba(30, 41, 59, 0.7) !important;
+}
+
+html[data-theme='dark'] .bg-amber-50 {
+  background-color: rgba(245, 158, 11, 0.08) !important;
+}
+
+html[data-theme='dark'] .border-amber-100 {
+  border-color: rgba(245, 158, 11, 0.2) !important;
+}
+
+html[data-theme='dark'] .bg-emerald-50 {
+  background-color: rgba(16, 185, 129, 0.08) !important;
+}
+
+html[data-theme='dark'] .border-emerald-100 {
+  border-color: rgba(16, 185, 129, 0.2) !important;
+}
+
+html[data-theme='dark'] .bg-teal-50 {
+  background-color: rgba(20, 184, 166, 0.08) !important;
+}
+
+html[data-theme='dark'] .border-teal-100 {
+  border-color: rgba(20, 184, 166, 0.2) !important;
+}
+
+html[data-theme='dark'] ::-webkit-scrollbar-track {
+  background: #040914;
+}
+
+html[data-theme='dark'] ::-webkit-scrollbar-thumb {
+  background: #1e293b;
+}
+
+html[data-theme='dark'] .glass-panel {
+  background: rgba(11, 17, 30, 0.85);
+  border-color: rgba(245, 158, 11, 0.2);
+}
+
+html[data-theme='dark'] .gold-gradient-light {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Selection */
+::selection {
+  background-color: rgba(217, 119, 6, 0.15);
+  color: #1e293b;
+}
+
+/* Section Angles and Borders */
+.diagonal-section {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Glassmorphism utility styled with premium warm-gold/slate vibe */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(217, 119, 6, 0.12);
+}
+
+.gold-border-glow:hover {
+  border-color: rgba(217, 119, 6, 0.4);
+  box-shadow: 0 4px 24px -2px rgba(217, 119, 6, 0.1);
+}
+
+/* Polished Gold Gradient text highlight for white bg */
+.gold-gradient {
+  background: linear-gradient(135deg, #78350f 0%, #d97706 50%, #b45309 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-gradient-light {
+  background: linear-gradient(135deg, #78350f 0%, #b45309 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Carousel/Slider track */
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 35s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Custom layout helpers */
+.touch-target {
+  min-height: 44px;
+  min-width: 44px;
+}
