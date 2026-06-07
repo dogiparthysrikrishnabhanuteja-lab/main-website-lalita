@@ -13,37 +13,47 @@ import { awards, partners, testimonials } from '../data/financial_data';
 
 const getBrandTheme = (name: string) => {
   const lowercase = name.toLowerCase();
+  
+  // Your logo.dev token
+  const logoToken = 'pk_edIEheiBQL6aVnV9bxDBoA'; 
+
+  // Helper to generate the primary logo URL and fallback URL
+  const getLogos = (domain: string, fallbackText: string) => ({
+    logoUrl: `https://img.logo.dev/${domain}?token=${logoToken}&size=80&retina=true`,
+    fallbackUrl: `https://via.placeholder.com/150x60/cccccc/888888?text=${encodeURIComponent(fallbackText)}`
+  });
+
   if (lowercase.includes('tata aia')) {
-    return { bg: 'from-amber-600 to-amber-800 bg-gradient-to-tr', text: 'text-white', abbrev: 'TA' };
+    return { bg: 'from-amber-600 to-amber-800 bg-gradient-to-tr', text: 'text-white', abbrev: 'TA', ...getLogos('tataaia.com', 'TATA AIA') };
   }
   if (lowercase.includes('tata aig')) {
-    return { bg: 'from-amber-500 to-slate-800 bg-gradient-to-tr', text: 'text-white', abbrev: 'TG' };
+    return { bg: 'from-amber-500 to-slate-800 bg-gradient-to-tr', text: 'text-white', abbrev: 'TG', ...getLogos('tataaig.com', 'TATA AIG') };
   }
   if (lowercase.includes('icici prudential') || lowercase.includes('icici pru')) {
-    return { bg: 'from-orange-500 to-orange-700 bg-gradient-to-tr', text: 'text-white', abbrev: 'IP' };
+    return { bg: 'from-orange-500 to-orange-700 bg-gradient-to-tr', text: 'text-white', abbrev: 'IP', ...getLogos('iciciprulife.com', 'ICICI PRU') };
   }
   if (lowercase.includes('icici lombard')) {
-    return { bg: 'from-red-500 to-red-700 bg-gradient-to-tr', text: 'text-white', abbrev: 'IL' };
+    return { bg: 'from-red-500 to-red-700 bg-gradient-to-tr', text: 'text-white', abbrev: 'IL', ...getLogos('icicilombard.com', 'ICICI LOMBARD') };
   }
   if (lowercase.includes('hdfc life')) {
-    return { bg: 'from-blue-600 to-slate-800 bg-gradient-to-tr', text: 'text-white', abbrev: 'HL' };
+    return { bg: 'from-blue-600 to-slate-800 bg-gradient-to-tr', text: 'text-white', abbrev: 'HL', ...getLogos('hdfclife.com', 'HDFC LIFE') };
   }
   if (lowercase.includes('hdfc ergo')) {
-    return { bg: 'from-indigo-600 to-slate-800 bg-gradient-to-tr', text: 'text-white', abbrev: 'HE' };
+    return { bg: 'from-indigo-600 to-slate-800 bg-gradient-to-tr', text: 'text-white', abbrev: 'HE', ...getLogos('hdfcergo.com', 'HDFC ERGO') };
   }
   if (lowercase.includes('star health')) {
-    return { bg: 'from-blue-500 to-indigo-650 bg-gradient-to-tr', text: 'text-white', abbrev: 'SH' };
+    return { bg: 'from-blue-500 to-indigo-650 bg-gradient-to-tr', text: 'text-white', abbrev: 'SH', ...getLogos('starhealth.in', 'STAR HEALTH') };
   }
   if (lowercase.includes('care health')) {
-    return { bg: 'from-emerald-500 to-teal-700 bg-gradient-to-tr', text: 'text-white', abbrev: 'CH' };
+    return { bg: 'from-emerald-500 to-teal-700 bg-gradient-to-tr', text: 'text-white', abbrev: 'CH', ...getLogos('careinsurance.com', 'CARE HEALTH') };
   }
   if (lowercase.includes('niva bupa')) {
-    return { bg: 'from-cyan-500 to-teal-700 bg-gradient-to-tr', text: 'text-white', abbrev: 'NB' };
+    return { bg: 'from-cyan-500 to-teal-700 bg-gradient-to-tr', text: 'text-white', abbrev: 'NB', ...getLogos('nivabupa.com', 'NIVA BUPA') };
   }
   if (lowercase.includes('prudent')) {
-    return { bg: 'from-purple-600 to-indigo-700 bg-gradient-to-tr', text: 'text-white', abbrev: 'PF' };
+    return { bg: 'from-purple-600 to-indigo-700 bg-gradient-to-tr', text: 'text-white', abbrev: 'PF', ...getLogos('prudentbrokers.com', 'PRUDENT') };
   }
-  return { bg: 'from-slate-500 to-slate-700 bg-gradient-to-tr', text: 'text-white', abbrev: 'FI' };
+  
 };
 
 interface HomeViewProps {
