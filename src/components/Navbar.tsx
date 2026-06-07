@@ -59,34 +59,40 @@ export default function Navbar({ currentPage, setCurrentPage, onScrollToSection,
     <header 
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
         scrolled 
-          ? 'bg-white/95 dark:bg-slate-950/95 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800/80 py-3 shadow-md' 
-          : 'bg-white/80 dark:bg-slate-950/80 backdrop-blur-sm py-4 border-b border-slate-100 dark:border-slate-900'
+          ? 'bg-white/95 dark:bg-slate-950/95 backdrop-blur-md border-b border-slate-200/85 dark:border-slate-800/85 py-3 shadow-md' 
+          : 'bg-white/90 dark:bg-slate-950/90 backdrop-blur-sm py-4 border-b border-slate-100 dark:border-slate-900'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           
-          {/* Logo Brand */}
+          {/* Logo Brand / Company name formatted elegantly as TWO lines to support user intent perfectly */}
           <button 
             onClick={() => handleNavClick('home', 'hero')}
-            className="flex flex-col text-left group cursor-pointer outline-none whitespace-nowrap shrink-0 mr-6"
+            className="flex items-center gap-3 text-left group cursor-pointer outline-none shrink-0"
           >
-            <span className="text-lg sm:text-xl lg:text-[22px] font-black tracking-tight text-slate-900 dark:text-white font-display group-hover:text-amber-500 transition-colors uppercase whitespace-nowrap leading-tight">
-              Lalita Financial Services
-            </span>
-            <span className="text-[10px] sm:text-[11px] tracking-widest text-slate-500 dark:text-slate-400 font-mono font-bold leading-none mt-1 uppercase whitespace-nowrap">
-              D T V S Swamy • MDRT Advisor
-            </span>
+            <div className="h-10 w-1 bg-amber-500 rounded-full shrink-0 group-hover:scale-y-110 transition-transform duration-300" />
+            <div className="flex flex-col">
+              <span className="text-base sm:text-lg lg:text-xl font-black tracking-tight text-slate-900 dark:text-white font-display group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors uppercase leading-none">
+                Lalita Financial
+              </span>
+              <span className="text-xs sm:text-sm font-extrabold tracking-widest text-amber-600 dark:text-amber-400 font-display group-hover:text-amber-500 transition-colors uppercase leading-none mt-1">
+                Services
+              </span>
+              <span className="text-[9px] tracking-wider text-slate-500 dark:text-slate-400 font-mono font-bold leading-none mt-1 uppercase whitespace-nowrap">
+                D T V S Swamy • MDRT Advisor
+              </span>
+            </div>
           </button>
 
-          {/* Desktop Navigation - Increased font sizes, rearranged spacing */}
-          <nav className="hidden xl:flex items-center space-x-2">
+          {/* Desktop Navigation - Rearranged, with increased font size & robust dark-mode coloring */}
+          <nav className="hidden xl:flex items-center space-x-1">
             <button
               onClick={() => handleNavClick('home', 'hero')}
-              className={`px-3 py-2 text-sm lg:text-base font-extrabold transition-colors cursor-pointer outline-none touch-target whitespace-nowrap ${
+              className={`px-3 py-2 text-[15px] xl:text-[16px] font-extrabold transition-colors cursor-pointer outline-none touch-target whitespace-nowrap ${
                 currentPage === 'home' 
                   ? 'text-amber-600 dark:text-amber-400 font-black' 
-                  : 'text-slate-800 dark:text-slate-100 hover:text-amber-500 dark:hover:text-amber-400'
+                  : 'text-slate-800 dark:text-slate-100 hover:text-amber-600 dark:hover:text-amber-400'
               }`}
             >
               Home
@@ -100,10 +106,10 @@ export default function Navbar({ currentPage, setCurrentPage, onScrollToSection,
             >
               <button
                 onClick={() => handleNavClick('services')}
-                className={`px-3 py-2 text-sm lg:text-base font-extrabold flex items-center gap-1 transition-colors cursor-pointer outline-none touch-target whitespace-nowrap ${
+                className={`px-3 py-2 text-[15px] xl:text-[16px] font-extrabold flex items-center gap-1 transition-colors cursor-pointer outline-none touch-target whitespace-nowrap ${
                   currentPage === 'services' 
-                    ? 'text-amber-600 dark:text-amber-400 font-black' 
-                    : 'text-slate-800 dark:text-slate-100 hover:text-amber-500 dark:hover:text-amber-400'
+                    ? 'text-amber-605 dark:text-amber-400 font-black' 
+                    : 'text-slate-800 dark:text-slate-100 hover:text-amber-600 dark:hover:text-amber-400'
                 }`}
               >
                 Services <ChevronDown className="w-3.5 h-3.5 transition-transform group-hover:rotate-180 text-slate-400" />
@@ -139,10 +145,10 @@ export default function Navbar({ currentPage, setCurrentPage, onScrollToSection,
 
             <button
               onClick={() => handleNavClick('resources')}
-              className={`px-3 py-2 text-sm lg:text-base font-extrabold transition-colors cursor-pointer outline-none touch-target whitespace-nowrap ${
+              className={`px-3 py-2 text-[15px] xl:text-[16px] font-extrabold transition-colors cursor-pointer outline-none touch-target whitespace-nowrap ${
                 currentPage === 'resources' 
                   ? 'text-amber-600 dark:text-amber-400 font-black' 
-                  : 'text-slate-800 dark:text-slate-100 hover:text-amber-500 dark:hover:text-amber-400'
+                  : 'text-slate-800 dark:text-slate-100 hover:text-amber-600 dark:hover:text-amber-400'
               }`}
             >
               Calculators
@@ -156,10 +162,10 @@ export default function Navbar({ currentPage, setCurrentPage, onScrollToSection,
             >
               <button
                 onClick={() => handleNavClick('home', 'about')}
-                className={`px-3 py-2 text-sm lg:text-base font-extrabold flex items-center gap-1 transition-colors cursor-pointer outline-none touch-target whitespace-nowrap ${
-                  currentPage === 'home' 
-                    ? 'text-amber-655 dark:text-amber-405' 
-                    : 'text-slate-800 dark:text-slate-100 hover:text-amber-500 dark:hover:text-amber-400'
+                className={`px-3 py-2 text-[15px] xl:text-[16px] font-extrabold flex items-center gap-1 transition-colors cursor-pointer outline-none touch-target whitespace-nowrap ${
+                  currentPage === 'home' && (window.location.hash === '#about' || window.location.hash === '#stats')
+                    ? 'text-amber-600 dark:text-amber-400' 
+                    : 'text-slate-800 dark:text-slate-100 hover:text-amber-600 dark:hover:text-amber-400'
                 }`}
               >
                 About <ChevronDown className="w-3.5 h-3.5 transition-transform group-hover:rotate-180 text-slate-400" />
@@ -192,45 +198,38 @@ export default function Navbar({ currentPage, setCurrentPage, onScrollToSection,
 
             <button
               onClick={() => handleNavClick('faq')}
-              className={`px-3 py-2 text-sm lg:text-base font-extrabold transition-colors cursor-pointer outline-none touch-target whitespace-nowrap ${
+              className={`px-3 py-2 text-[15px] xl:text-[16px] font-extrabold transition-colors cursor-pointer outline-none touch-target whitespace-nowrap ${
                 currentPage === 'faq' 
                   ? 'text-amber-600 dark:text-amber-400 font-black' 
-                  : 'text-slate-800 dark:text-slate-100 hover:text-amber-500 dark:hover:text-amber-400'
+                  : 'text-slate-800 dark:text-slate-100 hover:text-amber-600 dark:hover:text-amber-400'
               }`}
             >
               FAQ
             </button>
+          </nav>
+
+          {/* Desktop Right Hand Call to Action Indicator / Simplified layout, moved Contact into extreme right CTA to guarantee zero double line navigation items text wrapping! */}
+          <div className="hidden xl:flex items-center gap-3 shrink-0">
+            <button
+              onClick={toggleTheme}
+              className="p-2 text-slate-700 dark:text-slate-200 hover:text-amber-500 hover:bg-slate-100 dark:hover:bg-slate-800/80 rounded-full transition-all cursor-pointer outline-none touch-target"
+              title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+            >
+              {theme === 'dark' ? <Sun className="w-5 h-5 text-amber-500 animate-[spin_10s_linear_infinite]" /> : <Moon className="w-5 h-5 text-slate-700" />}
+            </button>
 
             <button
               onClick={() => handleNavClick('home', 'contact')}
-              className="px-3 py-2 text-sm lg:text-base font-extrabold text-slate-800 dark:text-slate-100 hover:text-amber-500 dark:hover:text-amber-400 transition-colors cursor-pointer outline-none touch-target whitespace-nowrap"
+              className="px-4.5 py-2.5 bg-amber-600 hover:bg-amber-700 text-white font-bold text-sm rounded-xl transition-all outline-none cursor-pointer flex items-center gap-2 shadow-md shadow-amber-600/10 hover:shadow-lg hover:-translate-y-0.5 whitespace-nowrap"
             >
-              Contact
-            </button>
-          </nav>
-
-          {/* Desktop Right Hand Call to Action Indicator */}
-          <div className="hidden xl:flex items-center gap-4 shrink-0">
-            <button
-              onClick={toggleTheme}
-              className="p-2 text-slate-700 dark:text-slate-200 hover:text-amber-500 rounded-full hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-all cursor-pointer outline-none touch-target"
-              title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-            >
-              {theme === 'dark' ? <Sun className="w-4.5 h-4.5 text-amber-500 animate-[spin_8s_linear_infinite]" /> : <Moon className="w-4.5 h-4.5 text-slate-700" />}
-            </button>
-
-            <button
-              onClick={() => handleNavClick('resources')}
-              className="px-4 py-2 bg-amber-600 hover:bg-amber-700 font-bold text-xs lg:text-sm text-white rounded-lg transition-all outline-none cursor-pointer flex items-center gap-1.5 shadow-md shadow-amber-600/10 hover:shadow-lg transition-all whitespace-nowrap"
-            >
-              <Sparkles className="w-3.5 h-3.5" /> Compound Tool
+              <PhoneCall className="w-4 h-4" /> Book Call
             </button>
           </div>
 
           {/* Hamburger Mobile Trigger */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="xl:hidden p-2 text-slate-650 dark:text-slate-200 hover:text-slate-900 outline-none cursor-pointer touch-target"
+            className="xl:hidden p-2 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg outline-none cursor-pointer touch-target"
             aria-label="Toggle navigation"
           >
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -270,7 +269,7 @@ export default function Navbar({ currentPage, setCurrentPage, onScrollToSection,
                 <div className="flex items-center gap-2">
                   <button
                     onClick={toggleTheme}
-                    className="p-1.5 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 text-slate-500 dark:text-slate-405 hover:text-amber-500 transition-colors cursor-pointer outline-none"
+                    className="p-1.5 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:text-amber-500 transition-colors cursor-pointer outline-none"
                     aria-label="Toggle theme"
                   >
                     {theme === 'dark' ? <Sun className="w-4 h-4 text-amber-500" /> : <Moon className="w-4 h-4 text-slate-700" />}
@@ -290,7 +289,7 @@ export default function Navbar({ currentPage, setCurrentPage, onScrollToSection,
                 <button
                   onClick={() => handleNavClick('home', 'hero')}
                   className={`w-full text-left py-2 text-sm font-extrabold flex items-center justify-between transition-colors ${
-                    currentPage === 'home' ? 'text-amber-600 dark:text-amber-400' : 'text-slate-805 dark:text-slate-200'
+                    currentPage === 'home' ? 'text-amber-600 dark:text-amber-400' : 'text-slate-800 dark:text-slate-200'
                   }`}
                 >
                   Home
@@ -312,10 +311,10 @@ export default function Navbar({ currentPage, setCurrentPage, onScrollToSection,
                 <div className="py-2.5 border-t border-b border-slate-100 dark:border-slate-800 space-y-2">
                   <button
                     onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
-                    className="w-full text-left flex items-center justify-between text-[11px] font-mono tracking-widest text-amber-705 dark:text-amber-405 uppercase font-extrabold outline-none cursor-pointer"
+                    className="w-full text-left flex items-center justify-between text-[11px] font-mono tracking-widest text-amber-700 dark:text-amber-400 uppercase font-extrabold outline-none cursor-pointer"
                   >
                     <span>Services & Suites</span>
-                    <ChevronDown className={`w-3.5 h-3.5 text-slate-400 transition-transform duration-300 ${mobileServicesOpen ? 'rotate-180 text-amber-700' : ''}`} />
+                    <ChevronDown className={`w-3.5 h-3.5 text-slate-400 transition-transform duration-300 ${mobileServicesOpen ? 'rotate-180 text-amber-750' : ''}`} />
                   </button>
                   
                   <AnimatePresence initial={false}>
@@ -337,7 +336,7 @@ export default function Navbar({ currentPage, setCurrentPage, onScrollToSection,
                           <button
                             key={i}
                             onClick={() => handleNavClick('services', s.h)}
-                            className="w-full text-left pl-3 py-1.5 text-xs text-slate-600 dark:text-slate-300 hover:text-amber-605 dark:hover:text-amber-400 transition-colors block font-semibold"
+                            className="w-full text-left pl-3 py-1.5 text-xs text-slate-600 dark:text-slate-300 hover:text-amber-600 dark:hover:text-amber-400 transition-colors block font-semibold"
                           >
                             • {s.l}
                           </button>
@@ -349,7 +348,7 @@ export default function Navbar({ currentPage, setCurrentPage, onScrollToSection,
 
                 <button
                   onClick={() => handleNavClick('faq')}
-                  className={`w-full text-left py-2 text-sm font-medium hover:text-amber-605 dark:hover:text-amber-400 transition-colors ${
+                  className={`w-full text-left py-2 text-sm font-medium hover:text-amber-600 dark:hover:text-amber-400 transition-colors ${
                     currentPage === 'faq' ? 'text-amber-600 dark:text-amber-400 font-bold' : 'text-slate-600 dark:text-slate-300'
                   }`}
                 >
@@ -376,7 +375,7 @@ export default function Navbar({ currentPage, setCurrentPage, onScrollToSection,
               {/* Drawer Footer Status block */}
               <div className="p-5 bg-slate-50 dark:bg-slate-950 border-t border-slate-100 dark:border-slate-800 shrink-0 text-center space-y-1.5">
                 <span className="text-[10px] uppercase font-mono font-extrabold tracking-wider text-slate-700 dark:text-slate-300 block">D T V S SWAMY • MDRT ADVISOR</span>
-                <span className="text-[9px] text-slate-405 dark:text-slate-500 font-mono block">Call: +91 98855 39211</span>
+                <span className="text-[9px] text-slate-500 dark:text-slate-400 font-mono block">Call: +91 98855 39211</span>
               </div>
             </motion.div>
           </>
