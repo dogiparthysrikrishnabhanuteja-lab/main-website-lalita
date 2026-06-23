@@ -298,7 +298,7 @@ export default function Navbar({ currentPage, setCurrentPage, onScrollToSection,
                   onClick={() => handleNavClick('home', 'about')}
                   className="w-full text-left py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-amber-600 dark:hover:text-amber-400 transition-colors"
                 >
-                  About Me
+                  About
                 </button>
                 <button
                   onClick={() => handleNavClick('home', 'stats')}
@@ -313,8 +313,7 @@ export default function Navbar({ currentPage, setCurrentPage, onScrollToSection,
                     onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
                     className="w-full text-left flex items-center justify-between text-[11px] font-mono tracking-widest text-amber-700 dark:text-amber-400 uppercase font-extrabold outline-none cursor-pointer"
                   >
-                    <span>Services & Suites</span>
-                    <ChevronDown className={`w-3.5 h-3.5 text-slate-400 transition-transform duration-300 ${mobileServicesOpen ? 'rotate-180 text-amber-750' : ''}`} />
+                    <span>Services</span>
                   </button>
                   
                   <AnimatePresence initial={false}>
@@ -352,7 +351,7 @@ export default function Navbar({ currentPage, setCurrentPage, onScrollToSection,
                     currentPage === 'faq' ? 'text-amber-600 dark:text-amber-400 font-bold' : 'text-slate-600 dark:text-slate-300'
                   }`}
                 >
-                  FAQ Help Center
+                  FAQ
                 </button>
 
                 <button
@@ -361,14 +360,14 @@ export default function Navbar({ currentPage, setCurrentPage, onScrollToSection,
                     currentPage === 'resources' ? 'text-amber-600 dark:text-amber-400 font-bold' : 'text-slate-800 dark:text-slate-200'
                   }`}
                 >
-                  <Sparkles className="w-4 h-4 text-amber-600 animate-pulse" /> Wealth Calculators
+                  <Sparkles className="w-4 h-4 text-amber-600 animate-pulse" /> Calculators
                 </button>
 
                 <button
                   onClick={() => handleNavClick('home', 'contact')}
                   className="w-full text-left py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-amber-600 dark:hover:text-amber-400 transition-colors border-t border-slate-100 dark:border-slate-800 pt-3"
                 >
-                  Book Consultation callback
+                  Contact
                 </button>
               </div>
 

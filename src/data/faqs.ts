@@ -152,5 +152,65 @@ export const faqs: FAQ[] = [
     category: 'investments',
     question: 'How does Rupee Cost Averaging benefit a retail investor during stock market corrections?',
     answer: 'During market declines, your fixed SIP installment automatically acquires more mutual fund units at lower values. Over time, this decreases the average procurement cost per unit. When the market subsequently recovers, your accumulated high-volume units compound exponentially as stock prices shift upwards, offering substantial premium yield benefits without timing the market.'
+  },
+  {
+    id: 'l7',
+    category: 'life',
+    question: 'Can I cancel an insurance policy if I change my mind later? (What is the Free-Look Period?)',
+    answer: 'Yes! All insurance policies in India come with a statutory free-look or cooling-off period of 15 to 30 days from the date you receive the physical policy document. If you are unsatisfied with any terms or change your mind, you can request cancellation within this window. The insurer will refund your premium, deducting only the proportionate risk cover premium, medical test charges, and stamp duty.'
+  },
+  {
+    id: 'h7',
+    category: 'health',
+    question: 'Is there an entry age limit for purchasing health insurance policies?',
+    answer: 'Most standard health insurance policies have a minimum entry age of 91 days (for children enrolled under a family floater) and a maximum entry age ranging from 65 years to lifetime enrollment, depending on the provider. However, we strongly advise securing comprehensive health covers before turning 40 to lock in lower premium brackets, skip rigorous medical screenings, and clear pre-existing waiting periods during your peak health.'
+  },
+  {
+    id: 'i6',
+    category: 'investments',
+    question: 'How often should I review my investment portfolio or insurance coverages?',
+    answer: 'We recommend conducting a thorough review of your financial portfolio and protection coverages at least once a year. Additionally, you should trigger an immediate review during significant life milestones—such as marriage, welcoming a newborn, taking a home loan, or receiving a major salary hike. This proactive step ensures your wealth generators and safety nets remain perfectly proportional to your real-time dependencies.'
+  },
+  {
+    id: 'g4',
+    category: 'general',
+    question: 'What is the immediate procedure to lodge a claim during emergencies?',
+    answer: 'In any emergency: 1) Document the damage immediately via clear photos or videos. 2) Contact Lalita Financial Services or the insurer’s helpline within 24 hours. 3) In case of motor accidents, do not move the vehicle if a third-party is injured until police reporting is done. 4) For theft/fire, file an immediate local police FIR. Our dedicated office handles surveyor coordination and document tracking to ensure a quick payout.'
+  },
+  {
+    id: 'l8',
+    category: 'life',
+    question: 'What are the essential documents needed to submit a claim?',
+    answer: 'The primary documentation requirements generally include: 1) Original policy contract booklet. 2) Duly signed and completed claim settlement form. 3) Legal death certificate (for life claims) or hospital discharge summary (for health claims). 4) KYC documents and a cancelled cheque of the registered nominee for direct NEFT payout. Lalita Financial Services personally prepares, tracks, and delivers your claims file to ensure maximum swiftness.'
+  },
+  {
+    id: 'g5',
+    category: 'general',
+    question: 'How can I contact customer support for queries or claims?',
+    answer: 'You can reach customer support 24/7 through several authorized channels:\n\n1. Toll-Free Customer Helpline: Call 1800 266 7780 (or 1800 22 9966 specifically designated for Senior Citizens).\n2. Official Support Email: support@lalitafinancial.com\n3. Dedicated WhatsApp Services: Send "Hi" to our support line at +91 91361 60375 on WhatsApp to instantly download policy copies, check claim status, or request renewal links.\n4. Registered Corporate Office: Peninsula Business Park, Tower A, Lower Parel, Mumbai.\n\nOur office at Lalita Financial Services also personally facilitates escalation and seamless communication with our partner insurance carriers on your behalf.'
+  },
+  {
+    id: 'g6',
+    category: 'general',
+    question: 'How can I download a copy of my insurance policy online?',
+    answer: 'Downloading your policy document is secure and completely paperless:\n\n1. Visit our digital self-service portal or the official portal of your respective partner insurer and select the "Self-Service" or "Customer Portal" tab.\n2. Enter your registered Mobile Number or Email ID along with your Policy Number or Proposal Number.\n3. Verify the transaction with the one-time OTP sent to your phone to view and instantly download your active policy schedule, 80D Income Tax Benefit certificate, or premium payment receipt.\n4. Alternatively, you can message "Policy Copy" to our WhatsApp Support number (+91 91361 60375) for a digital PDF version.'
+  },
+  {
+    id: 'a4',
+    category: 'auto',
+    question: 'How do I register and track a motor insurance claim?',
+    answer: 'To register and track your motor accident or damage claim:\n\n1. **Register Immediately**: Call our partner insurer’s toll-free helpline at 1800 266 7780 or register your claim directly via the partner portal.\n2. **Provide Details**: Share the policy number, driver details, accident spot details, and date/time of the event.\n3. **Track Status**: You can track the status live by visiting our partner portal’s claim tracking section. You can also query our WhatsApp assistance line (+91 91361 60375) for real-time claim status updates.\n4. **Our Care**: Lalita Financial Services handles surveyor appointments, repair status checking, and cashless workshop delivery to eliminate any stress.'
+  },
+  {
+    id: 'h8',
+    category: 'health',
+    question: 'How can I find cashless network hospitals and network garages near me?',
+    answer: 'We offer extensive cashless network coverage, featuring over 7,200+ network hospitals and 5,400+ authorized cashless repair garages across India through our partner insurance networks. To locate the nearest facilities:\n\n1. Visit the "Network Locator" on our web platform or our partner insurance company’s official website.\n2. Filter by entering your State, City, Pin Code, and Vehicle Maker (for auto claims) or specialty requirement (for health claims).\n3. Send your current Pin Code to our WhatsApp assistance line (+91 91361 60375) with the message "Cashless Garage near me" or "Cashless Hospital near me" to receive active local links.\n4. Call Lalita Financial Services directly — we keep an updated list and can coordinate immediate cashless approvals for your treatment or vehicle repair.'
+  },
+  {
+    id: 'a5',
+    category: 'auto',
+    question: 'Can I renew an expired motor or health policy online?',
+    answer: 'Yes! You can easily renew both active and recently expired policies online:\n\n1. Go to our digital renewal desk or our partner insurer’s renewal portal, enter your previous Policy Number, and view your renewal details.\n2. If your motor insurance has expired for more than 90 days, a physical or digital vehicle inspection is mandatory. We provide a highly convenient "Self-Inspection App" process where you can upload quick photos and videos of your vehicle. Once reviewed and approved online (usually within a few hours), you can proceed with the premium payment.\n3. For health insurance, a break-in-policy may require medical check-ups or updated underwriting. Contact our advisory hub first to make sure your continuous coverage benefits (like waiting period credits and cumulative bonuses) are fully preserved.'
   }
 ];

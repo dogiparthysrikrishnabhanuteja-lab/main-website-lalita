@@ -101,7 +101,11 @@ export default function App() {
     } else {
       setCurrentPage('home');
       if (initialHash && ['#resources', '#faq', '#services'].includes(initialHash)) {
-        window.history.replaceState(null, '', window.location.pathname);
+        try {
+          window.history.replaceState(null, '', window.location.pathname);
+        } catch (error) {
+          console.warn('replaceState blocked or failed:', error);
+        }
       }
     }
 

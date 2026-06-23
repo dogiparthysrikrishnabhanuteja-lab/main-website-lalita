@@ -232,6 +232,7 @@ html[data-theme='dark'] .gold-gradient-light {
   display: flex;
   width: max-content;
   animation: marquee 35s linear infinite;
+  will-change: transform;
 }
 
 .marquee-track:hover {
@@ -241,6 +242,10 @@ html[data-theme='dark'] .gold-gradient-light {
 @keyframes marquee {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
+}
+
+@keyframes shimmer {
+  100% { transform: translateX(100%); }
 }
 
 /* Custom layout helpers */

@@ -73,7 +73,7 @@ export default function Footer({ setCurrentPage, onScrollToSection }: FooterProp
                   onClick={() => handleLinkClick('home', 'about')} 
                   className="hover:text-amber-400 text-slate-300 transition-colors text-left outline-none cursor-pointer"
                 >
-                  About Mr. Swamy
+                  About
                 </button>
               </li>
               <li>
@@ -81,7 +81,15 @@ export default function Footer({ setCurrentPage, onScrollToSection }: FooterProp
                   onClick={() => handleLinkClick('services')} 
                   className="hover:text-amber-400 text-slate-300 transition-colors text-left outline-none cursor-pointer"
                 >
-                  Our Protection Suite
+                  Services
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => handleLinkClick('resources')} 
+                  className="hover:text-amber-400 text-slate-300 transition-colors text-left outline-none cursor-pointer"
+                >
+                  Calculators
                 </button>
               </li>
               <li>
@@ -89,15 +97,7 @@ export default function Footer({ setCurrentPage, onScrollToSection }: FooterProp
                   onClick={() => handleLinkClick('faq')} 
                   className="hover:text-amber-400 text-slate-300 transition-colors text-left outline-none cursor-pointer"
                 >
-                  Verify FAQ Bank
-                </button>
-              </li>
-              <li>
-                <button 
-                  onClick={() => handleLinkClick('resources')} 
-                  className="hover:text-amber-400 text-amber-500 transition-colors text-left outline-none cursor-pointer font-medium"
-                >
-                  Advisory Selector Matrix
+                  FAQ
                 </button>
               </li>
               <li>
@@ -105,7 +105,7 @@ export default function Footer({ setCurrentPage, onScrollToSection }: FooterProp
                   onClick={() => handleLinkClick('home', 'contact')} 
                   className="hover:text-amber-400 text-slate-300 transition-colors text-left outline-none cursor-pointer"
                 >
-                  Request Consultation
+                  Contact
                 </button>
               </li>
             </ul>

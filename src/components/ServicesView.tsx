@@ -20,6 +20,7 @@ import {
   Legend 
 } from 'recharts';
 import { services, partners } from '../data/financial_data';
+import PartnerLogo from './PartnerLogos';
 
 const getBrandTheme = (name: string) => {
   const lowercase = name.toLowerCase();
@@ -90,20 +91,26 @@ export default function ServicesView({ onNavigateToFaqCategory, onNavigateToCont
   };
 
   return (
-    <div className="space-y-16 py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-white text-slate-800">
+    <div className="space-y-16 py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-100 transition-colors duration-300">
       
       {/* 1. Services Header */}
-      <div className="text-center space-y-4 pt-16">
-        <div className="inline-flex items-center gap-1.5 px-4 py-1.5 bg-amber-500/10 border border-amber-500/20 text-amber-800 text-xs font-bold uppercase tracking-widest rounded-full">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-80px" }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="text-center space-y-4 pt-16"
+      >
+        <div className="inline-flex items-center gap-1.5 px-4 py-1.5 bg-amber-500/10 border border-amber-500/20 text-amber-900 dark:text-amber-400 text-xs font-bold uppercase tracking-widest rounded-full">
           Comprehensive Suites
         </div>
-        <h1 className="text-4xl sm:text-5xl font-black font-display tracking-tight text-slate-900">
-          Our Protection & <span className="bg-gradient-to-r from-amber-600 to-amber-800 bg-clip-text text-transparent">Investment Suites</span>
+        <h1 className="text-2xl sm:text-4xl md:text-5xl font-black font-display tracking-tight text-slate-900 dark:text-white transition-colors">
+          Our Protection & <span className="bg-gradient-to-r from-amber-700 to-amber-900 dark:from-amber-400 dark:to-yellow-300 bg-clip-text text-transparent">Investment Suites</span>
         </h1>
-        <p className="text-sm sm:text-base text-slate-600 max-w-2xl mx-auto leading-relaxed font-sans font-medium">
+        <p className="text-xs sm:text-sm md:text-base text-slate-600 dark:text-slate-350 max-w-2xl mx-auto leading-relaxed font-sans font-medium">
           Horizontal multi-layered systematic structures for comprehensive assets security and prime generational compounding wealth.
         </p>
-      </div>
+      </motion.div>
 
       {/* 2. Bento Grid of Services -> Reformatted to luxurious Row layouts */}
       <div className="space-y-10 max-w-6xl mx-auto">
@@ -120,7 +127,7 @@ export default function ServicesView({ onNavigateToFaqCategory, onNavigateToCont
               boxShadow: "0 20px 40px -15px rgba(217, 119, 6, 0.18), 0 0 20px 1px rgba(217, 119, 6, 0.08)",
               borderColor: "rgba(217, 119, 6, 0.45)"
             }}
-            className="rounded-2xl bg-slate-50/50 border border-slate-200 p-6 sm:p-8 flex flex-col lg:flex-row items-stretch gap-6 lg:gap-10 transition-all duration-300 relative overflow-hidden group"
+            className="rounded-2xl bg-slate-50/50 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-850 p-6 sm:p-8 flex flex-col lg:flex-row items-stretch gap-6 lg:gap-10 transition-all duration-300 relative overflow-hidden group"
           >
             {/* Background radial highlight */}
             <div className="absolute right-0 top-0 w-32 h-32 bg-amber-500/[0.01] rounded-full blur-2xl pointer-events-none group-hover:bg-amber-500/[0.03] transition-all" />
@@ -130,17 +137,17 @@ export default function ServicesView({ onNavigateToFaqCategory, onNavigateToCont
               <div className="space-y-4">
                 {/* Header Info */}
                 <div className="flex items-center gap-3.5">
-                  <div className="p-3 bg-white rounded-xl border border-slate-200 group-hover:border-amber-500/30 transition-colors shrink-0 shadow-sm">
+                  <div className="p-3 bg-white dark:bg-slate-950 rounded-xl border border-slate-200 dark:border-slate-800 group-hover:border-amber-500/30 transition-colors shrink-0 shadow-sm">
                     {getIcon(srv.iconName)}
                   </div>
                   <div>
-                    <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 tracking-wide">{srv.title}</h3>
-                    <p className="text-[10px] sm:text-[11px] text-amber-700 uppercase tracking-widest font-bold font-mono">{srv.subtitle}</p>
+                    <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white tracking-wide">{srv.title}</h3>
+                    <p className="text-[10px] sm:text-[11px] text-amber-700 dark:text-amber-400 uppercase tracking-widest font-bold font-mono">{srv.subtitle}</p>
                   </div>
                 </div>
 
                 {/* Description */}
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-sans pt-1">
+                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-sans pt-1">
                   {srv.description}
                 </p>
               </div>
@@ -348,42 +355,15 @@ export default function ServicesView({ onNavigateToFaqCategory, onNavigateToCont
                 </div>
               ))
             ) : (
-              partners.map((part, idx) => {
-                const theme = getBrandTheme(part.name);
-                return (
-                  <div 
-                    key={idx} 
-                    className="flex items-center gap-3 bg-white border border-slate-200/80 py-2 px-3.5 rounded-xl w-[180px] sm:w-[215px] h-[52px] shrink-0 group hover:border-amber-500/30 hover:shadow-sm transition-all duration-300"
-                  >
-                    {/* High Quality Corporate Emblem acting as a reliable, stylized Logo */}
-                    <div className="relative w-8 h-8 rounded-lg flex items-center justify-center font-extrabold text-[10px] tracking-wider shadow-inner shrink-0 uppercase select-none overflow-hidden bg-slate-50 border border-slate-100 group-hover:border-amber-500/20">
-                      <div className={`absolute inset-0 flex items-center justify-center font-extrabold text-[9px] tracking-wider uppercase select-none ${theme.bg} ${theme.text}`}>
-                        {theme.abbrev}
-                      </div>
-                      {/* Floating brand logo showing on top if successfully loaded */}
-                      <img 
-                        referrerPolicy="no-referrer"
-                        src={part.logoUrl} 
-                        alt={part.name}
-                        className="absolute inset-0 w-full h-full p-2 bg-white object-contain transition-transform z-10 group-hover:scale-105"
-                        onError={(e) => {
-                          e.currentTarget.style.display = 'none';
-                        }}
-                      />
-                    </div>
-                    
-                    {/* Partner Identity Details */}
-                    <div className="flex flex-col text-left overflow-hidden">
-                      <span className="text-[11px] font-black text-slate-800 leading-tight group-hover:text-amber-700 transition-colors line-clamp-1">
-                        {part.name}
-                      </span>
-                      <span className="text-[7.5px] text-slate-400 font-mono uppercase tracking-widest leading-none mt-0.5">
-                        Licensed
-                      </span>
-                    </div>
-                  </div>
-                );
-              })
+              partners.map((part, idx) => (
+                <div 
+                  key={idx} 
+                  title={part.name}
+                  className="flex items-center justify-center p-3 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-xl w-[170px] sm:w-[200px] h-14 shrink-0 group hover:border-amber-500/35 dark:hover:border-amber-500/45 hover:shadow-[0_8px_24px_rgba(217,119,6,0.06)] grayscale hover:grayscale-0 opacity-65 hover:opacity-100 transition-all duration-500 cursor-pointer"
+                >
+                  <PartnerLogo name={part.name} className="h-7 sm:h-8 w-auto" />
+                </div>
+              ))
             )}
           </div>
         </div>

@@ -51,20 +51,26 @@ export default function ResourcesView({ onSetContactMessage, onNavigateToFaqCate
   ];
 
   return (
-    <div className="space-y-16 py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-white selection:bg-gold-500/20">
+    <div className="space-y-16 py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-100 transition-colors duration-300 selection:bg-amber-500/20">
       
       {/* 1. Header Area styling */}
-      <div className="text-center space-y-4 pt-16">
-        <div className="inline-flex items-center gap-1.5 px-4 py-1.5 bg-gold-550/10 border border-gold-500/20 text-yellow-800 text-xs font-bold uppercase tracking-widest rounded-full">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-80px" }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="text-center space-y-4 pt-16"
+      >
+        <div className="inline-flex items-center gap-1.5 px-4 py-1.5 bg-amber-500/10 border border-amber-500/20 text-amber-900 dark:text-amber-400 text-xs font-bold uppercase tracking-widest rounded-full">
           Wealth Simulators
         </div>
-        <h1 className="text-4xl sm:text-5xl font-extrabold font-display tracking-tight text-slate-900">
-          Interactive <span className="gold-gradient-light font-display">Advisory Portals</span>
+        <h1 className="text-2xl sm:text-4xl md:text-5xl font-extrabold font-display tracking-tight text-slate-900 dark:text-white transition-colors">
+          Interactive <span className="bg-gradient-to-r from-amber-700 to-amber-900 dark:from-amber-400 dark:to-yellow-300 bg-clip-text text-transparent font-display">Advisory Portals</span>
         </h1>
-        <p className="text-sm sm:text-base text-slate-600 max-w-2xl mx-auto leading-relaxed">
+        <p className="text-xs sm:text-sm md:text-base text-slate-600 dark:text-slate-350 max-w-2xl mx-auto leading-relaxed">
           Estimate investment growth rates, balance compound yields, and simulate retirement outflows using our interactive calculators.
         </p>
-      </div>
+      </motion.div>
 
       {/* 2. Primary layout */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">

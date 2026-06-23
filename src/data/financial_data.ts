@@ -40,6 +40,16 @@ export const awards: Award[] = [
 
 export const partners: Partner[] = [
   {
+    name: 'AMFI',
+    logoUrl: 'https://logo.clearbit.com/amfiindia.com?size=150&format=png',
+    fallback: 'AMFI'
+  },
+  {
+    name: 'IRDAI',
+    logoUrl: 'https://logo.clearbit.com/irdai.gov.in?size=150&format=png',
+    fallback: 'IRDAI'
+  },
+  {
     name: 'TATA AIA Life Insurance',
     logoUrl: 'https://logo.clearbit.com/tataaia.com?size=150&format=png',
     fallback: 'Tata AIA Life'
