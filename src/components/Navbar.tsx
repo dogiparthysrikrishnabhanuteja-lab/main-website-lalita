@@ -56,7 +56,11 @@ export default function Navbar({ currentPage, setCurrentPage, onScrollToSection,
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     } else {
-      window.location.hash = targetHash;
+      if (window.navigateToHash) {
+        window.navigateToHash(targetHash);
+      } else {
+        window.location.hash = targetHash;
+      }
     }
   };
 

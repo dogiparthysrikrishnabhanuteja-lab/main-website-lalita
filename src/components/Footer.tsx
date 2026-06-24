@@ -27,7 +27,11 @@ export default function Footer({ setCurrentPage, onScrollToSection }: FooterProp
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     } else {
-      window.location.hash = targetHash;
+      if (window.navigateToHash) {
+        window.navigateToHash(targetHash);
+      } else {
+        window.location.hash = targetHash;
+      }
     }
   };
 

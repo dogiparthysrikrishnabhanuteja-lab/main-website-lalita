@@ -592,7 +592,11 @@ export default function HomeView({ preFilledMessage, setPreFilledMessage, onNavi
           <div className="pt-10 border-t border-slate-900/60 mt-10 relative z-10">
             <button
               onClick={() => {
-                window.location.hash = '#services';
+                if (window.navigateToHash) {
+                  window.navigateToHash('#services');
+                } else {
+                  window.location.hash = '#services';
+                }
               }}
               className="inline-flex items-center gap-2 px-6 py-2.5 bg-transparent border border-slate-800 hover:border-amber-500 text-white hover:text-amber-400 font-semibold text-xs tracking-wider uppercase rounded-lg transition-all duration-300 shadow-md hover:shadow-amber-500/10 cursor-pointer"
             >

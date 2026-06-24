@@ -30,12 +30,61 @@ export default function FaqView({ initialCategoryFilter = 'all' }: FaqViewProps)
   const [selectedCategory, setSelectedCategory] = useState<'all' | 'life' | 'health' | 'auto' | 'general' | 'investments'>(initialCategoryFilter);
   const [searchQuery, setSearchQuery] = useState('');
   const [expandedFaqId, setExpandedFaqId] = useState<string | null>(null);
+  const questionsRef = useRef<HTMLDivElement>(null);
 
-  // Sync category filter if changed externally
+  // Sync category filter if changed externally and scroll the selected FAQ question into view immediately on load
   useEffect(() => {
+    // Reset scroll position to top immediately to clear any inherited scroll state from previous long pages
+    window.scrollTo(0, 0);
+
     setSelectedCategory(initialCategoryFilter);
     setSearchQuery('');
-    setExpandedFaqId(null);
+    
+    if (initialCategoryFilter && initialCategoryFilter !== 'all') {
+      // Find the first FAQ of this category to expand it and focus user attention
+      const firstFaqOfCategory = faqs.find(faq => faq.category === initialCategoryFilter);
+      if (firstFaqOfCategory) {
+        setExpandedFaqId(firstFaqOfCategory.id);
+        
+        let attempts = 0;
+        const interval = setInterval(() => {
+          const faqElement = document.getElementById(`faq-card-${firstFaqOfCategory.id}`);
+          if (faqElement) {
+            // Calculate absolute top position of the element to ensure reliable scrolling on all devices
+            const rect = faqElement.getBoundingClientRect();
+            const absoluteTop = rect.top + window.scrollY;
+            const targetPosition = absoluteTop - 110; // Precise offset to clear the sticky navbar/header
+            
+            window.scrollTo({
+              top: targetPosition >= 0 ? targetPosition : 0,
+              behavior: 'smooth'
+            });
+            
+            clearInterval(interval);
+          } else {
+            attempts++;
+            if (attempts > 12) { // 1.2 seconds maximum fallback timeout
+              if (questionsRef.current) {
+                const rect = questionsRef.current.getBoundingClientRect();
+                const absoluteTop = rect.top + window.scrollY;
+                const targetPosition = absoluteTop - 110;
+                window.scrollTo({
+                  top: targetPosition >= 0 ? targetPosition : 0,
+                  behavior: 'smooth'
+                });
+              }
+              clearInterval(interval);
+            }
+          }
+        }, 80);
+        
+        return () => clearInterval(interval);
+      } else {
+        setExpandedFaqId(null);
+      }
+    } else {
+      setExpandedFaqId(null);
+    }
   }, [initialCategoryFilter]);
 
   const categories = [
@@ -277,7 +326,7 @@ export default function FaqView({ initialCategoryFilter = 'all' }: FaqViewProps)
       </motion.div>
 
       {/* Global Search Input bar at the top */}
-      <div className="relative max-w-2xl mx-auto">
+      <div ref={questionsRef} className="relative max-w-2xl mx-auto scroll-mt-24">
         <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-amber-600 dark:text-amber-400" />
         <input 
           type="text" 
@@ -381,6 +430,7 @@ export default function FaqView({ initialCategoryFilter = 'all' }: FaqViewProps)
                   return (
                     <motion.div 
                       key={faq.id}
+                      id={`faq-card-${faq.id}`}
                       layout="position"
                       variants={cardVariants}
                       className="overflow-hidden rounded-xl bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800/80 hover:border-amber-500/30 dark:hover:border-amber-500/30 transition-all duration-300 shadow-sm"
