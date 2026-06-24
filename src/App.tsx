@@ -230,14 +230,24 @@ export default function App() {
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
-  // Handle pending scrolling logic
+  // Handle pending scrolling logic with header offset and layout transition delay
   useEffect(() => {
     if (pendingScroll) {
       let attempts = 0;
       const interval = setInterval(() => {
         const element = document.getElementById(pendingScroll);
         if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
+          // Allow layout transition animations (like page entries) to settle
+          setTimeout(() => {
+            const headerOffset = 110; // Fixed header/navbar height offset
+            const elementPosition = element.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+            
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
+          }, 150);
           setPendingScroll(null);
           clearInterval(interval);
         } else {
@@ -338,6 +348,7 @@ export default function App() {
             >
               <FaqView 
                 initialCategoryFilter={faqInitialCategory}
+                onCategoryChange={setFaqInitialCategory}
               />
             </motion.div>
           )}

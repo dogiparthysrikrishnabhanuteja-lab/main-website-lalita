@@ -21,6 +21,7 @@ import { FAQ } from '../types';
 
 interface FaqViewProps {
   initialCategoryFilter?: 'all' | 'life' | 'health' | 'auto' | 'general' | 'investments' | 'tax';
+  onCategoryChange?: (category: 'all' | 'life' | 'health' | 'auto' | 'general' | 'investments' | 'tax') => void;
 }
 
 type TabType = 'explorer' | 'assistant';
@@ -99,49 +100,71 @@ function fuzzyMatch(text: string, query: string): boolean {
   return (matchedCount / queryWords.length) >= threshold;
 }
 
-export default function FaqView({ initialCategoryFilter = 'all' }: FaqViewProps) {
+export default function FaqView({ initialCategoryFilter = 'all', onCategoryChange }: FaqViewProps) {
   const [activeTab, setActiveTab] = useState<TabType>('explorer');
   const [selectedCategory, setSelectedCategory] = useState<'all' | 'life' | 'health' | 'auto' | 'general' | 'investments' | 'tax'>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [expandedFaqId, setExpandedFaqId] = useState<string | null>(null);
   const questionsRef = useRef<HTMLDivElement>(null);
+  const lastInitialCategoryRef = useRef<string | undefined>(undefined);
 
   // Sync category filter if changed externally and scroll the selected FAQ question into view immediately on load
   useEffect(() => {
-    setActiveTab('explorer');
-    setSelectedCategory(initialCategoryFilter);
-    setSearchQuery('');
-    
-    if (initialCategoryFilter && initialCategoryFilter !== 'all') {
-      // Find the first FAQ of this category to expand it and focus user attention
-      const firstFaqOfCategory = faqs.find(faq => faq.category === initialCategoryFilter);
-      if (firstFaqOfCategory) {
-        setExpandedFaqId(firstFaqOfCategory.id);
-        
-        let attempts = 0;
-        const interval = setInterval(() => {
-          const faqElement = document.getElementById(`faq-card-${firstFaqOfCategory.id}`);
-          if (faqElement) {
-            // Using modern native scrollIntoView with scroll-mt-28 on the element is 100% stable across all device viewport changes
-            faqElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            clearInterval(interval);
-          } else {
-            attempts++;
-            if (attempts > 15) { // 1.5 seconds maximum fallback timeout
-              if (questionsRef.current) {
-                questionsRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Only synchronize if the external prop actually changed to avoid parent-triggered reset loops
+    if (initialCategoryFilter !== lastInitialCategoryRef.current) {
+      lastInitialCategoryRef.current = initialCategoryFilter;
+      setActiveTab('explorer');
+      setSelectedCategory(initialCategoryFilter);
+      setSearchQuery('');
+      
+      if (initialCategoryFilter && initialCategoryFilter !== 'all') {
+        // Find the first FAQ of this category to expand it and focus user attention
+        const firstFaqOfCategory = faqs.find(faq => faq.category === initialCategoryFilter);
+        if (firstFaqOfCategory) {
+          setExpandedFaqId(firstFaqOfCategory.id);
+          
+          let attempts = 0;
+          // Wait for the route transition (300ms) to complete before measuring positions
+          const delayTimeout = setTimeout(() => {
+            const interval = setInterval(() => {
+              const faqElement = document.getElementById(`faq-card-${firstFaqOfCategory.id}`);
+              if (faqElement) {
+                const headerOffset = 110; // Account for the fixed header height
+                const elementPosition = faqElement.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                
+                window.scrollTo({
+                  top: offsetPosition,
+                  behavior: 'smooth'
+                });
+                clearInterval(interval);
+              } else {
+                attempts++;
+                if (attempts > 12) { // 1.2s timeout fallback
+                  if (questionsRef.current) {
+                    const headerOffset = 110;
+                    const elementPosition = questionsRef.current.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                    window.scrollTo({
+                      top: offsetPosition,
+                      behavior: 'smooth'
+                    });
+                  }
+                  clearInterval(interval);
+                }
               }
-              clearInterval(interval);
-            }
-          }
-        }, 100);
-        
-        return () => clearInterval(interval);
+            }, 100);
+            
+            return () => clearInterval(interval);
+          }, 350);
+          
+          return () => clearTimeout(delayTimeout);
+        } else {
+          setExpandedFaqId(null);
+        }
       } else {
         setExpandedFaqId(null);
       }
-    } else {
-      setExpandedFaqId(null);
     }
   }, [initialCategoryFilter]);
 
@@ -190,6 +213,7 @@ export default function FaqView({ initialCategoryFilter = 'all' }: FaqViewProps)
     const nextValue = categories[nextIndex].value;
     setSelectedCategory(nextValue);
     setExpandedFaqId(null);
+    onCategoryChange?.(nextValue);
 
     // Focus the newly active category button
     const buttons = e.currentTarget.querySelectorAll<HTMLButtonElement>('[role="tab"]');
@@ -482,6 +506,7 @@ export default function FaqView({ initialCategoryFilter = 'all' }: FaqViewProps)
                   onClick={() => {
                     setSelectedCategory(cat.value);
                     setExpandedFaqId(null);
+                    onCategoryChange?.(cat.value);
                   }}
                   className={`px-4 py-2.5 sm:py-2 text-xs text-nowrap rounded-lg border font-bold transition-all cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-amber-500 min-h-[44px] ${
                     selectedCategory === cat.value
@@ -592,6 +617,7 @@ export default function FaqView({ initialCategoryFilter = 'all' }: FaqViewProps)
                     onClick={() => {
                       setSearchQuery('');
                       setSelectedCategory('all');
+                      onCategoryChange?.('all');
                     }}
                     className="px-4 py-2 text-xs font-mono font-bold bg-slate-900 dark:bg-slate-800 hover:bg-slate-800 dark:hover:bg-slate-700 text-white rounded-lg cursor-pointer outline-none transition-all min-h-[40px]"
                   >

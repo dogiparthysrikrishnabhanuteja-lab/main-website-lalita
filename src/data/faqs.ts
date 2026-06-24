@@ -492,7 +492,7 @@ export const faqs: FAQ[] = [
   },
   {
     id: 'g13',
-    category: 'general',
+    category: 'health',
     question: 'What is Group Health Insurance (GHI), and does it replace personal health cover?',
     answer: 'Group Health Insurance (GHI) is a health plan provided by an employer to its employees. While GHI offers immediate coverage without waiting periods or medical checkups, we strongly advise against relying on it as your sole health cover. GHI is tied to your employment—meaning if you resign, retire, or face layoffs, you and your family are instantly left uninsured. You should always maintain a personal, independent health policy to ensure lifetime continuous coverage.'
   },
