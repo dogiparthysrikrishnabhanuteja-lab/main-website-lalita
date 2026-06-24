@@ -311,14 +311,14 @@ export default function ServicesView({ onNavigateToFaqCategory, onNavigateToCont
               <div className="flex flex-col gap-2 pt-2 border-t border-slate-100">
                 <button
                   onClick={() => onNavigateToFaqCategory(srv.category)}
-                  className="w-full py-2.5 text-center text-[10px] sm:text-[11px] font-mono font-bold tracking-wider uppercase text-amber-800 hover:text-white flex items-center justify-center gap-1.5 bg-amber-50 hover:bg-amber-600 border border-amber-200 hover:border-amber-600 rounded-lg transition-all cursor-pointer outline-none shadow-sm"
+                  className="w-full py-3 text-center text-[10px] sm:text-[11px] font-mono font-bold tracking-wider uppercase text-amber-800 hover:text-white flex items-center justify-center gap-1.5 bg-amber-50 hover:bg-amber-600 border border-amber-200 hover:border-amber-600 rounded-lg transition-all cursor-pointer outline-none shadow-sm min-h-[44px]"
                 >
                   Explore FAQ Details <ArrowRight className="w-3.5 h-3.5" />
                 </button>
                 
                 <button
                   onClick={() => onNavigateToContact(`Hello Mr. Swamy, I am interested in your financial advisory for "${srv.title}". Please set up an evaluation callback.`)}
-                  className="w-full text-center text-xs font-bold text-slate-500 hover:text-slate-850 transition-colors cursor-pointer outline-none flex items-center justify-center gap-1 py-1"
+                  className="w-full text-center text-xs font-bold text-slate-500 hover:text-slate-850 transition-colors cursor-pointer outline-none flex items-center justify-center gap-1 py-3 sm:py-2 min-h-[44px]"
                 >
                   Request a callback & quote
                 </button>

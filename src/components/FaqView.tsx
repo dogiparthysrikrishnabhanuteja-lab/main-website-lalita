@@ -27,7 +27,7 @@ type TabType = 'explorer' | 'assistant';
 
 export default function FaqView({ initialCategoryFilter = 'all' }: FaqViewProps) {
   const [activeTab, setActiveTab] = useState<TabType>('explorer');
-  const [selectedCategory, setSelectedCategory] = useState<'all' | 'life' | 'health' | 'auto' | 'general' | 'investments'>(initialCategoryFilter);
+  const [selectedCategory, setSelectedCategory] = useState<'all' | 'life' | 'health' | 'auto' | 'general' | 'investments'>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [expandedFaqId, setExpandedFaqId] = useState<string | null>(null);
   const questionsRef = useRef<HTMLDivElement>(null);
@@ -86,6 +86,7 @@ export default function FaqView({ initialCategoryFilter = 'all' }: FaqViewProps)
   const filteredFaqs = useMemo(() => {
     return faqs.filter(faq => {
       const matchCategory = selectedCategory === 'all' || faq.category === selectedCategory;
+
       const matchSearch = 
         faq.question.toLowerCase().includes(searchQuery.toLowerCase()) || 
         faq.answer.toLowerCase().includes(searchQuery.toLowerCase());
@@ -330,7 +331,7 @@ export default function FaqView({ initialCategoryFilter = 'all' }: FaqViewProps)
       <div className="grid grid-cols-2 gap-2 p-1.5 bg-slate-100 dark:bg-slate-900 rounded-xl max-w-md mx-auto">
         <button
           onClick={() => setActiveTab('explorer')}
-          className={`flex flex-col sm:flex-row items-center justify-center gap-2 py-2.5 px-3 rounded-lg text-xs font-bold transition-all outline-none cursor-pointer ${
+          className={`flex flex-col sm:flex-row items-center justify-center gap-2 py-3 sm:py-2.5 px-3 rounded-lg text-xs font-bold transition-all outline-none cursor-pointer min-h-[44px] ${
             activeTab === 'explorer'
               ? 'bg-white dark:bg-slate-950 text-amber-700 dark:text-amber-400 shadow-md'
               : 'text-slate-500 dark:text-slate-400 hover:text-slate-850 dark:hover:text-slate-200'
@@ -342,7 +343,7 @@ export default function FaqView({ initialCategoryFilter = 'all' }: FaqViewProps)
 
         <button
           onClick={() => setActiveTab('assistant')}
-          className={`flex flex-col sm:flex-row items-center justify-center gap-2 py-2.5 px-3 rounded-lg text-xs font-bold transition-all outline-none cursor-pointer ${
+          className={`flex flex-col sm:flex-row items-center justify-center gap-2 py-3 sm:py-2.5 px-3 rounded-lg text-xs font-bold transition-all outline-none cursor-pointer min-h-[44px] ${
             activeTab === 'assistant'
               ? 'bg-white dark:bg-slate-950 text-amber-700 dark:text-amber-400 shadow-md'
               : 'text-slate-500 dark:text-slate-400 hover:text-slate-850 dark:hover:text-slate-200'
@@ -387,7 +388,7 @@ export default function FaqView({ initialCategoryFilter = 'all' }: FaqViewProps)
                     setSelectedCategory(cat.value);
                     setExpandedFaqId(null);
                   }}
-                  className={`px-4 py-1.5 text-xs text-nowrap rounded-lg border font-bold transition-all cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-amber-500 ${
+                  className={`px-4 py-2.5 sm:py-2 text-xs text-nowrap rounded-lg border font-bold transition-all cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-amber-500 min-h-[44px] ${
                     selectedCategory === cat.value
                       ? 'bg-amber-600 border-amber-600 text-white shadow-lg shadow-amber-600/15'
                       : 'bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:border-slate-350 dark:hover:border-slate-700'
@@ -456,7 +457,7 @@ export default function FaqView({ initialCategoryFilter = 'all' }: FaqViewProps)
                             >
                               <p className="whitespace-pre-line">{faq.answer}</p>
                               <div className="flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-wider text-amber-700 dark:text-amber-400 font-bold">
-                                <Sparkles className="w-3.5 h-3.5" /> Checked Under Category: {categories.find(c => c.value === faq.category)?.label}
+                                <Sparkles className="w-3.5 h-3.5" /> Checked Under Category: {categories.find(c => c.value === faq.category)?.label || (['life', 'health', 'auto'].includes(faq.category) ? 'Insurance' : faq.category)}
                               </div>
                             </div>
                           </motion.div>
@@ -478,7 +479,7 @@ export default function FaqView({ initialCategoryFilter = 'all' }: FaqViewProps)
                     setSearchQuery('');
                     setSelectedCategory('all');
                   }}
-                  className="px-4 py-1.5 text-xs font-mono font-bold bg-slate-900 dark:bg-slate-800 hover:bg-amber-600 dark:hover:bg-amber-600 text-white rounded-lg cursor-pointer outline-none transition-all"
+                  className="px-4 py-2.5 sm:py-2 text-xs font-mono font-bold bg-slate-900 dark:bg-slate-800 hover:bg-amber-600 dark:hover:bg-amber-600 text-white rounded-lg cursor-pointer outline-none transition-all min-h-[44px]"
                 >
                   Clear All Filters
                 </button>
@@ -552,7 +553,7 @@ export default function FaqView({ initialCategoryFilter = 'all' }: FaqViewProps)
                         <button
                           key={`sug-${sIdx}`}
                           onClick={() => handleSendChat(sug)}
-                          className="px-3 py-1 bg-white hover:bg-amber-50 dark:bg-slate-950 dark:hover:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-amber-500/30 dark:hover:border-amber-500/30 text-[11px] text-slate-600 dark:text-slate-400 hover:text-amber-700 dark:hover:text-amber-400 font-bold rounded-lg cursor-pointer transition-all duration-300 shadow-sm"
+                          className="px-4 py-2.5 sm:py-2 bg-white hover:bg-amber-50 dark:bg-slate-950 dark:hover:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-amber-500/30 dark:hover:border-amber-500/30 text-[11px] text-slate-600 dark:text-slate-400 hover:text-amber-700 dark:hover:text-amber-400 font-bold rounded-lg cursor-pointer transition-all duration-300 shadow-sm min-h-[44px]"
                         >
                           {sug}
                         </button>
@@ -585,18 +586,18 @@ export default function FaqView({ initialCategoryFilter = 'all' }: FaqViewProps)
               e.preventDefault();
               handleSendChat(chatInput);
             }}
-            className="bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 p-3 sm:p-4 flex gap-2"
+            className="bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 p-3 sm:p-4 flex gap-2 items-center"
           >
             <input 
               type="text" 
               value={chatInput}
               onChange={(e) => setChatInput(e.target.value)}
               placeholder="Ask anything (e.g., tax saving, claim steps, term formula)..."
-              className="flex-1 px-4 py-2 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 focus:border-amber-600 focus:bg-white dark:focus:bg-slate-950 outline-none rounded-xl text-xs sm:text-sm placeholder:text-slate-400 dark:placeholder:text-slate-500 transition-all text-slate-800 dark:text-slate-100"
+              className="flex-1 px-4 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 focus:border-amber-600 focus:bg-white dark:focus:bg-slate-950 outline-none rounded-xl text-xs sm:text-sm placeholder:text-slate-400 dark:placeholder:text-slate-500 transition-all text-slate-800 dark:text-slate-100 min-h-[44px]"
             />
             <button
               type="submit"
-              className="p-2.5 bg-amber-600 hover:bg-amber-700 text-white rounded-xl cursor-pointer outline-none shadow-md shadow-amber-600/15 shrink-0 transition-colors"
+              className="p-3 bg-amber-600 hover:bg-amber-700 text-white rounded-xl cursor-pointer outline-none shadow-md shadow-amber-600/15 shrink-0 transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
             >
               <Send className="w-4 h-4" />
             </button>

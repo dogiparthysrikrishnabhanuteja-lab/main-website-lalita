@@ -98,7 +98,7 @@ export default function Footer({ setCurrentPage, onScrollToSection }: FooterProp
                   onClick={() => handleLinkClick('resources')} 
                   className="hover:text-amber-400 text-slate-300 transition-colors text-left outline-none cursor-pointer"
                 >
-                  Calculators
+                  Resources
                 </button>
               </li>
               <li>

@@ -33,7 +33,7 @@ export default function Navbar({ currentPage, setCurrentPage, onScrollToSection,
 
       const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
       if (totalHeight > 0) {
-        const progress = (window.scrollY / totalHeight) * 105; // slightly boost to reach end cleanly
+        const progress = (window.scrollY / totalHeight) * 100; // mathematically exact 100% progress tracking
         setScrollProgress(Math.min(100, Math.max(0, progress)));
       } else {
         setScrollProgress(0);
@@ -160,7 +160,7 @@ export default function Navbar({ currentPage, setCurrentPage, onScrollToSection,
                   : 'text-slate-800 dark:text-slate-100 hover:text-amber-600 dark:hover:text-amber-400'
               }`}
             >
-              Calculators
+              Resources
             </button>
 
             {/* Dropdown About Menu */}
@@ -369,7 +369,7 @@ export default function Navbar({ currentPage, setCurrentPage, onScrollToSection,
                     currentPage === 'resources' ? 'text-amber-600 dark:text-amber-400 font-bold' : 'text-slate-800 dark:text-slate-200'
                   }`}
                 >
-                  <Sparkles className="w-4 h-4 text-amber-600 animate-pulse" /> Calculators
+                  <Sparkles className="w-4 h-4 text-amber-600 animate-pulse" /> Resources
                 </button>
 
                 <button
@@ -393,11 +393,11 @@ export default function Navbar({ currentPage, setCurrentPage, onScrollToSection,
       {/* Thin, Animated Gold Scroll Progress Bar at the very top of the viewport (active on all scrollable pages) */}
       <div 
         style={{ width: `${scrollProgress}%` }} 
-        className="fixed top-0 left-0 h-[4px] bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 transition-all duration-75 ease-out z-[9999] shadow-[0_1.5px_12px_rgba(245,158,11,0.65)]"
+        className="fixed top-0 left-0 h-[3px] bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 transition-all duration-75 ease-out z-[9999] shadow-[0_1px_8px_rgba(245,158,11,0.5)]"
       />
 
       {/* Subtle floating desktop percentage tooltip indicator drop down near the progress bar */}
-      <div className="hidden md:flex fixed top-[4px] right-6 z-[9999] pointer-events-none select-none">
+      <div className="hidden md:flex fixed top-[3px] right-6 z-[9999] pointer-events-none select-none">
         <div className="bg-slate-900 border-b border-x border-slate-850/80 text-amber-500 font-mono text-[9px] font-black tracking-widest px-2.5 py-0.5 rounded-b-md shadow-md shadow-slate-900/10 flex items-center gap-1.5 transition-all duration-150">
           <span className="text-slate-400">READ PROGRESS</span>
           <span className="text-white bg-amber-600/20 px-1 py-0.2 rounded text-[8px]">{Math.round(scrollProgress)}%</span>

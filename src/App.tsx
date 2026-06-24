@@ -73,6 +73,14 @@ export default function App() {
 
   const navigateTo = (targetPage: string, hash: string, replace: boolean = false) => {
     const page = targetPage || getPageFromHash(hash);
+    
+    // Explicit state validation to avoid duplicate history states
+    const currentState = window.history.state;
+    if (currentState && currentState.page === page && currentState.hash === hash && !replace) {
+      updateStateForPageAndHash(page, hash);
+      return;
+    }
+
     updateStateForPageAndHash(page, hash);
 
     const state = { page, hash };
@@ -146,10 +154,18 @@ export default function App() {
     }
 
     const handlePopState = (event: PopStateEvent) => {
-      if (event.state && event.state.page) {
-        updateStateForPageAndHash(event.state.page, event.state.hash || '');
+      if (event.state && typeof event.state === 'object' && 'page' in event.state) {
+        const page = event.state.page;
+        const hash = event.state.hash || '';
+        if (['home', 'services', 'faq', 'resources'].includes(page)) {
+          updateStateForPageAndHash(page, hash);
+        } else {
+          const fallbackPage = getPageFromHash(window.location.hash);
+          updateStateForPageAndHash(fallbackPage, window.location.hash);
+        }
       } else {
-        updateStateForPageAndHash('home', '');
+        const fallbackPage = getPageFromHash(window.location.hash);
+        updateStateForPageAndHash(fallbackPage, window.location.hash);
       }
     };
 
