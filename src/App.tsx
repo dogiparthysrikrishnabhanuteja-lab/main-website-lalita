@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { ArrowUp, MessageSquare, Sparkles, CheckCircle, Clock } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import Navbar from './components/Navbar';
@@ -28,29 +28,84 @@ export default function App() {
     return 'light';
   });
 
-  // Define a robust navigateToHash function globally to handle clean URL states without adding sticky junk to browser history
-  useEffect(() => {
-    const navigateToHash = (hash: string) => {
-      try {
-        let page = 'home';
-        if (hash === '#resources') page = 'resources';
-        else if (hash.startsWith('#faq')) page = 'faq';
-        else if (hash.startsWith('#services') || ['#life-insurance', '#health-insurance', '#car-insurance', '#general-insurance', '#mutual-funds'].some(h => hash.startsWith(h))) page = 'services';
-        
-        window.history.replaceState({ page }, '', `${window.location.pathname}${hash}`);
-        // Manually dispatch a hashchange event so our App.tsx listener is informed
-        window.dispatchEvent(new HashChangeEvent('hashchange'));
-      } catch (error) {
-        console.warn('replaceState navigation failed, falling back to direct location.hash:', error);
-        window.location.hash = hash;
+  const getPageFromHash = (hash: string): string => {
+    if (!hash || hash === '#' || hash === '#home') return 'home';
+    if (hash === '#resources') return 'resources';
+    if (hash.startsWith('#faq')) return 'faq';
+    if (hash.startsWith('#services') || ['#life-insurance', '#health-insurance', '#car-insurance', '#general-insurance', '#mutual-funds'].some(h => hash.startsWith(h))) return 'services';
+    if (['#hero', '#about', '#why-choose-us', '#stats', '#awards', '#partners', '#testimonials', '#contact'].includes(hash)) return 'home';
+    return 'home';
+  };
+
+  const [faqInitialCategory, setFaqInitialCategory] = useState<'all' | 'life' | 'health' | 'auto' | 'general' | 'investments'>('all');
+  const [preFilledMessage, setPreFilledMessage] = useState<string>('');
+  const [showScrollTop, setShowScrollTop] = useState<boolean>(false);
+  const [pendingScroll, setPendingScroll] = useState<string | null>(null);
+
+  const updateStateForPageAndHash = (targetPage: string, hash: string) => {
+    setCurrentPage(targetPage);
+    
+    if (targetPage === 'faq') {
+      if (hash.startsWith('#faq-')) {
+        const cat = hash.split('-')[1] as any;
+        if (['life', 'health', 'auto', 'general', 'investments'].includes(cat)) {
+          setFaqInitialCategory(cat);
+        }
       }
+    } else if (targetPage === 'services') {
+      if (hash && hash !== '#services') {
+        const sectionId = hash.substring(1);
+        setPendingScroll(sectionId);
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    } else if (targetPage === 'home') {
+      if (hash && hash !== '#home' && hash !== '#') {
+        const sectionId = hash.substring(1);
+        setPendingScroll(sectionId);
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    } else if (targetPage === 'resources') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  const navigateTo = (targetPage: string, hash: string, replace: boolean = false) => {
+    const page = targetPage || getPageFromHash(hash);
+    updateStateForPageAndHash(page, hash);
+
+    const state = { page, hash };
+    const url = hash ? `${window.location.pathname}${hash}` : window.location.pathname;
+    try {
+      if (replace) {
+        window.history.replaceState(state, '', url);
+      } else {
+        window.history.pushState(state, '', url);
+      }
+    } catch (e) {
+      console.warn('History navigation failed:', e);
+    }
+  };
+
+  // Keep a ref to avoid closure issues with navigateTo
+  const navigateToRef = useRef(navigateTo);
+  useEffect(() => {
+    navigateToRef.current = navigateTo;
+  });
+
+  // Global navigator function definition
+  useEffect(() => {
+    window.navigateToHash = (hash: string) => {
+      const page = getPageFromHash(hash);
+      navigateToRef.current(page, hash, false);
     };
-    window.navigateToHash = navigateToHash;
     return () => {
       delete window.navigateToHash;
     };
   }, []);
 
+  // Sync theme
   useEffect(() => {
     const root = window.document.documentElement;
     if (theme === 'dark') {
@@ -67,11 +122,6 @@ export default function App() {
     setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
   };
 
-  const [faqInitialCategory, setFaqInitialCategory] = useState<'all' | 'life' | 'health' | 'auto' | 'general' | 'investments'>('all');
-  const [preFilledMessage, setPreFilledMessage] = useState<string>('');
-  const [showScrollTop, setShowScrollTop] = useState<boolean>(false);
-  const [pendingScroll, setPendingScroll] = useState<string | null>(null);
-
   // Monitor scroll for back-to-top buttons
   useEffect(() => {
     const handleScroll = () => {
@@ -85,101 +135,21 @@ export default function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Listen for browser hash anchors to trigger appropriate view mapping
+  // Handle HTML5 History popstate event robustly
   useEffect(() => {
-    const handleHashChange = () => {
-      const hash = window.location.hash;
-      if (!hash) return;
-
-      let navigated = false;
-      let targetPage = '';
-
-      if (hash === '#' || hash === '#home') {
-        setCurrentPage('home');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        navigated = true;
-        targetPage = 'home';
-      } else if (['#life-insurance', '#health-insurance', '#car-insurance', '#general-insurance', '#mutual-funds'].some(h => hash.startsWith(h))) {
-        setCurrentPage('services');
-        setTimeout(() => {
-          const srvElement = document.getElementById(hash.substring(1));
-          if (srvElement) srvElement.scrollIntoView({ behavior: 'smooth' });
-        }, 150);
-        navigated = true;
-        targetPage = 'services';
-      } else if (hash.startsWith('#faq-')) {
-        setCurrentPage('faq');
-        const srvCategory = hash.split('-')[1] as any;
-        if (['life', 'health', 'auto', 'general', 'investments'].includes(srvCategory)) {
-          setFaqInitialCategory(srvCategory);
-        }
-        navigated = true;
-        targetPage = 'faq';
-      } else if (hash === '#resources') {
-        setCurrentPage('resources');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        navigated = true;
-        targetPage = 'resources';
-      } else if (hash === '#faq') {
-        setCurrentPage('faq');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        navigated = true;
-        targetPage = 'faq';
-      } else if (hash === '#services') {
-        setCurrentPage('services');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        navigated = true;
-        targetPage = 'services';
-      } else if (['#hero', '#about', '#why-choose-us', '#stats', '#awards', '#partners', '#testimonials', '#contact'].includes(hash)) {
-        setCurrentPage('home');
-        setTimeout(() => {
-          const sectionEl = document.getElementById(hash.substring(1));
-          if (sectionEl) {
-            sectionEl.scrollIntoView({ behavior: 'smooth' });
-          } else {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          }
-        }, 150);
-        navigated = true;
-        targetPage = 'home';
-      }
-
-      if (navigated && targetPage) {
-        // Clear the hash after navigation is successfully triggered to ensure the URL does not carry leftover state indicators, while preserving history page state
-        try {
-          window.history.replaceState({ page: targetPage }, '', window.location.pathname);
-        } catch (error) {
-          console.warn('replaceState blocked or failed:', error);
-        }
-      }
-    };
-
-    window.addEventListener('hashchange', handleHashChange);
-    
-    // Set active view safely depending on custom routing hashes
     const initialHash = window.location.hash;
-    if (initialHash) {
-      handleHashChange();
-    } else {
-      setCurrentPage('home');
-    }
-
-    return () => window.removeEventListener('hashchange', handleHashChange);
-  }, []);
-
-  // Handle HTML5 History State to enable back button within subsections without exiting
-  useEffect(() => {
+    const initialPage = getPageFromHash(initialHash);
+    
+    // Always seed initial history state so browser back works reliably from deep link
     if (!window.history.state) {
-      window.history.replaceState({ page: 'home' }, '', window.location.pathname);
+      window.history.replaceState({ page: initialPage, hash: initialHash }, '', window.location.href);
     }
 
     const handlePopState = (event: PopStateEvent) => {
       if (event.state && event.state.page) {
-        setCurrentPage(event.state.page);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        updateStateForPageAndHash(event.state.page, event.state.hash || '');
       } else {
-        setCurrentPage('home');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        updateStateForPageAndHash('home', '');
       }
     };
 
@@ -187,15 +157,37 @@ export default function App() {
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
-  // Monitor page changes and push to browser history to prevent direct exits on back click
+  // Listen for native hash changes defensively
   useEffect(() => {
-    const currentState = window.history.state;
-    if (!currentState || currentState.page !== currentPage) {
-      window.history.pushState({ page: currentPage }, '', window.location.pathname);
-    }
-  }, [currentPage]);
+    const handleHashChange = () => {
+      const hash = window.location.hash;
+      const targetPage = getPageFromHash(hash);
+      const currentState = window.history.state;
 
-  // Monitor for pending section scrolls once target page loads
+      // Avoid double pushing if history state is already in sync with the current URL
+      if (currentState && currentState.page === targetPage && currentState.hash === hash) {
+        return;
+      }
+
+      updateStateForPageAndHash(targetPage, hash);
+      try {
+        window.history.replaceState({ page: targetPage, hash }, '', window.location.href);
+      } catch (e) {
+        console.warn('replaceState on hashchange failed:', e);
+      }
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    
+    // Handle initial routing securely on mount
+    const initialHash = window.location.hash;
+    const initialPage = getPageFromHash(initialHash);
+    updateStateForPageAndHash(initialPage, initialHash);
+
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  // Handle pending scrolling logic
   useEffect(() => {
     if (pendingScroll) {
       let attempts = 0;
@@ -207,7 +199,7 @@ export default function App() {
           clearInterval(interval);
         } else {
           attempts++;
-          if (attempts > 15) { // abort after 1.5 seconds if element doesn't exist yet
+          if (attempts > 15) {
             setPendingScroll(null);
             clearInterval(interval);
           }
@@ -221,25 +213,16 @@ export default function App() {
     const servicesSections = ['life-insurance', 'health-insurance', 'car-insurance', 'general-insurance', 'mutual-funds'];
     const targetPage = servicesSections.includes(sectionId) ? 'services' : 'home';
 
-    if (currentPage !== targetPage) {
-      setPendingScroll(sectionId);
-      setCurrentPage(targetPage);
-    } else {
-      const element = document.getElementById(sectionId);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
+    navigateTo(targetPage, `#${sectionId}`, false);
   };
 
   const handleNavigateToFaqCategory = (cat: 'life' | 'health' | 'auto' | 'general' | 'investments', scrollOffset: number = 120) => {
     setFaqInitialCategory(cat);
-    setCurrentPage('faq');
-    if (window.navigateToHash) {
-      window.navigateToHash(`#faq-${cat}`);
-    } else {
-      window.location.hash = `#faq-${cat}`;
-    }
+    navigateTo('faq', `#faq-${cat}`, false);
+  };
+
+  const handlePageChange = (page: string) => {
+    navigateTo(page, '', false);
   };
 
   const handleNavigateToContact = (msg?: string) => {
@@ -260,7 +243,7 @@ export default function App() {
       {/* 1. Header & Navigation Menu */}
       <Navbar 
         currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
+        setCurrentPage={handlePageChange}
         onScrollToSection={handleScrollToSection}
         theme={theme}
         toggleTheme={toggleTheme}
@@ -335,7 +318,7 @@ export default function App() {
 
       {/* 3. Consistent Footers */}
       <Footer 
-        setCurrentPage={setCurrentPage}
+        setCurrentPage={handlePageChange}
         onScrollToSection={handleScrollToSection}
       />
 
