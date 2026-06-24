@@ -161,7 +161,9 @@ export default function FaqView({ initialCategoryFilter = 'all' }: FaqViewProps)
 
   const filteredFaqs = useMemo(() => {
     return faqs.filter(faq => {
-      const matchCategory = selectedCategory === 'all' || faq.category === selectedCategory;
+      // If there is an active search query, search across all categories (as stated in the search bar placeholder)
+      // Otherwise, filter by the selected category.
+      const matchCategory = searchQuery.trim() !== '' || selectedCategory === 'all' || faq.category === selectedCategory;
 
       const matchSearch = 
         fuzzyMatch(faq.question, searchQuery) || 
@@ -497,6 +499,7 @@ export default function FaqView({ initialCategoryFilter = 'all' }: FaqViewProps)
           <div id="faq-list" role="feed" aria-busy="false" className="space-y-4">
             {filteredFaqs.length > 0 ? (
               <motion.div 
+                key={`${selectedCategory}-${searchQuery}`}
                 variants={containerVariants}
                 initial="hidden"
                 animate="show"
