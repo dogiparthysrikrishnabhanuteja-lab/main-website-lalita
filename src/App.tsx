@@ -42,7 +42,7 @@ export default function App() {
   const [showScrollTop, setShowScrollTop] = useState<boolean>(false);
   const [pendingScroll, setPendingScroll] = useState<string | null>(null);
 
-  const updateStateForPageAndHash = (targetPage: string, hash: string) => {
+  const updateStateForPageAndHash = (targetPage: string, hash: string, sectionIdFromState?: string | null) => {
     setCurrentPage(targetPage);
     
     if (targetPage === 'faq') {
@@ -56,14 +56,18 @@ export default function App() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     } else if (targetPage === 'services') {
-      if (hash && hash !== '#services') {
+      if (sectionIdFromState) {
+        setPendingScroll(sectionIdFromState);
+      } else if (hash && hash !== '#services') {
         const sectionId = hash.substring(1);
         setPendingScroll(sectionId);
       } else {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     } else if (targetPage === 'home') {
-      if (hash && hash !== '#home' && hash !== '#') {
+      if (sectionIdFromState) {
+        setPendingScroll(sectionIdFromState);
+      } else if (hash && hash !== '#home' && hash !== '#') {
         const sectionId = hash.substring(1);
         setPendingScroll(sectionId);
       } else {
@@ -77,16 +81,21 @@ export default function App() {
   const navigateTo = (targetPage: string, hash: string, replace: boolean = false) => {
     const page = targetPage || getPageFromHash(hash);
     
+    let targetSectionId: string | null = null;
+    if (hash && hash.startsWith('#') && hash !== '#' && hash !== '#home' && hash !== '#services' && hash !== '#faq' && hash !== '#resources') {
+      targetSectionId = hash.substring(1);
+    }
+    
     // Explicit state validation to avoid duplicate history states
     const currentState = window.history.state;
-    if (currentState && currentState.page === page && currentState.hash === hash && !replace) {
-      updateStateForPageAndHash(page, hash);
+    if (currentState && currentState.page === page && currentState.hash === hash && currentState.sectionId === targetSectionId && !replace) {
+      updateStateForPageAndHash(page, hash, targetSectionId);
       return;
     }
 
-    updateStateForPageAndHash(page, hash);
+    updateStateForPageAndHash(page, hash, targetSectionId);
 
-    const state = { page, hash };
+    const state = { page, hash, sectionId: targetSectionId };
     const url = hash ? `${window.location.pathname}${hash}` : window.location.pathname;
     try {
       if (replace) {
@@ -151,24 +160,30 @@ export default function App() {
     const initialHash = window.location.hash;
     const initialPage = getPageFromHash(initialHash);
     
+    let initialSectionId: string | null = null;
+    if (initialHash && initialHash.startsWith('#') && initialHash !== '#' && initialHash !== '#home' && initialHash !== '#services' && initialHash !== '#faq' && initialHash !== '#resources') {
+      initialSectionId = initialHash.substring(1);
+    }
+
     // Always seed initial history state so browser back works reliably from deep link
     if (!window.history.state) {
-      window.history.replaceState({ page: initialPage, hash: initialHash }, '', window.location.href);
+      window.history.replaceState({ page: initialPage, hash: initialHash, sectionId: initialSectionId }, '', window.location.href);
     }
 
     const handlePopState = (event: PopStateEvent) => {
       if (event.state && typeof event.state === 'object' && 'page' in event.state) {
         const page = event.state.page;
         const hash = event.state.hash || '';
+        const sectionId = event.state.sectionId || null;
         if (['home', 'services', 'faq', 'resources'].includes(page)) {
-          updateStateForPageAndHash(page, hash);
+          updateStateForPageAndHash(page, hash, sectionId);
         } else {
           const fallbackPage = getPageFromHash(window.location.hash);
-          updateStateForPageAndHash(fallbackPage, window.location.hash);
+          updateStateForPageAndHash(fallbackPage, window.location.hash, null);
         }
       } else {
         const fallbackPage = getPageFromHash(window.location.hash);
-        updateStateForPageAndHash(fallbackPage, window.location.hash);
+        updateStateForPageAndHash(fallbackPage, window.location.hash, null);
       }
     };
 
@@ -183,14 +198,19 @@ export default function App() {
       const targetPage = getPageFromHash(hash);
       const currentState = window.history.state;
 
+      let sectionId: string | null = null;
+      if (hash && hash.startsWith('#') && hash !== '#' && hash !== '#home' && hash !== '#services' && hash !== '#faq' && hash !== '#resources') {
+        sectionId = hash.substring(1);
+      }
+
       // Avoid double pushing if history state is already in sync with the current URL
-      if (currentState && currentState.page === targetPage && currentState.hash === hash) {
+      if (currentState && currentState.page === targetPage && currentState.hash === hash && currentState.sectionId === sectionId) {
         return;
       }
 
-      updateStateForPageAndHash(targetPage, hash);
+      updateStateForPageAndHash(targetPage, hash, sectionId);
       try {
-        window.history.replaceState({ page: targetPage, hash }, '', window.location.href);
+        window.history.replaceState({ page: targetPage, hash, sectionId }, '', window.location.href);
       } catch (e) {
         console.warn('replaceState on hashchange failed:', e);
       }
@@ -201,7 +221,11 @@ export default function App() {
     // Handle initial routing securely on mount
     const initialHash = window.location.hash;
     const initialPage = getPageFromHash(initialHash);
-    updateStateForPageAndHash(initialPage, initialHash);
+    let initialSectionId: string | null = null;
+    if (initialHash && initialHash.startsWith('#') && initialHash !== '#' && initialHash !== '#home' && initialHash !== '#services' && initialHash !== '#faq' && initialHash !== '#resources') {
+      initialSectionId = initialHash.substring(1);
+    }
+    updateStateForPageAndHash(initialPage, initialHash, initialSectionId);
 
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
