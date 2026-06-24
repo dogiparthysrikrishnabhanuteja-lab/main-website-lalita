@@ -13,16 +13,21 @@ interface FooterProps {
 export default function Footer({ setCurrentPage, onScrollToSection }: FooterProps) {
   
   const handleLinkClick = (page: string, hashId?: string) => {
-    setCurrentPage(page);
-    if (hashId) {
-      setTimeout(() => {
-        const element = document.getElementById(hashId);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 100);
+    const targetHash = hashId ? `#${hashId}` : `#${page}`;
+    if (window.location.hash === targetHash) {
+      setCurrentPage(page);
+      if (hashId) {
+        setTimeout(() => {
+          const element = document.getElementById(hashId);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 100);
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
     } else {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.location.hash = targetHash;
     }
   };
 

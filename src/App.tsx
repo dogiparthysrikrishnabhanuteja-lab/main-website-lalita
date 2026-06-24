@@ -60,7 +60,11 @@ export default function App() {
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash;
-      if (!hash) return;
+      if (!hash || hash === '#' || hash === '#home') {
+        setCurrentPage('home');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
 
       if (['#life-insurance', '#health-insurance', '#car-insurance', '#general-insurance', '#mutual-funds'].some(h => hash.startsWith(h))) {
         setCurrentPage('services');
@@ -87,26 +91,23 @@ export default function App() {
         setCurrentPage('home');
         setTimeout(() => {
           const sectionEl = document.getElementById(hash.substring(1));
-          if (sectionEl) sectionEl.scrollIntoView({ behavior: 'smooth' });
+          if (sectionEl) {
+            sectionEl.scrollIntoView({ behavior: 'smooth' });
+          } else {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
         }, 150);
       }
     };
 
     window.addEventListener('hashchange', handleHashChange);
     
-    // Set active view safely depending on custom routing hashes, but prevent default redirect to full-screen modules like resources on initial mount
+    // Set active view safely depending on custom routing hashes
     const initialHash = window.location.hash;
-    if (initialHash && !['#resources', '#faq', '#services'].includes(initialHash)) {
+    if (initialHash) {
       handleHashChange();
     } else {
       setCurrentPage('home');
-      if (initialHash && ['#resources', '#faq', '#services'].includes(initialHash)) {
-        try {
-          window.history.replaceState(null, '', window.location.pathname);
-        } catch (error) {
-          console.warn('replaceState blocked or failed:', error);
-        }
-      }
     }
 
     return () => window.removeEventListener('hashchange', handleHashChange);
@@ -150,9 +151,7 @@ export default function App() {
   };
 
   const handleNavigateToFaqCategory = (cat: 'life' | 'health' | 'auto' | 'general' | 'investments') => {
-    setFaqInitialCategory(cat);
-    setCurrentPage('faq');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.location.hash = `#faq-${cat}`;
   };
 
   const handleNavigateToContact = (msg?: string) => {
@@ -194,8 +193,7 @@ export default function App() {
                 preFilledMessage={preFilledMessage}
                 setPreFilledMessage={setPreFilledMessage}
                 onNavigateToResources={() => {
-                  setCurrentPage('resources');
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                  window.location.hash = '#resources';
                 }}
               />
             </motion.div>

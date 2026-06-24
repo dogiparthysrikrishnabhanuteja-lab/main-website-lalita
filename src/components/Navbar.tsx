@@ -47,11 +47,16 @@ export default function Navbar({ currentPage, setCurrentPage, onScrollToSection,
     setIsOpen(false);
     setDropdownOpen(false);
     
-    if (sectionId) {
-      onScrollToSection(sectionId);
+    const targetHash = sectionId ? `#${sectionId}` : `#${page}`;
+    if (window.location.hash === targetHash) {
+      if (sectionId) {
+        onScrollToSection(sectionId);
+      } else {
+        setCurrentPage(page);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
     } else {
-      setCurrentPage(page);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.location.hash = targetHash;
     }
   };
 
