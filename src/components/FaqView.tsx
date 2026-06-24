@@ -34,9 +34,6 @@ export default function FaqView({ initialCategoryFilter = 'all' }: FaqViewProps)
 
   // Sync category filter if changed externally and scroll the selected FAQ question into view immediately on load
   useEffect(() => {
-    // Reset scroll position to top immediately to clear any inherited scroll state from previous long pages
-    window.scrollTo(0, 0);
-
     setSelectedCategory(initialCategoryFilter);
     setSearchQuery('');
     
@@ -50,33 +47,19 @@ export default function FaqView({ initialCategoryFilter = 'all' }: FaqViewProps)
         const interval = setInterval(() => {
           const faqElement = document.getElementById(`faq-card-${firstFaqOfCategory.id}`);
           if (faqElement) {
-            // Calculate absolute top position of the element to ensure reliable scrolling on all devices
-            const rect = faqElement.getBoundingClientRect();
-            const absoluteTop = rect.top + window.scrollY;
-            const targetPosition = absoluteTop - 110; // Precise offset to clear the sticky navbar/header
-            
-            window.scrollTo({
-              top: targetPosition >= 0 ? targetPosition : 0,
-              behavior: 'smooth'
-            });
-            
+            // Using modern native scrollIntoView with scroll-mt-28 on the element is 100% stable across all device viewport changes
+            faqElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
             clearInterval(interval);
           } else {
             attempts++;
-            if (attempts > 12) { // 1.2 seconds maximum fallback timeout
+            if (attempts > 15) { // 1.5 seconds maximum fallback timeout
               if (questionsRef.current) {
-                const rect = questionsRef.current.getBoundingClientRect();
-                const absoluteTop = rect.top + window.scrollY;
-                const targetPosition = absoluteTop - 110;
-                window.scrollTo({
-                  top: targetPosition >= 0 ? targetPosition : 0,
-                  behavior: 'smooth'
-                });
+                questionsRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
               }
               clearInterval(interval);
             }
           }
-        }, 80);
+        }, 100);
         
         return () => clearInterval(interval);
       } else {
@@ -433,7 +416,7 @@ export default function FaqView({ initialCategoryFilter = 'all' }: FaqViewProps)
                       id={`faq-card-${faq.id}`}
                       layout="position"
                       variants={cardVariants}
-                      className="overflow-hidden rounded-xl bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800/80 hover:border-amber-500/30 dark:hover:border-amber-500/30 transition-all duration-300 shadow-sm"
+                      className="overflow-hidden rounded-xl bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800/80 hover:border-amber-500/30 dark:hover:border-amber-500/30 transition-all duration-300 shadow-sm scroll-mt-28"
                     >
                       {/* Accordion Head with proper HTML5 button semantics and ARIA-expanded */}
                       <button

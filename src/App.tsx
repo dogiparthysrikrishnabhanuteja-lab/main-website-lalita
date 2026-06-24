@@ -32,7 +32,12 @@ export default function App() {
   useEffect(() => {
     const navigateToHash = (hash: string) => {
       try {
-        window.history.replaceState(null, '', `${window.location.pathname}${hash}`);
+        let page = 'home';
+        if (hash === '#resources') page = 'resources';
+        else if (hash.startsWith('#faq')) page = 'faq';
+        else if (hash.startsWith('#services') || ['#life-insurance', '#health-insurance', '#car-insurance', '#general-insurance', '#mutual-funds'].some(h => hash.startsWith(h))) page = 'services';
+        
+        window.history.replaceState({ page }, '', `${window.location.pathname}${hash}`);
         // Manually dispatch a hashchange event so our App.tsx listener is informed
         window.dispatchEvent(new HashChangeEvent('hashchange'));
       } catch (error) {
@@ -87,11 +92,13 @@ export default function App() {
       if (!hash) return;
 
       let navigated = false;
+      let targetPage = '';
 
       if (hash === '#' || hash === '#home') {
         setCurrentPage('home');
         window.scrollTo({ top: 0, behavior: 'smooth' });
         navigated = true;
+        targetPage = 'home';
       } else if (['#life-insurance', '#health-insurance', '#car-insurance', '#general-insurance', '#mutual-funds'].some(h => hash.startsWith(h))) {
         setCurrentPage('services');
         setTimeout(() => {
@@ -99,6 +106,7 @@ export default function App() {
           if (srvElement) srvElement.scrollIntoView({ behavior: 'smooth' });
         }, 150);
         navigated = true;
+        targetPage = 'services';
       } else if (hash.startsWith('#faq-')) {
         setCurrentPage('faq');
         const srvCategory = hash.split('-')[1] as any;
@@ -106,18 +114,22 @@ export default function App() {
           setFaqInitialCategory(srvCategory);
         }
         navigated = true;
+        targetPage = 'faq';
       } else if (hash === '#resources') {
         setCurrentPage('resources');
         window.scrollTo({ top: 0, behavior: 'smooth' });
         navigated = true;
+        targetPage = 'resources';
       } else if (hash === '#faq') {
         setCurrentPage('faq');
         window.scrollTo({ top: 0, behavior: 'smooth' });
         navigated = true;
+        targetPage = 'faq';
       } else if (hash === '#services') {
         setCurrentPage('services');
         window.scrollTo({ top: 0, behavior: 'smooth' });
         navigated = true;
+        targetPage = 'services';
       } else if (['#hero', '#about', '#why-choose-us', '#stats', '#awards', '#partners', '#testimonials', '#contact'].includes(hash)) {
         setCurrentPage('home');
         setTimeout(() => {
@@ -129,12 +141,13 @@ export default function App() {
           }
         }, 150);
         navigated = true;
+        targetPage = 'home';
       }
 
-      if (navigated) {
-        // Clear the hash after navigation is successfully triggered to ensure the URL does not carry leftover state indicators
+      if (navigated && targetPage) {
+        // Clear the hash after navigation is successfully triggered to ensure the URL does not carry leftover state indicators, while preserving history page state
         try {
-          window.history.replaceState(null, '', window.location.pathname);
+          window.history.replaceState({ page: targetPage }, '', window.location.pathname);
         } catch (error) {
           console.warn('replaceState blocked or failed:', error);
         }
@@ -177,7 +190,7 @@ export default function App() {
   // Monitor page changes and push to browser history to prevent direct exits on back click
   useEffect(() => {
     const currentState = window.history.state;
-    if (currentState && currentState.page !== currentPage) {
+    if (!currentState || currentState.page !== currentPage) {
       window.history.pushState({ page: currentPage }, '', window.location.pathname);
     }
   }, [currentPage]);
