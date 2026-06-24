@@ -13,25 +13,10 @@ interface FooterProps {
 export default function Footer({ setCurrentPage, onScrollToSection }: FooterProps) {
   
   const handleLinkClick = (page: string, hashId?: string) => {
-    const targetHash = hashId ? `#${hashId}` : `#${page}`;
-    if (window.location.hash === targetHash) {
-      setCurrentPage(page);
-      if (hashId) {
-        setTimeout(() => {
-          const element = document.getElementById(hashId);
-          if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
-          }
-        }, 100);
-      } else {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
+    if (hashId) {
+      onScrollToSection(hashId);
     } else {
-      if (window.navigateToHash) {
-        window.navigateToHash(targetHash);
-      } else {
-        window.location.hash = targetHash;
-      }
+      setCurrentPage(page);
     }
   };
 

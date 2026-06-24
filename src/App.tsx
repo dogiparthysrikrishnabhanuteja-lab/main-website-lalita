@@ -37,7 +37,7 @@ export default function App() {
     return 'home';
   };
 
-  const [faqInitialCategory, setFaqInitialCategory] = useState<'all' | 'life' | 'health' | 'auto' | 'general' | 'investments'>('all');
+  const [faqInitialCategory, setFaqInitialCategory] = useState<'all' | 'life' | 'health' | 'auto' | 'general' | 'investments' | 'tax'>('all');
   const [preFilledMessage, setPreFilledMessage] = useState<string>('');
   const [showScrollTop, setShowScrollTop] = useState<boolean>(false);
   const [pendingScroll, setPendingScroll] = useState<string | null>(null);
@@ -48,9 +48,12 @@ export default function App() {
     if (targetPage === 'faq') {
       if (hash.startsWith('#faq-')) {
         const cat = hash.split('-')[1] as any;
-        if (['life', 'health', 'auto', 'general', 'investments'].includes(cat)) {
+        if (['life', 'health', 'auto', 'general', 'investments', 'tax'].includes(cat)) {
           setFaqInitialCategory(cat);
         }
+      } else {
+        setFaqInitialCategory('all');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     } else if (targetPage === 'services') {
       if (hash && hash !== '#services') {
@@ -232,7 +235,7 @@ export default function App() {
     navigateTo(targetPage, `#${sectionId}`, false);
   };
 
-  const handleNavigateToFaqCategory = (cat: 'life' | 'health' | 'auto' | 'general' | 'investments', scrollOffset: number = 120) => {
+  const handleNavigateToFaqCategory = (cat: 'life' | 'health' | 'auto' | 'general' | 'investments' | 'tax', scrollOffset: number = 120) => {
     setFaqInitialCategory(cat);
     navigateTo('faq', `#faq-${cat}`, false);
   };
@@ -266,7 +269,7 @@ export default function App() {
       />
 
       {/* 2. Primary Page Router View */}
-      <main className="flex-grow pt-16 overflow-hidden">
+      <main className="flex-grow pt-16 w-full overflow-x-hidden">
         <AnimatePresence mode="wait">
           {currentPage === 'home' && (
             <motion.div

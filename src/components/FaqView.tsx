@@ -20,20 +20,95 @@ import { faqs } from '../data/faqs';
 import { FAQ } from '../types';
 
 interface FaqViewProps {
-  initialCategoryFilter?: 'all' | 'life' | 'health' | 'auto' | 'general' | 'investments';
+  initialCategoryFilter?: 'all' | 'life' | 'health' | 'auto' | 'general' | 'investments' | 'tax';
 }
 
 type TabType = 'explorer' | 'assistant';
 
+// Helper functions for fuzzy matching
+function getLevenshteinDistance(a: string, b: string): number {
+  const matrix: number[][] = [];
+
+  for (let i = 0; i <= b.length; i++) {
+    matrix[i] = [i];
+  }
+
+  for (let j = 0; j <= a.length; j++) {
+    matrix[0][j] = j;
+  }
+
+  for (let i = 1; i <= b.length; i++) {
+    for (let j = 1; j <= a.length; j++) {
+      if (b.charAt(i - 1) === a.charAt(j - 1)) {
+        matrix[i][j] = matrix[i - 1][j - 1];
+      } else {
+        matrix[i][j] = Math.min(
+          matrix[i - 1][j - 1] + 1, // substitution
+          matrix[i][j - 1] + 1,     // insertion
+          matrix[i - 1][j] + 1      // deletion
+        );
+      }
+    }
+  }
+
+  return matrix[b.length][a.length];
+}
+
+function fuzzyMatch(text: string, query: string): boolean {
+  const queryClean = query.toLowerCase().trim();
+  if (!queryClean) return true;
+
+  const targetText = text.toLowerCase();
+  
+  // Direct substring match as first priority
+  if (targetText.includes(queryClean)) {
+    return true;
+  }
+
+  const queryWords = queryClean.split(/\s+/).filter(w => w.length > 1);
+  if (queryWords.length === 0) return true;
+
+  const targetWords = targetText.split(/[^a-z0-9]+/).filter(w => w.length > 1);
+
+  // For each query word, we want to find at least one matching target word
+  let matchedCount = 0;
+  for (const qw of queryWords) {
+    let isWordMatched = false;
+    for (const tw of targetWords) {
+      // Direct inclusion
+      if (tw.includes(qw) || qw.includes(tw)) {
+        isWordMatched = true;
+        break;
+      }
+      
+      // Fuzzy match using Levenshtein distance
+      const maxDistance = qw.length <= 4 ? 1 : 2;
+      const dist = getLevenshteinDistance(qw, tw);
+      if (dist <= maxDistance) {
+        isWordMatched = true;
+        break;
+      }
+    }
+    if (isWordMatched) {
+      matchedCount++;
+    }
+  }
+
+  // Require at least 75% of query words to match
+  const threshold = queryWords.length === 1 ? 1 : 0.75;
+  return (matchedCount / queryWords.length) >= threshold;
+}
+
 export default function FaqView({ initialCategoryFilter = 'all' }: FaqViewProps) {
   const [activeTab, setActiveTab] = useState<TabType>('explorer');
-  const [selectedCategory, setSelectedCategory] = useState<'all' | 'life' | 'health' | 'auto' | 'general' | 'investments'>('all');
+  const [selectedCategory, setSelectedCategory] = useState<'all' | 'life' | 'health' | 'auto' | 'general' | 'investments' | 'tax'>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [expandedFaqId, setExpandedFaqId] = useState<string | null>(null);
   const questionsRef = useRef<HTMLDivElement>(null);
 
   // Sync category filter if changed externally and scroll the selected FAQ question into view immediately on load
   useEffect(() => {
+    setActiveTab('explorer');
     setSelectedCategory(initialCategoryFilter);
     setSearchQuery('');
     
@@ -72,11 +147,12 @@ export default function FaqView({ initialCategoryFilter = 'all' }: FaqViewProps)
 
   const categories = [
     { value: 'all', label: 'All Services' },
-    { value: 'life', label: 'Life Legacy' },
-    { value: 'health', label: 'Health Care' },
+    { value: 'life', label: 'Life Insurance' },
+    { value: 'health', label: 'Health Insurance' },
+    { value: 'investments', label: 'Investment Planning' },
+    { value: 'tax', label: 'Tax Savings' },
     { value: 'auto', label: 'Motor Vehicle' },
-    { value: 'general', label: 'General Insurance' },
-    { value: 'investments', label: 'Mutual Funds & SIPs' }
+    { value: 'general', label: 'General Insurance' }
   ] as const;
 
   const handleToggleFaq = (id: string) => {
@@ -88,8 +164,8 @@ export default function FaqView({ initialCategoryFilter = 'all' }: FaqViewProps)
       const matchCategory = selectedCategory === 'all' || faq.category === selectedCategory;
 
       const matchSearch = 
-        faq.question.toLowerCase().includes(searchQuery.toLowerCase()) || 
-        faq.answer.toLowerCase().includes(searchQuery.toLowerCase());
+        fuzzyMatch(faq.question, searchQuery) || 
+        fuzzyMatch(faq.answer, searchQuery);
       return matchCategory && matchSearch;
     });
   }, [selectedCategory, searchQuery]);
@@ -194,11 +270,14 @@ export default function FaqView({ initialCategoryFilter = 'all' }: FaqViewProps)
     }
   ]);
   const [isAssistantTyping, setIsAssistantTyping] = useState(false);
-  const chatBottomRef = useRef<HTMLDivElement>(null);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (chatBottomRef.current) {
-      chatBottomRef.current.scrollIntoView({ behavior: 'smooth' });
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTo({
+        top: chatContainerRef.current.scrollHeight,
+        behavior: 'smooth'
+      });
     }
   }, [chatMessages, isAssistantTyping]);
 
@@ -330,7 +409,14 @@ export default function FaqView({ initialCategoryFilter = 'all' }: FaqViewProps)
       {/* Interactive Tabs Navigator */}
       <div className="grid grid-cols-2 gap-2 p-1.5 bg-slate-100 dark:bg-slate-900 rounded-xl max-w-md mx-auto">
         <button
-          onClick={() => setActiveTab('explorer')}
+          onClick={() => {
+            setActiveTab('explorer');
+            setTimeout(() => {
+              if (questionsRef.current) {
+                questionsRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }
+            }, 80);
+          }}
           className={`flex flex-col sm:flex-row items-center justify-center gap-2 py-3 sm:py-2.5 px-3 rounded-lg text-xs font-bold transition-all outline-none cursor-pointer min-h-[44px] ${
             activeTab === 'explorer'
               ? 'bg-white dark:bg-slate-950 text-amber-700 dark:text-amber-400 shadow-md'
@@ -342,7 +428,14 @@ export default function FaqView({ initialCategoryFilter = 'all' }: FaqViewProps)
         </button>
 
         <button
-          onClick={() => setActiveTab('assistant')}
+          onClick={() => {
+            setActiveTab('assistant');
+            setTimeout(() => {
+              if (questionsRef.current) {
+                questionsRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }
+            }, 80);
+          }}
           className={`flex flex-col sm:flex-row items-center justify-center gap-2 py-3 sm:py-2.5 px-3 rounded-lg text-xs font-bold transition-all outline-none cursor-pointer min-h-[44px] ${
             activeTab === 'assistant'
               ? 'bg-white dark:bg-slate-950 text-amber-700 dark:text-amber-400 shadow-md'
@@ -417,7 +510,11 @@ export default function FaqView({ initialCategoryFilter = 'all' }: FaqViewProps)
                       id={`faq-card-${faq.id}`}
                       layout="position"
                       variants={cardVariants}
-                      className="overflow-hidden rounded-xl bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800/80 hover:border-amber-500/30 dark:hover:border-amber-500/30 transition-all duration-300 shadow-sm scroll-mt-28"
+                      className={`overflow-hidden rounded-xl bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800/80 hover:border-amber-500/30 dark:hover:border-amber-500/30 transition-all duration-300 shadow-sm scroll-mt-28 border-l-4 ${
+                        isExpanded 
+                          ? 'border-l-amber-600 dark:border-l-amber-500 shadow-md bg-amber-50/5 dark:bg-amber-950/5' 
+                          : 'border-l-slate-200 dark:border-l-slate-800'
+                      }`}
                     >
                       {/* Accordion Head with proper HTML5 button semantics and ARIA-expanded */}
                       <button
@@ -453,10 +550,10 @@ export default function FaqView({ initialCategoryFilter = 'all' }: FaqViewProps)
                               id={`faq-content-${faq.id}`}
                               role="region"
                               aria-labelledby={`faq-btn-${faq.id}`}
-                              className="px-5 py-4 border-t border-slate-100 dark:border-slate-800/50 bg-white dark:bg-slate-950/20 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-sans space-y-3 animate-fadeIn"
+                              className="px-5 py-5 border-t border-slate-100 dark:border-slate-800/50 bg-white dark:bg-slate-950/20 text-sm sm:text-[15px] text-slate-600 dark:text-slate-300 leading-relaxed sm:leading-loose font-sans space-y-4 animate-fadeIn"
                             >
                               <p className="whitespace-pre-line">{faq.answer}</p>
-                              <div className="flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-wider text-amber-700 dark:text-amber-400 font-bold">
+                              <div className="flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-wider text-amber-700 dark:text-amber-400 font-bold pt-2">
                                 <Sparkles className="w-3.5 h-3.5" /> Checked Under Category: {categories.find(c => c.value === faq.category)?.label || (['life', 'health', 'auto'].includes(faq.category) ? 'Insurance' : faq.category)}
                               </div>
                             </div>
@@ -468,21 +565,36 @@ export default function FaqView({ initialCategoryFilter = 'all' }: FaqViewProps)
                 })}
               </motion.div>
             ) : (
-              <div className="text-center p-12 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl space-y-4">
-                <AlertCircle className="w-8 h-8 text-amber-600 mx-auto opacity-65 animate-bounce" />
-                <div className="space-y-1">
-                  <h5 className="text-sm font-bold text-slate-850 dark:text-slate-200">No questions match your filter</h5>
-                  <p className="text-xs text-slate-500">Try adjusting your keyword typing or clearing the active search filter.</p>
+              <div className="text-center p-12 bg-slate-50 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800 rounded-2xl space-y-5 animate-fadeIn">
+                <AlertCircle className="w-10 h-10 text-amber-600 dark:text-amber-500 mx-auto opacity-75 animate-pulse" />
+                <div className="space-y-2">
+                  <h5 className="text-base font-extrabold text-slate-900 dark:text-white">No results found</h5>
+                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-md mx-auto">
+                    We couldn't find any match for <span className="font-semibold text-amber-700 dark:text-amber-400">"{searchQuery || 'your filter'}"</span>.
+                  </p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">
+                    Try a different keyword (e.g., <button onClick={() => setSearchQuery('tax')} className="text-amber-600 hover:underline font-semibold cursor-pointer outline-none">tax</button>, <button onClick={() => setSearchQuery('life')} className="text-amber-600 hover:underline font-semibold cursor-pointer outline-none">life</button>, <button onClick={() => setSearchQuery('health')} className="text-amber-600 hover:underline font-semibold cursor-pointer outline-none">health</button>, <button onClick={() => setSearchQuery('claim')} className="text-amber-600 hover:underline font-semibold cursor-pointer outline-none">claim</button>) or adjust your selected category.
+                  </p>
                 </div>
-                <button 
-                  onClick={() => {
-                    setSearchQuery('');
-                    setSelectedCategory('all');
-                  }}
-                  className="px-4 py-2.5 sm:py-2 text-xs font-mono font-bold bg-slate-900 dark:bg-slate-800 hover:bg-amber-600 dark:hover:bg-amber-600 text-white rounded-lg cursor-pointer outline-none transition-all min-h-[44px]"
-                >
-                  Clear All Filters
-                </button>
+                <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
+                  {searchQuery && (
+                    <button 
+                      onClick={() => setSearchQuery('')}
+                      className="px-4 py-2 text-xs font-mono font-bold bg-amber-600 hover:bg-amber-700 text-white rounded-lg cursor-pointer outline-none transition-all min-h-[40px] shadow-md shadow-amber-600/10"
+                    >
+                      Clear Search Keyword
+                    </button>
+                  )}
+                  <button 
+                    onClick={() => {
+                      setSearchQuery('');
+                      setSelectedCategory('all');
+                    }}
+                    className="px-4 py-2 text-xs font-mono font-bold bg-slate-900 dark:bg-slate-800 hover:bg-slate-800 dark:hover:bg-slate-700 text-white rounded-lg cursor-pointer outline-none transition-all min-h-[40px]"
+                  >
+                    Reset All Filters
+                  </button>
+                </div>
               </div>
             )}
           </div>
@@ -497,7 +609,7 @@ export default function FaqView({ initialCategoryFilter = 'all' }: FaqViewProps)
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
-          className="border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-xl bg-slate-50 dark:bg-slate-900/40 flex flex-col h-[520px]"
+          className="border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-xl bg-slate-50 dark:bg-slate-900/40 flex flex-col h-[480px] sm:h-[550px] max-h-[70vh]"
         >
           {/* Chat Header */}
           <div className="bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 px-5 py-4 flex items-center gap-3">
@@ -514,7 +626,7 @@ export default function FaqView({ initialCategoryFilter = 'all' }: FaqViewProps)
           </div>
 
           {/* Chat Messages Body */}
-          <div className="flex-1 overflow-y-auto p-4 sm:p-5 space-y-4">
+          <div ref={chatContainerRef} className="flex-1 overflow-y-auto p-4 sm:p-5 space-y-4">
             {chatMessages.map((msg) => (
               <div 
                 key={msg.id}
@@ -551,7 +663,7 @@ export default function FaqView({ initialCategoryFilter = 'all' }: FaqViewProps)
                     <div className="flex flex-wrap gap-1.5 pt-1">
                       {msg.suggestions.map((sug, sIdx) => (
                         <button
-                          key={`sug-${sIdx}`}
+                           key={`sug-${sIdx}`}
                           onClick={() => handleSendChat(sug)}
                           className="px-4 py-2.5 sm:py-2 bg-white hover:bg-amber-50 dark:bg-slate-950 dark:hover:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-amber-500/30 dark:hover:border-amber-500/30 text-[11px] text-slate-600 dark:text-slate-400 hover:text-amber-700 dark:hover:text-amber-400 font-bold rounded-lg cursor-pointer transition-all duration-300 shadow-sm min-h-[44px]"
                         >
@@ -576,8 +688,6 @@ export default function FaqView({ initialCategoryFilter = 'all' }: FaqViewProps)
                 </div>
               </div>
             )}
-
-            <div ref={chatBottomRef} />
           </div>
 
           {/* Chat Inputs */}

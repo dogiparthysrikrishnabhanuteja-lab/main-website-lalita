@@ -47,20 +47,10 @@ export default function Navbar({ currentPage, setCurrentPage, onScrollToSection,
     setIsOpen(false);
     setDropdownOpen(false);
     
-    const targetHash = sectionId ? `#${sectionId}` : `#${page}`;
-    if (window.location.hash === targetHash) {
-      if (sectionId) {
-        onScrollToSection(sectionId);
-      } else {
-        setCurrentPage(page);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
+    if (sectionId) {
+      onScrollToSection(sectionId);
     } else {
-      if (window.navigateToHash) {
-        window.navigateToHash(targetHash);
-      } else {
-        window.location.hash = targetHash;
-      }
+      setCurrentPage(page);
     }
   };
 
@@ -117,7 +107,7 @@ export default function Navbar({ currentPage, setCurrentPage, onScrollToSection,
                 onClick={() => handleNavClick('services')}
                 className={`px-3 py-2 text-[15px] xl:text-[16px] font-extrabold flex items-center gap-1 transition-colors cursor-pointer outline-none touch-target whitespace-nowrap ${
                   currentPage === 'services' 
-                    ? 'text-amber-605 dark:text-amber-400 font-black' 
+                    ? 'text-amber-600 dark:text-amber-400 font-black' 
                     : 'text-slate-800 dark:text-slate-100 hover:text-amber-600 dark:hover:text-amber-400'
                 }`}
               >

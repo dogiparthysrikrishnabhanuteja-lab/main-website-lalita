@@ -10,7 +10,7 @@ import SipCalculator from './SipCalculator';
 
 interface ResourcesViewProps {
   onSetContactMessage: (msg: string) => void;
-  onNavigateToFaqCategory: (cat: 'life' | 'health' | 'auto' | 'general' | 'investments') => void;
+  onNavigateToFaqCategory: (cat: 'life' | 'health' | 'auto' | 'general' | 'investments' | 'tax') => void;
 }
 
 export default function ResourcesView({ onSetContactMessage, onNavigateToFaqCategory }: ResourcesViewProps) {

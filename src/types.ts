@@ -5,7 +5,7 @@
 
 export interface FAQ {
   id: string;
-  category: 'all' | 'life' | 'health' | 'auto' | 'general' | 'investments';
+  category: 'all' | 'life' | 'health' | 'auto' | 'general' | 'investments' | 'tax';
   question: string;
   answer: string;
 }

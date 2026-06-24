@@ -33,7 +33,7 @@ const getBrandTheme = (name: string) => {
     return { bg: 'from-indigo-600 to-slate-800 bg-gradient-to-tr', text: 'text-white', abbrev: 'HE' };
   }
   if (lowercase.includes('star health')) {
-    return { bg: 'from-blue-500 to-indigo-650 bg-gradient-to-tr', text: 'text-white', abbrev: 'SH' };
+    return { bg: 'from-blue-500 to-indigo-600 bg-gradient-to-tr', text: 'text-white', abbrev: 'SH' };
   }
   if (lowercase.includes('care health')) {
     return { bg: 'from-emerald-500 to-teal-700 bg-gradient-to-tr', text: 'text-white', abbrev: 'CH' };
@@ -220,12 +220,17 @@ export default function HomeView({ preFilledMessage, setPreFilledMessage, onNavi
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 items-center justify-center pt-8">
-              <a 
-                href="#contact" 
+              <button
+                onClick={() => {
+                  const element = document.getElementById('contact');
+                  if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
                 className="px-8 py-3.5 bg-amber-600 hover:bg-amber-700 font-bold text-white rounded-xl transition-all shadow-xl shadow-amber-600/15 flex items-center gap-2 group cursor-pointer outline-none w-full sm:w-auto justify-center"
               >
                 Request a Consultation <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
-              </a>
+              </button>
               <button
                 onClick={onNavigateToResources}
                 className="px-8 py-3.5 bg-slate-900 hover:bg-slate-800 dark:bg-slate-800 dark:hover:bg-slate-700 text-white font-bold rounded-xl border border-slate-700 dark:border-slate-600 transition-all w-full sm:w-auto cursor-pointer outline-none flex items-center justify-center gap-2 shadow-lg"

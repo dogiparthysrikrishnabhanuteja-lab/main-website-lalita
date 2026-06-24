@@ -43,7 +43,7 @@ const getBrandTheme = (name: string) => {
     return { bg: 'from-indigo-600 to-slate-800 bg-gradient-to-tr', text: 'text-white', abbrev: 'HE' };
   }
   if (lowercase.includes('star health')) {
-    return { bg: 'from-blue-500 to-indigo-650 bg-gradient-to-tr', text: 'text-white', abbrev: 'SH' };
+    return { bg: 'from-blue-500 to-indigo-600 bg-gradient-to-tr', text: 'text-white', abbrev: 'SH' };
   }
   if (lowercase.includes('care health')) {
     return { bg: 'from-emerald-500 to-teal-700 bg-gradient-to-tr', text: 'text-white', abbrev: 'CH' };
@@ -54,11 +54,11 @@ const getBrandTheme = (name: string) => {
   if (lowercase.includes('prudent')) {
     return { bg: 'from-purple-600 to-indigo-700 bg-gradient-to-tr', text: 'text-white', abbrev: 'PF' };
   }
-  return { bg: 'from-slate-650 to-slate-800 bg-gradient-to-tr', text: 'text-white', abbrev: 'FI' };
+  return { bg: 'from-slate-600 to-slate-800 bg-gradient-to-tr', text: 'text-white', abbrev: 'FI' };
 };
 
 interface ServicesViewProps {
-  onNavigateToFaqCategory: (cat: 'life' | 'health' | 'auto' | 'general' | 'investments') => void;
+  onNavigateToFaqCategory: (cat: 'life' | 'health' | 'auto' | 'general' | 'investments' | 'tax') => void;
   onNavigateToContact: (prefilledMsg?: string) => void;
 }
 
