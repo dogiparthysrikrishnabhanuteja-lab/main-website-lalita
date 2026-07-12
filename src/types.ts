@@ -20,6 +20,7 @@ export interface Award {
 export interface Partner {
   name: string;
   logoUrl: string;
+  officialLogoUrl?: string;
   fallback: string;
 }
 

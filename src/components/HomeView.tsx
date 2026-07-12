@@ -10,6 +10,7 @@ import {
   Send, Phone, MapPin, ArrowRight, CheckCircle2, User, HelpCircle, Sparkles
 } from 'lucide-react';
 import { awards, partners, testimonials } from '../data/financial_data';
+import { useLanguage } from '../context/LanguageContext';
 import PartnerLogo from './PartnerLogos';
 
 const getBrandTheme = (name: string) => {
@@ -54,11 +55,14 @@ interface HomeViewProps {
 }
 
 export default function HomeView({ preFilledMessage, setPreFilledMessage, onNavigateToResources }: HomeViewProps) {
+  const { language, t } = useLanguage();
+
   // Contact Form States
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
+    interest: '',
     message: ''
   });
   const [submitting, setSubmitting] = useState(false);
@@ -77,14 +81,14 @@ export default function HomeView({ preFilledMessage, setPreFilledMessage, onNavi
     }
   }, [preFilledMessage]);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name || !formData.email || !formData.message) {
+    if (!formData.name || !formData.email || !formData.message || !formData.interest) {
       setSubmitStatus('error');
       return;
     }
@@ -95,7 +99,7 @@ export default function HomeView({ preFilledMessage, setPreFilledMessage, onNavi
     setTimeout(() => {
       setSubmitting(false);
       setSubmitStatus('success');
-      setFormData({ name: '', email: '', phone: '', message: '' });
+      setFormData({ name: '', email: '', phone: '', interest: '', message: '' });
       setPreFilledMessage(''); // reset message
     }, 1500);
   };
@@ -186,6 +190,52 @@ export default function HomeView({ preFilledMessage, setPreFilledMessage, onNavi
     }
   };
 
+  const localizedTestimonials = testimonials.map(tItem => {
+    if (language === 'en') return tItem;
+    if (tItem.author.includes('Kumar')) {
+      return {
+        quote: "డి టి వి ఎస్ స్వామి గారు నా కుటుంబ ఆర్థిక భవిష్యత్తును సురక్షితం చేయడంలో ఎంతో సహాయపడ్డారు. ఆయన ఇచ్చే సలహాలు ఎల్లప్పుడూ స్పష్టంగా, పారదర్శకంగా మరియు మా నెలవారీ ఆదాయ వ్యయాలకు తగినట్లుగా ఉంటాయి. ఆయన వ్యక్తిగత శ్రద్ధ మరియు అంకితభావానికి నేను ఆయనను బాగా సిఫార్సు చేస్తున్నాను.",
+        author: "డాక్టర్ ఎ. కుమార్",
+        role: "సీనియర్ కన్సల్టెంట్ ఆర్కిటెక్ట్, హ్యాపీ ఫ్యామిలీ ప్రొటెక్షన్ క్లయింట్"
+      };
+    }
+    if (tItem.author.includes('Srivalli')) {
+      return {
+        quote: "లలితా ఫైనాన్షియల్ అడ్వైజరీతో పని చేయడం వల్ల మా ఆరోగ్య బీమా రక్షణ మరియు పెట్టుబడుల ప్రక్రియ చాలా సులభంగా మారింది. మాకు లభించిన కార్ ఇన్సూరెన్స్, అత్యవసర వైద్య రక్షణ మరియు మా లక్ష్యాలకు సరిపోయే ఎస్‌ఐపీలు ఎంతో ఉపయోగపడ్డాయి. పూర్తి పారదర్శకమైన సలహాలు!",
+        author: "శ్రీవల్లి దోగిపర్తి",
+        role: "వ్యాపార యజమాని, కన్సాలిడేటెడ్ బిజినెస్ & ఫ్యామిలీ క్లయింట్"
+      };
+    }
+    if (tItem.author.includes('Venkateswarlu')) {
+      return {
+        quote: "స్వామి గారు పన్ను ఆదా మరియు ఎల్ఎస్ఎస్ (ELSS) ద్వారా నా పొదుపును క్రమబద్ధీకరించిన తర్వాతే నా ఎస్‌ఐపీ పెట్టుబడులు నిజమైన ఫలితాన్నిచ్చాయి. ఆయన చూపే శ్రద్ధ, క్లెయిమ్ పరిష్కార వేగం మరియు సానుభూతి ఆయన ఎండీఆర్‌టీ (MDRT) హోదాకు పూర్తి తగినవి.",
+        author: "జి. వెంకటేశ్వర్లు",
+        role: "రిటైర్మెంట్ ప్లానర్ మరియు హెచ్ఎన్ఐ (HNW) ఇన్వెస్టర్"
+      };
+    }
+    return tItem;
+  });
+
+  const localizedAwards = awards.map(a => {
+    if (language === 'en') return a;
+    let title = a.title;
+    if (a.title === '1.5 MDRT Qualifier') title = '1.5 MDRT క్వాలిఫైయర్';
+    if (a.title === 'MDRT Advisor') title = 'MDRT సలహాదారు';
+    if (a.title === 'Bronze Club Member') title = 'బ్రాంజ్ క్లబ్ సభ్యుడు';
+    if (a.title === 'Bronze Plus Club Member') title = 'బ్రాంజ్ ప్లస్ క్లబ్ సభ్యుడు';
+    if (a.title === 'Quarter MDRT Leader') title = 'క్వార్టర్ MDRT లీడర్';
+    
+    let company = a.company;
+    if (a.company.includes('Tata AIA')) company = 'టాటా AIA లైఫ్ ఇన్సూరెన్స్';
+    if (a.company.includes('Care Health')) company = 'కేర్ హెల్త్ ఇన్సూరెన్స్';
+    if (a.company.includes('Tata AIG')) company = 'టాటా AIG జనరల్ ఇన్సూరెన్స్';
+
+    let year = a.year;
+    if (a.year === 'JFM 2027') year = 'జెఎఫ్ఎమ్ 2027';
+
+    return { ...a, title, company, year };
+  });
+
   return (
     <div className="space-y-20 sm:space-y-28 pb-12 overflow-hidden bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-100 transition-colors duration-300">
       
@@ -203,20 +253,37 @@ export default function HomeView({ preFilledMessage, setPreFilledMessage, onNavi
             className="space-y-6 max-w-4xl mx-auto"
           >
             <div className="inline-flex items-center gap-1.5 px-4 py-1.5 bg-amber-500/10 border border-amber-500/20 text-amber-700 dark:text-amber-400 text-xs font-bold uppercase tracking-widest rounded-full">
-              <Star className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400 animate-spin" style={{ animationDuration: '12s' }} /> MDRT Advisor
+              <Star className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400 animate-spin" style={{ animationDuration: '12s' }} /> {t("MDRT CERTIFIED CHIEF ADVISOR")}
             </div>
 
             <h1 className="text-3xl sm:text-5xl lg:text-7xl font-black tracking-tight font-display text-slate-900 dark:text-white leading-tight">
-              Guiding Your Path to{' '}
-              <span className="bg-gradient-to-r from-amber-700 to-amber-900 dark:from-amber-400 dark:to-yellow-300 bg-clip-text text-transparent">Financial Prosperity</span>
+              {language === 'en' ? (
+                <>
+                  Guiding Your Path to{' '}
+                  <span className="bg-gradient-to-r from-amber-700 to-amber-900 dark:from-amber-400 dark:to-yellow-300 bg-clip-text text-transparent">
+                    Financial Prosperity
+                  </span>
+                </>
+              ) : (
+                <>
+                  <span className="bg-gradient-to-r from-amber-700 to-amber-900 dark:from-amber-400 dark:to-yellow-300 bg-clip-text text-transparent">
+                    ఆర్థిక సుసంపన్నత
+                  </span>{' '}
+                  వైపు మీ ప్రస్థానానికి సరైన మార్గదర్శకత్వం
+                </>
+              )}
             </h1>
 
             <p className="text-base sm:text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed font-sans">
-              Expert, transparent, and ethical advisory in Life & Health Insurance, General Protection, and Mutual Fund Investments.
+              {language === 'en' 
+                ? "Expert, transparent, and ethical advisory in Life & Health Insurance, General Protection, and Mutual Fund Investments."
+                : "జీవిత & ఆరోగ్య బీమా, సాధారణ రక్షణ మరియు మ్యూచువల్ ఫండ్ పెట్టుబడులలో నిపుణులైన, పారదర్శకమైన మరియు నైతికమైన సలహా."}
             </p>
 
             <p className="text-xs sm:text-sm font-mono tracking-wider text-amber-700 dark:text-amber-400 uppercase font-bold">
-              Your Trustworthy Advisor for Comprehensive Wealth Protection.
+              {language === 'en' 
+                ? "Your Trustworthy Advisor for Comprehensive Wealth Protection." 
+                : "సమగ్ర సంపద రక్షణ కోసం మీ నమ్మకమైన సలహాదారు."}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 items-center justify-center pt-8">
@@ -229,13 +296,13 @@ export default function HomeView({ preFilledMessage, setPreFilledMessage, onNavi
                 }}
                 className="px-8 py-3.5 bg-amber-600 hover:bg-amber-700 font-bold text-white rounded-xl transition-all shadow-xl shadow-amber-600/15 flex items-center gap-2 group cursor-pointer outline-none w-full sm:w-auto justify-center"
               >
-                Request a Consultation <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
+                {t("Get in Touch")} <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
               </button>
               <button
                 onClick={onNavigateToResources}
                 className="px-8 py-3.5 bg-slate-900 hover:bg-slate-800 dark:bg-slate-800 dark:hover:bg-slate-700 text-white font-bold rounded-xl border border-slate-700 dark:border-slate-600 transition-all w-full sm:w-auto cursor-pointer outline-none flex items-center justify-center gap-2 shadow-lg"
               >
-                <Sparkles className="w-4 h-4 text-amber-500" /> Launch Calculator Suite
+                <Sparkles className="w-4 h-4 text-amber-500" /> {t("Financial Calculators")}
               </button>
             </div>
           </motion.div>
@@ -269,8 +336,12 @@ export default function HomeView({ preFilledMessage, setPreFilledMessage, onNavi
                 }}
               />
               <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent p-6 text-center">
-                <p className="text-amber-400 font-mono text-xs font-bold uppercase tracking-wider">MDRT Status Qualified</p>
-                <p className="text-white text-base font-extrabold mt-0.5">TATA AIA TOP ADVISOR PANEL</p>
+                <p className="text-amber-400 font-mono text-xs font-bold uppercase tracking-wider">
+                  {language === 'en' ? "MDRT Status Qualified" : "MDRT హోదా గుర్తింపు పొందిన"}
+                </p>
+                <p className="text-white text-base font-extrabold mt-0.5">
+                  {language === 'en' ? "TATA AIA TOP ADVISOR PANEL" : "టాటా AIA టాప్ అడ్వైజర్ ప్యానెల్"}
+                </p>
               </div>
             </div>
           </motion.div>
@@ -284,26 +355,32 @@ export default function HomeView({ preFilledMessage, setPreFilledMessage, onNavi
             className="lg:col-span-7 space-y-6"
           >
             <div className="space-y-2">
-              <span className="text-xs font-bold font-mono tracking-widest text-amber-600 dark:text-amber-400 uppercase">Expert Heritage</span>
+              <span className="text-xs font-bold font-mono tracking-widest text-amber-600 dark:text-amber-400 uppercase">
+                {language === 'en' ? "Expert Heritage" : "అనుభవజ్ఞుడైన సలహాదారు"}
+              </span>
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight font-display text-slate-900 dark:text-white transition-colors">
-                Trustee D T V S SWAMY
+                {language === 'en' ? "Trustee D T V S SWAMY" : "సలహాదారు డి టి వి ఎస్ స్వామి"}
               </h2>
             </div>
 
             <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-sm sm:text-base">
-              With a deep-seated passion for financial empowerment, I am dedicated to providing insightful, transparent, and ethical financial advice. My journey in the Indian financial sector is driven by a singular mission: to help individuals and families navigate the complexities of financial planning with extreme safety and unwavering confidence.
+              {language === 'en'
+                ? "With a deep-seated passion for financial empowerment, I am dedicated to providing insightful, transparent, and ethical financial advice. My journey in the Indian financial sector is driven by a singular mission: to help individuals and families navigate the complexities of financial planning with extreme safety and unwavering confidence."
+                : "ఆర్థిక సాధికారతపై ఉన్న లోతైన ఆసక్తితో, నేను పారదర్శకమైన మరియు నైతికమైన ఆర్థిక సలహాలను అందించడానికి కట్టుబడి ఉన్నాను. భారతీయ ఆర్థిక రంగంలో నా ప్రయాణం ఒకే ఒక లక్ష్యంతో సాగుతోంది: వ్యక్తులు మరియు కుటుంబాలు తమ ఆర్థిక ప్రణాళికలను పూర్తి రక్షణతో మరియు నమ్మకంతో నిర్మించుకునేలా సహాయపడటం."}
             </p>
 
             <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-sm sm:text-base">
-              I believe in a strictly structured analytical blueprint. We scrutinize details like assets, existing dependencies, debt horizons, and timeline goals to model perfect protection strategies. Whether securing your family’s standard-of-living index or optimizing systematic investment yields, my loyalty is to serve as your dependable advocate.
+              {language === 'en'
+                ? "I believe in a strictly structured analytical blueprint. We scrutinize details like assets, existing dependencies, debt horizons, and timeline goals to model perfect protection strategies. Whether securing your family’s standard-of-living index or optimizing systematic investment yields, my loyalty is to serve as your dependable advocate."
+                : "నేను ఖచ్చితమైన విశ్లేషణాత్మక విధానాన్ని నమ్ముతాను. ఆస్తులు, అప్పులు, కుటుంబ బాధ్యతలు మరియు భవిష్యత్తు లక్ష్యాల వంటి అన్ని వివరాలను పరిశీలించి సరైన రక్షణ వ్యూహాలను రూపొందిస్తాము. మీ కుటుంబ జీవిత ప్రమాణాలను రక్షించడమైనా లేదా పెట్టుబడులపై గరిష్ట లాభాలను పొందడమైనా, మీకు నమ్మకమైన సలహాదారుగా నిలబడటమే నా విధి."}
             </p>
 
             <div className="pt-4 flex flex-wrap items-center gap-4">
               <div className="px-4 py-2 bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900/35 rounded-xl text-xs text-amber-800 dark:text-amber-300 font-mono flex items-center gap-1.5 font-bold">
-                <ShieldCheck className="w-4 h-4 text-amber-600" /> MDRT ADVISOR
+                <ShieldCheck className="w-4 h-4 text-amber-600" /> {language === 'en' ? "MDRT ADVISOR" : "MDRT సలహాదారు"}
               </div>
               <div className="px-4 py-2 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-xs text-slate-700 dark:text-slate-300 font-mono flex items-center gap-1.5 font-semibold">
-                <UserCheck className="w-4 h-4 text-emerald-600" /> SEAMLESS CLAIMS ADVOCATE
+                <UserCheck className="w-4 h-4 text-emerald-600" /> {language === 'en' ? "SEAMLESS CLAIMS ADVOCATE" : "క్లెయిమ్స్ పరిష్కార సహాయకుడు"}
               </div>
             </div>
           </motion.div>
@@ -322,31 +399,47 @@ export default function HomeView({ preFilledMessage, setPreFilledMessage, onNavi
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="text-center max-w-2xl mx-auto space-y-2"
           >
-            <span className="text-xs font-bold font-mono tracking-widest text-amber-600 dark:text-amber-400 uppercase">Core Values</span>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold font-display text-slate-900 dark:text-white">Why Partner With Swamy?</h2>
-            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300">Four foundational pillars structured to hold your long-term prosperity safe.</p>
+            <span className="text-xs font-bold font-mono tracking-widest text-amber-600 dark:text-amber-400 uppercase">
+              {language === 'en' ? "Core Values" : "ముఖ్య విలువలు"}
+            </span>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold font-display text-slate-900 dark:text-white">
+              {language === 'en' ? "Why Partner With Swamy?" : "స్వామి గారితో ఎందుకు భాగస్వామ్యం కావాలి?"}
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300">
+              {language === 'en' 
+                ? "Four foundational pillars structured to hold your long-term prosperity safe." 
+                : "మీ దీర్ఘకాలిక శ్రేయస్సును సురక్షితంగా ఉంచడానికి రూపొందించిన నాలుగు పునాది స్తంభాలు."}
+            </p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
-                t: "Tailored Strategy Formulation",
-                d: "Individually formulated protection routes precisely matched to your wealth horizons and risk metrics.",
+                t: language === 'en' ? "Tailored Strategy Formulation" : "వ్యక్తిగత ఆర్థిక వ్యూహాలు",
+                d: language === 'en' 
+                  ? "Individually formulated protection routes precisely matched to your wealth horizons and risk metrics."
+                  : "మీ సంపద పరిధులు మరియు రిస్క్ ప్రమాణాలకు సరిగ్గా సరిపోయే విధంగా రూపొందించిన రక్షణ మార్గాలు.",
                 i: <User className="w-5 h-5 text-amber-600" />
               },
               {
-                t: "Authentic Ethical Standard",
-                d: "Completely transparent advisory parameters, protecting your dependents above all product targets.",
+                t: language === 'en' ? "Authentic Ethical Standard" : "నిజమైన నైతిక విలువలు",
+                d: language === 'en'
+                  ? "Completely transparent advisory parameters, protecting your dependents above all product targets."
+                  : "పూర్తిగా పారదర్శకమైన సలహాలు, ఎటువంటి స్వార్థ ప్రయోజనాలు లేకుండా మీ కుటుంబ రక్షణకే ప్రథమ ప్రాధాన్యత.",
                 i: <Shield className="w-5 h-5 text-amber-600" />
               },
               {
-                t: "MDRT Level Excellence",
-                d: "Elite certified global underwriting standards and consecutive industrial qualifications.",
+                t: language === 'en' ? "MDRT Level Excellence" : "MDRT స్థాయి నైపుణ్యం",
+                d: language === 'en'
+                  ? "Elite certified global underwriting standards and consecutive industrial qualifications."
+                  : "ప్రపంచ స్థాయి గుర్తింపు పొందిన ప్రమాణాలు మరియు నిరంతర పారిశ్రామిక నైపుణ్యాలు.",
                 i: <Award className="w-5 h-5 text-amber-600" />
               },
               {
-                t: "High-Touch Claimant Stand",
-                d: "Standing directly as your emergency advocate during vital claimant settlements and cash flows.",
+                t: language === 'en' ? "High-Touch Claimant Stand" : "క్లెయిమ్స్ సమయాల్లో తోడుగా",
+                d: language === 'en'
+                  ? "Standing directly as your emergency advocate during vital claimant settlements and cash flows."
+                  : "అत्यవసర క్లెయిమ్ సెటిల్మెంట్ల సమయంలో మీ కుటుంబానికి నేరుగా అండగా నిలబడటం.",
                 i: <CheckCircle2 className="w-5 h-5 text-amber-600" />
               }
             ].map((p, idx) => (
@@ -393,13 +486,23 @@ export default function HomeView({ preFilledMessage, setPreFilledMessage, onNavi
           
           <div className="space-y-3">
             <div className="inline-flex items-center gap-1.5 px-3.5 py-1 bg-amber-500/10 border border-amber-500/25 text-amber-500 text-[10px] font-black uppercase tracking-widest rounded-full">
-              <Sparkles className="w-3 h-3 text-amber-400 animate-pulse" /> Transparent Social Proof
+              <Sparkles className="w-3 h-3 text-amber-400 animate-pulse" /> {language === 'en' ? "Transparent Social Proof" : "పారదర్శక నమ్మకం"}
             </div>
             <h2 className="text-2xl sm:text-4xl md:text-5xl font-black tracking-tight font-display text-white leading-tight">
-              Our <span className="bg-gradient-to-r from-amber-400 to-yellow-500 bg-clip-text text-transparent">Key Impact</span> in Numbers
+              {language === 'en' ? (
+                <>
+                  Our <span className="bg-gradient-to-r from-amber-400 to-yellow-500 bg-clip-text text-transparent">Key Impact</span> in Numbers
+                </>
+              ) : (
+                <>
+                  మా <span className="bg-gradient-to-r from-amber-400 to-yellow-500 bg-clip-text text-transparent">ప్రగతి ప్రస్థానం</span> - అంకెల్లో
+                </>
+              )}
             </h2>
             <p className="text-xs sm:text-sm text-slate-400 max-w-xl mx-auto font-medium">
-              We started our advisory in <b>2022</b>. Within a span of a few years, we have protected hundreds of lives, secured vast household capitals, and delivered unwavering claims resolution.
+              {language === 'en' 
+                ? "We started our advisory in 2022. Within a span of a few years, we have protected hundreds of lives, secured vast household capitals, and delivered unwavering claims resolution."
+                : "మేము 2022 లో మా సేవలను ప్రారంభించాము. కొన్ని సంవత్సరాల కాలంలోనే, మేము వందలాది జీవితాలకు రక్షణ కల్పించాము, గృహ మూలధనాన్ని సురక్షితం చేసాము మరియు స్థిరమైన క్లెయిమ్‌లను పరిష్కరించాము."}
             </p>
           </div>
 
@@ -407,30 +510,30 @@ export default function HomeView({ preFilledMessage, setPreFilledMessage, onNavi
             {[
               { 
                 value: counts.clients, 
-                label: "Happy Clients Protected", 
+                label: language === 'en' ? "Happy Clients Protected" : "సురక్షితమైన ఆనంద కుటుంబాలు", 
                 suffix: "+", 
-                desc: "Secured heads of families and wealth portfolios",
+                desc: language === 'en' ? "Secured heads of families and wealth portfolios" : "कुटुంబ యజమానులు మరియు సంపద పోర్ట్‌ఫోలియోలకు రక్షణ",
                 icon: <UserCheck className="w-6 h-6 text-amber-400" />
               },
               { 
                 value: `₹${counts.sumAssured}`, 
-                label: "Total Sum Assured", 
+                label: language === 'en' ? "Total Sum Assured" : "మొత్తం రక్షణ కవచం (సమ్ అష్యూర్డ్)", 
                 suffix: " Cr+", 
-                desc: "Value of life & medical safety nets deployed",
+                desc: language === 'en' ? "Value of life & medical safety nets deployed" : "అందించిన జీవిత & ఆరోగ్య భద్రత విలువ",
                 icon: <ShieldCheck className="w-6 h-6 text-emerald-400" />
               },
               { 
                 value: counts.experience, 
-                label: "Years of Dedication", 
-                suffix: " Years", 
-                desc: "Established in 2022 under strict ethical standards",
+                label: language === 'en' ? "Years of Dedication" : "నిరంతర సేవా కాలం", 
+                suffix: language === 'en' ? " Years" : " సంవత్సరాలు", 
+                desc: language === 'en' ? "Established in 2022 under strict ethical standards" : "కఠినమైన నైతిక ప్రమాణాలతో 2022 లో స్థాపించబడింది",
                 icon: <Star className="w-6 h-6 text-indigo-400 animate-spin" style={{ animationDuration: '20s' }} />
               },
               { 
                 value: counts.retention, 
-                label: "Persistency / Retentivity", 
+                label: language === 'en' ? "Persistency / Retentivity" : "పాలసీల పునరుద్ధరణ రేటు", 
                 suffix: "%", 
-                desc: "Consecutive premium renewals reflecting high trust",
+                desc: language === 'en' ? "Consecutive premium renewals reflecting high trust" : "అత్యధిక విశ్వసనీయతకు నిదర్శనంగా నిలిచే ప్రీమియంల పునరుద్ధరణ",
                 icon: <Trophy className="w-6 h-6 text-yellow-400" />
               }
             ].map((st, i) => (
@@ -473,13 +576,21 @@ export default function HomeView({ preFilledMessage, setPreFilledMessage, onNavi
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="text-center max-w-2xl mx-auto space-y-2"
         >
-          <span className="text-xs font-bold font-mono tracking-widest text-amber-700 dark:text-amber-400 uppercase">Recognized Standards</span>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold font-display text-slate-900 dark:text-white transition-colors">Trust & Honors</h2>
-          <p className="text-xs sm:text-sm text-slate-550 dark:text-slate-400">Continuous industrial merits highlighting consecutive commitments to secure household capitals.</p>
+          <span className="text-xs font-bold font-mono tracking-widest text-amber-700 dark:text-amber-400 uppercase">
+            {language === 'en' ? "Recognized Standards" : "గుర్తింపు పొందిన ప్రమాణాలు"}
+          </span>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold font-display text-slate-900 dark:text-white transition-colors">
+            {language === 'en' ? "Trust & Honors" : "విశ్వసనీయత & గౌరవాలు"}
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+            {language === 'en'
+              ? "Continuous industrial merits highlighting consecutive commitments to secure household capitals."
+              : "గృహ మూలధనాన్ని సురక్షితం చేయడానికి మేము చూపే నిరంతర నిబద్ధతకు గుర్తింపుగా లభించిన గౌరవాలు."}
+          </p>
         </motion.div>
 
         <div className="grid grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-6">
-          {awards.map((aw, idx) => (
+          {localizedAwards.map((aw, idx) => (
             <motion.div 
               key={idx}
               initial={{ opacity: 0, y: 20 }}
@@ -511,10 +622,16 @@ export default function HomeView({ preFilledMessage, setPreFilledMessage, onNavi
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="text-center space-y-2"
         >
-          <span className="text-xs font-bold font-mono tracking-widest text-amber-700 dark:text-amber-400 uppercase">Trusted Collaborations</span>
-          <h3 className="text-xl sm:text-3xl md:text-4xl font-extrabold font-display text-slate-900 dark:text-white">Authorized Portfolios & Platforms</h3>
-          <p className="text-xs sm:text-sm text-slate-550 dark:text-slate-400 max-w-lg mx-auto">
-            Directly authorized integrations and advisory partnerships under top-tier national underwriters.
+          <span className="text-xs font-bold font-mono tracking-widest text-amber-700 dark:text-amber-400 uppercase">
+            {language === 'en' ? "Trusted Collaborations" : "విశ్వసనీయ సహకారాలు"}
+          </span>
+          <h3 className="text-xl sm:text-3xl md:text-4xl font-extrabold font-display text-slate-900 dark:text-white">
+            {language === 'en' ? "Authorized Portfolios & Platforms" : "అధికారిక సంస్థలు & వేదికలు"}
+          </h3>
+          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 max-w-lg mx-auto">
+            {language === 'en'
+              ? "Directly authorized integrations and advisory partnerships under top-tier national underwriters."
+              : "దేశంలోని అగ్రశ్రేణి బీమా సంస్థలతో మాకున్న అధికారిక సలహా భాగస్వామ్యాలు."}
           </p>
         </motion.div>
 
@@ -568,7 +685,7 @@ export default function HomeView({ preFilledMessage, setPreFilledMessage, onNavi
                       style={{ display: 'flex' }}
                     >
                       <div className="h-10 sm:h-12 w-36 sm:w-44 flex items-center justify-center" style={{ display: 'flex' }}>
-                        <PartnerLogo name={part.name} className="h-8 sm:h-10 w-32 sm:w-40 text-white block" />
+                        <PartnerLogo name={part.name} logoUrl={part.logoUrl} officialLogoUrl={part.officialLogoUrl} className="h-8 sm:h-10 w-32 sm:w-40 text-white block" />
                       </div>
                     </div>
                   ))}
@@ -584,7 +701,7 @@ export default function HomeView({ preFilledMessage, setPreFilledMessage, onNavi
                       style={{ display: 'flex' }}
                     >
                       <div className="h-10 sm:h-12 w-36 sm:w-44 flex items-center justify-center" style={{ display: 'flex' }}>
-                        <PartnerLogo name={part.name} className="h-8 sm:h-10 w-32 sm:w-40 text-white block" />
+                        <PartnerLogo name={part.name} logoUrl={part.logoUrl} officialLogoUrl={part.officialLogoUrl} className="h-8 sm:h-10 w-32 sm:w-40 text-white block" />
                       </div>
                     </div>
                   ))}
@@ -603,9 +720,9 @@ export default function HomeView({ preFilledMessage, setPreFilledMessage, onNavi
                   window.location.hash = '#services';
                 }
               }}
-              className="inline-flex items-center gap-2 px-6 py-2.5 bg-transparent border border-slate-800 hover:border-amber-500 text-white hover:text-amber-400 font-semibold text-xs tracking-wider uppercase rounded-lg transition-all duration-300 shadow-md hover:shadow-amber-500/10 cursor-pointer"
+              className="inline-flex items-center gap-2 px-6 py-2.5 bg-transparent border border-slate-800 hover:border-amber-500 text-white hover:text-amber-400 font-semibold text-xs tracking-wider uppercase rounded-lg transition-all duration-300 shadow-md hover:shadow-amber-500/10 cursor-pointer text-left outline-none"
             >
-              See Solutions <ArrowRight className="w-4 h-4" />
+              {language === 'en' ? "See Solutions" : "సేవలను చూడండి"} <ArrowRight className="w-4 h-4" />
             </button>
           </div>
         </motion.div>
@@ -620,12 +737,16 @@ export default function HomeView({ preFilledMessage, setPreFilledMessage, onNavi
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="text-center max-w-2xl mx-auto space-y-2"
         >
-          <span className="text-xs font-bold font-mono tracking-widest text-amber-700 dark:text-amber-400 uppercase">Valid Experience</span>
-          <h2 className="text-xl sm:text-3xl md:text-4xl font-extrabold font-display text-slate-900 dark:text-white transition-colors">Client Success Stories</h2>
+          <span className="text-xs font-bold font-mono tracking-widest text-amber-700 dark:text-amber-400 uppercase">
+            {language === 'en' ? "Valid Experience" : "వినియోగదారుల అభిప్రాయాలు"}
+          </span>
+          <h2 className="text-xl sm:text-3xl md:text-4xl font-extrabold font-display text-slate-900 dark:text-white transition-colors">
+            {language === 'en' ? "Client Success Stories" : "మా క్లయింట్ల విజయగాథలు"}
+          </h2>
         </motion.div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {testimonials.map((t, idx) => (
+          {localizedTestimonials.map((tItem, idx) => (
             <motion.div 
               key={idx}
               initial={{ opacity: 0, y: 30 }}
@@ -637,11 +758,11 @@ export default function HomeView({ preFilledMessage, setPreFilledMessage, onNavi
             >
               <div className="text-amber-500 dark:text-amber-400 text-4xl font-serif leading-none absolute left-3 top-3 opacity-20">“</div>
               <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 italic leading-relaxed relative z-10 font-sans">
-                "{t.quote}"
+                "{tItem.quote}"
               </p>
               <div className="space-y-1">
-                <h5 className="text-sm font-bold text-slate-900 dark:text-slate-100 tracking-wide">{t.author}</h5>
-                <p className="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider">{t.role}</p>
+                <h5 className="text-sm font-bold text-slate-900 dark:text-slate-100 tracking-wide">{tItem.author}</h5>
+                <p className="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider">{tItem.role}</p>
               </div>
             </motion.div>
           ))}
@@ -663,80 +784,275 @@ export default function HomeView({ preFilledMessage, setPreFilledMessage, onNavi
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="relative z-10 text-center space-y-4 max-w-3xl mx-auto mb-10 sm:mb-12"
         >
-          <span className="text-xs font-mono uppercase font-bold tracking-widest text-amber-700 dark:text-amber-400">Advisory Evaluation</span>
-          <h2 className="text-xl sm:text-3xl md:text-4xl font-extrabold tracking-tight font-display text-slate-900 dark:text-white transition-colors">Let's Secure Your Future</h2>
+          <span className="text-xs font-mono uppercase font-bold tracking-widest text-amber-700 dark:text-amber-400">
+            {language === 'en' ? "Advisory Evaluation" : "ఆర్థిక విశ్లేషణ"}
+          </span>
+          <h2 className="text-xl sm:text-3xl md:text-4xl font-extrabold tracking-tight font-display text-slate-900 dark:text-white transition-colors">
+            {language === 'en' ? "Let's Secure Your Future" : "మీ భవిష్యత్తును సురక్షితం చేసుకోండి"}
+          </h2>
           <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-medium leading-relaxed">
-            Reach out directly to schedule a face-to-face evaluation or a direct professional strategy call. We analyze your health and life safety limits with absolute transparent accuracy.
+            {language === 'en' 
+              ? "Reach out directly to schedule a face-to-face evaluation or a direct professional strategy call. We analyze your health and life safety limits with absolute transparent accuracy."
+              : "ప్రత్యేక ఆర్థిక వ్యూహాల చర్చ కోసం మమ్మల్ని నేరుగా సంప్రదించండి. మేము మీ జీవిత మరియు ఆరోగ్య భద్రతా అవసరాలను పూర్తి పారదర్శకతతో విశ్లేషిస్తాము."}
           </p>
         </motion.div>
 
-        <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 max-w-4xl mx-auto">
+        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 max-w-6xl mx-auto">
           
-          {/* Call Cards */}
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            whileHover={{ y: -5, scale: 1.01 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="bg-slate-900 dark:bg-slate-900/90 text-white rounded-2xl p-6 border border-slate-800 shadow-xl space-y-4 flex flex-col justify-between"
-          >
-            <div className="space-y-3">
-              <div className="p-3 w-11 h-11 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-500 flex items-center justify-center">
-                <Phone className="w-5 h-5" />
-              </div>
-              <div className="text-left">
-                <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest font-mono">Hotline Contacts</h4>
-                <p className="text-base sm:text-lg font-black text-white mt-1">+91 98855 39211</p>
-                <p className="text-xs font-semibold text-slate-400 font-mono">+91 77993 22556</p>
-              </div>
-            </div>
-            <a 
-              href="tel:+919885539211"
-              className="mt-4 w-full py-2.5 bg-amber-600 hover:bg-amber-700 text-white font-extrabold text-xs text-center uppercase tracking-wider rounded-lg transition-all"
+          {/* Left Column: Contact Cards (5 cols) */}
+          <div className="lg:col-span-5 flex flex-col gap-6">
+            
+            {/* Hotline Card */}
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              whileHover={{ y: -5, scale: 1.01 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="bg-slate-900 dark:bg-slate-900/90 text-white rounded-2xl p-6 border border-slate-800 shadow-xl space-y-4 flex flex-col justify-between"
             >
-              Call Primary Hotline
-            </a>
-          </motion.div>
+              <div className="space-y-3">
+                <div className="p-3 w-11 h-11 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-500 flex items-center justify-center">
+                  <Phone className="w-5 h-5" />
+                </div>
+                <div className="text-left">
+                  <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest font-mono">
+                    {language === 'en' ? "Hotline Contacts" : "హాట్‌లైన్ నంబర్లు"}
+                  </h4>
+                  <p className="text-base sm:text-lg font-black text-white mt-1">+91 98855 39211</p>
+                  <p className="text-xs font-semibold text-slate-400 font-mono">+91 77993 22556</p>
+                </div>
+              </div>
+              <a 
+                href="tel:+919885539211"
+                className="mt-4 w-full py-2.5 bg-amber-600 hover:bg-amber-700 text-white font-extrabold text-xs text-center uppercase tracking-wider rounded-lg transition-all"
+              >
+                {language === 'en' ? "Call Primary Hotline" : "ముఖ్య హాట్‌లైన్‌కు కాల్ చేయండి"}
+              </a>
+            </motion.div>
 
-          {/* Address Location Card */}
+            {/* Address Location Card */}
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              whileHover={{ y: -5, scale: 1.01 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="bg-slate-900 dark:bg-slate-900/90 text-white rounded-2xl p-6 border border-slate-800 shadow-xl space-y-4 flex flex-col justify-between"
+            >
+              <div className="space-y-3">
+                <div className="p-3 w-11 h-11 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center">
+                  <MapPin className="w-5 h-5" />
+                </div>
+                <div className="text-left">
+                  <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest font-mono">
+                    {language === 'en' ? "Corporate Location" : "కార్పొరేట్ కార్యాలయం"}
+                  </h4>
+                  <p className="text-[11px] text-slate-300 leading-relaxed mt-1.5 font-medium">
+                    {language === 'en' ? (
+                      <>
+                        Flat No. 101, Golden Park Apartment,<br />
+                        Tarakarama Nagar, Karempudi Road,<br />
+                        VINUKONDA - 522647, Palnadu Dist.
+                      </>
+                    ) : (
+                      <>
+                        ఫ్లాట్ నెం. 101, గోల్డెన్ పార్క్ అపార్ట్‌మెంట్,<br />
+                        తారకరామ నగర్, కారెంపూడి రోడ్,<br />
+                        వినుకొండ - 522647, పల్నాడు జిల్లా.
+                      </>
+                    )}
+                  </p>
+                </div>
+              </div>
+              <a 
+                href="https://maps.google.com/?q=Vinukonda+Palnadu+District+Andhra+Pradesh"
+                target="_blank"
+                rel="noreferrer"
+                className="mt-4 w-full py-2.5 bg-slate-800 hover:bg-slate-700 text-white font-extrabold text-xs text-center uppercase tracking-wider rounded-lg border border-slate-700 transition-all"
+              >
+                {language === 'en' ? "View Google Maps" : "గూగుల్ మ్యాప్స్ లో చూడండి"}
+              </a>
+            </motion.div>
+
+          </div>
+
+          {/* Right Column: Contact Form (7 cols) */}
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
-            whileHover={{ y: -5, scale: 1.01 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="bg-slate-900 dark:bg-slate-900/90 text-white rounded-2xl p-6 border border-slate-800 shadow-xl space-y-4 flex flex-col justify-between"
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="lg:col-span-7 bg-slate-900 dark:bg-slate-900/90 text-white rounded-2xl p-6 sm:p-8 border border-slate-800 shadow-xl space-y-6"
           >
-            <div className="space-y-3">
-              <div className="p-3 w-11 h-11 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center">
-                <MapPin className="w-5 h-5" />
-              </div>
-              <div className="text-left">
-                <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest font-mono">Corporate Location</h4>
-                <p className="text-[11px] text-slate-300 leading-relaxed mt-1.5 font-medium">
-                  Flat No. 101, Golden Park Apartment,<br />
-                  Tarakarama Nagar, Karempudi Road,<br />
-                  VINUKONDA - 522647, Palnadu Dist.
-                </p>
-              </div>
+            {/* Form Title & Description */}
+            <div className="text-left space-y-1">
+              <h3 className="text-lg sm:text-xl font-bold font-display text-white">
+                {language === 'en' ? "Schedule Free Consultation" : "ఉచిత సలహా సంప్రదింపులను బుక్ చేయండి"}
+              </h3>
+              <p className="text-xs text-slate-400">
+                {language === 'en' 
+                  ? "Provide your metrics below and Swamy will reach out to schedule an absolute conflict-free session." 
+                  : "క్రింది వివరాలను అందించండి మరియు స్వామి గారు మీతో ఉచిత సమావేశాన్ని ఏర్పాటు చేస్తారు."}
+              </p>
             </div>
-            <a 
-              href="https://maps.google.com/?q=Vinukonda+Palnadu+District+Andhra+Pradesh"
-              target="_blank"
-              rel="noreferrer"
-              className="mt-4 w-full py-2.5 bg-slate-800 hover:bg-slate-700 text-white font-extrabold text-xs text-center uppercase tracking-wider rounded-lg border border-slate-700 transition-all"
-            >
-              View Google Maps
-            </a>
+
+            <form onSubmit={handleFormSubmit} className="space-y-4 text-left">
+              
+              {/* Name Field */}
+              <div className="space-y-1.5">
+                <label htmlFor="form-name" className="block text-xs font-bold text-slate-300 uppercase tracking-wider font-mono">
+                  {t("Your Full Name")} <span className="text-amber-500">*</span>
+                </label>
+                <input
+                  id="form-name"
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  placeholder={language === 'en' ? "Enter your full name" : "మీ పూర్తి పేరు నమోదు చేయండి"}
+                  required
+                  className="w-full bg-slate-950/80 border border-slate-800 focus:border-amber-500 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition-colors"
+                />
+              </div>
+
+              {/* Phone and Email in grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                
+                {/* Phone Number */}
+                <div className="space-y-1.5">
+                  <label htmlFor="form-phone" className="block text-xs font-bold text-slate-300 uppercase tracking-wider font-mono">
+                    {t("Phone Number")}
+                  </label>
+                  <input
+                    id="form-phone"
+                    type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    placeholder={language === 'en' ? "+91 XXXXX XXXXX" : "+91 XXXXX XXXXX"}
+                    className="w-full bg-slate-950/80 border border-slate-800 focus:border-amber-500 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition-colors"
+                  />
+                </div>
+
+                {/* Email Address */}
+                <div className="space-y-1.5">
+                  <label htmlFor="form-email" className="block text-xs font-bold text-slate-300 uppercase tracking-wider font-mono">
+                    {t("Email Address")} <span className="text-amber-500">*</span>
+                  </label>
+                  <input
+                    id="form-email"
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    placeholder={language === 'en' ? "name@example.com" : "name@example.com"}
+                    required
+                    className="w-full bg-slate-950/80 border border-slate-800 focus:border-amber-500 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition-colors"
+                  />
+                </div>
+
+              </div>
+
+              {/* Insurance Interest Dropdown */}
+              <div className="space-y-1.5">
+                <label htmlFor="form-interest" className="block text-xs font-bold text-slate-300 uppercase tracking-wider font-mono">
+                  {t("Primary Goal of Consultation")} <span className="text-amber-500">*</span>
+                </label>
+                <select
+                  id="form-interest"
+                  name="interest"
+                  value={formData.interest}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full bg-slate-950/80 border border-slate-800 focus:border-amber-500 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition-colors appearance-none cursor-pointer"
+                >
+                  <option value="" disabled className="bg-slate-950 text-slate-500">{t("Select a Goal")}</option>
+                  <option value="life" className="bg-slate-950 text-white">{t("Life Insurance & Family Protection")}</option>
+                  <option value="health" className="bg-slate-950 text-white">{t("Health & Cashless Hospitalization")}</option>
+                  <option value="motor" className="bg-slate-950 text-white">{t("Motor/Vehicle Comprehensive Shield")}</option>
+                  <option value="business" className="bg-slate-950 text-white">{t("Business Assets & Fire/Burglary Covers")}</option>
+                  <option value="sip" className="bg-slate-950 text-white">{t("Goal-Based SIP & Mutual Funds compounding")}</option>
+                  <option value="tax" className="bg-slate-950 text-white">{t("Tax Savings Strategies (80C / 80D)")}</option>
+                </select>
+              </div>
+
+              {/* Message Field */}
+              <div className="space-y-1.5">
+                <label htmlFor="form-message" className="block text-xs font-bold text-slate-300 uppercase tracking-wider font-mono">
+                  {t("Write Your Specific Query (Optional)")} <span className="text-amber-500">*</span>
+                </label>
+                <textarea
+                  id="form-message"
+                  name="message"
+                  rows={4}
+                  value={formData.message}
+                  onChange={handleInputChange}
+                  placeholder={language === 'en' ? "Detail your specific goals, existing assets, or questions..." : "మీ నిర్దిష్ట ప్రశ్నలు లేదా ఆర్థిక లక్ష్యాల వివరాలను ఇక్కడ తెలపండి..."}
+                  required
+                  className="w-full bg-slate-950/80 border border-slate-800 focus:border-amber-500 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition-colors resize-none"
+                />
+              </div>
+
+              {/* Status messages and Submit button */}
+              <div className="pt-2 space-y-3">
+                {submitStatus === 'error' && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="p-3.5 rounded-xl bg-red-500/10 border border-red-500/25 text-red-400 text-xs font-medium"
+                  >
+                    {t("An error occurred. Please try again.")}
+                  </motion.div>
+                )}
+
+                {submitStatus === 'success' && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="p-3.5 rounded-xl bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 text-xs font-medium"
+                  >
+                    {t("Thank you! Your request has been sent successfully.")}
+                  </motion.div>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={submitting}
+                  className="w-full py-3.5 bg-amber-600 hover:bg-amber-700 disabled:bg-amber-600/50 text-white font-extrabold text-sm uppercase tracking-wider rounded-xl transition-all shadow-md shadow-amber-600/10 hover:shadow-lg hover:-translate-y-0.5 flex items-center justify-center gap-2 cursor-pointer outline-none"
+                >
+                  {submitting ? (
+                    <>
+                      <svg className="animate-spin h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                      </svg>
+                      {t("Submitting request...")}
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-4 h-4" />
+                      {t("Submit Consultation Request")}
+                    </>
+                  )}
+                </button>
+              </div>
+
+            </form>
           </motion.div>
 
         </div>
 
         {/* Advisory trust response notice */}
         <div className="relative z-10 max-w-xl mx-auto mt-8 bg-amber-500/5 border border-amber-500/15 p-4 rounded-xl text-center space-y-1">
-          <span className="text-[10px] font-mono uppercase text-amber-600 font-extrabold tracking-wider block">Advisory Excellence Standard</span>
-          <p className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">All personal messages directly through hotlines or WhatsApp receive direct evaluation from D T V S SWAMY within standard working hours.</p>
+          <span className="text-[10px] font-mono uppercase text-amber-600 font-extrabold tracking-wider block">
+            {language === 'en' ? "Advisory Excellence Standard" : "విశిష్ట సలహా ప్రమాణాలు"}
+          </span>
+          <p className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">
+            {language === 'en' 
+              ? "All personal messages directly through hotlines or WhatsApp receive direct evaluation from D T V S SWAMY within standard working hours."
+              : "హాట్‌లైన్లు లేదా వాట్సాప్ ద్వారా వచ్చే సందేశాలకు శ్రీ డి టి వి ఎస్ స్వామి గారు స్వయంగా స్పందించి తగిన సలహాలను అందిస్తారు."}
+          </p>
         </div>
       </section>
 

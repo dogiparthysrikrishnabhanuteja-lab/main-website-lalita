@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import { faqs } from '../data/faqs';
 import { FAQ } from '../types';
+import { useLanguage } from '../context/LanguageContext';
 
 interface FaqViewProps {
   initialCategoryFilter?: 'all' | 'life' | 'health' | 'auto' | 'general' | 'investments' | 'tax';
@@ -101,6 +102,7 @@ function fuzzyMatch(text: string, query: string): boolean {
 }
 
 export default function FaqView({ initialCategoryFilter = 'all', onCategoryChange }: FaqViewProps) {
+  const { language, t, translateFaq } = useLanguage();
   const [activeTab, setActiveTab] = useState<TabType>('explorer');
   const [selectedCategory, setSelectedCategory] = useState<'all' | 'life' | 'health' | 'auto' | 'general' | 'investments' | 'tax'>('all');
   const [searchQuery, setSearchQuery] = useState('');
@@ -169,13 +171,13 @@ export default function FaqView({ initialCategoryFilter = 'all', onCategoryChang
   }, [initialCategoryFilter]);
 
   const categories = [
-    { value: 'all', label: 'All Services' },
-    { value: 'life', label: 'Life Insurance' },
-    { value: 'health', label: 'Health Insurance' },
-    { value: 'investments', label: 'Investment Planning' },
-    { value: 'tax', label: 'Tax Savings' },
-    { value: 'auto', label: 'Motor Vehicle' },
-    { value: 'general', label: 'General Insurance' }
+    { value: 'all', label: t('All Categories') },
+    { value: 'life', label: t('Life Insurance') },
+    { value: 'health', label: t('Health Insurance') },
+    { value: 'investments', label: t('Mutual Funds') },
+    { value: 'tax', label: t('Tax Savings') },
+    { value: 'auto', label: t('Motor Insurance') },
+    { value: 'general', label: t('General Insurance') }
   ] as const;
 
   const handleToggleFaq = (id: string) => {
@@ -183,7 +185,14 @@ export default function FaqView({ initialCategoryFilter = 'all', onCategoryChang
   };
 
   const filteredFaqs = useMemo(() => {
-    return faqs.filter(faq => {
+    return faqs.map(faq => {
+      const translated = translateFaq(faq.id, faq.question, faq.answer);
+      return {
+        ...faq,
+        question: translated.question,
+        answer: translated.answer
+      };
+    }).filter(faq => {
       // If there is an active search query, search across all categories (as stated in the search bar placeholder)
       // Otherwise, filter by the selected category.
       const matchCategory = searchQuery.trim() !== '' || selectedCategory === 'all' || faq.category === selectedCategory;
@@ -193,7 +202,7 @@ export default function FaqView({ initialCategoryFilter = 'all', onCategoryChang
         fuzzyMatch(faq.answer, searchQuery);
       return matchCategory && matchSearch;
     });
-  }, [selectedCategory, searchQuery]);
+  }, [selectedCategory, searchQuery, language]);
 
   // Keyboard navigation for categories (Arrow keys)
   const handleCategoryKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
@@ -404,13 +413,17 @@ export default function FaqView({ initialCategoryFilter = 'all', onCategoryChang
         className="text-center space-y-4 pt-12"
       >
         <div className="inline-flex items-center gap-1.5 px-4 py-1.5 bg-amber-500/10 border border-amber-500/20 text-amber-900 dark:text-amber-400 text-xs font-bold uppercase tracking-widest rounded-full">
-          Knowledge Bank
+          {t("FAQ")}
         </div>
         <h1 className="text-2xl sm:text-4xl md:text-5xl font-black font-display tracking-tight text-slate-900 dark:text-white transition-colors">
-          Frequently <span className="bg-gradient-to-r from-amber-700 to-amber-900 dark:from-amber-400 dark:to-yellow-300 bg-clip-text text-transparent">Asked Questions</span>
+          {language === 'en' ? (
+            <>Frequently <span className="bg-gradient-to-r from-amber-700 to-amber-900 dark:from-amber-400 dark:to-yellow-300 bg-clip-text text-transparent">Asked Questions</span></>
+          ) : (
+            <span className="bg-gradient-to-r from-amber-700 to-amber-900 dark:from-amber-400 dark:to-yellow-300 bg-clip-text text-transparent">తరచుగా అడిగే ప్రశ్నలు</span>
+          )}
         </h1>
         <p className="text-xs sm:text-sm md:text-base text-slate-600 dark:text-slate-350 max-w-2xl mx-auto leading-relaxed font-sans">
-          Unlock quick answers, transparent parameters, and expert insights on diverse coverage options instantly.
+          {t("Access structured, transparent answers covering all life, health, auto, general insurance protocols, and investment compounders.")}
         </p>
       </motion.div>
 
@@ -419,7 +432,7 @@ export default function FaqView({ initialCategoryFilter = 'all', onCategoryChang
         <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-amber-600 dark:text-amber-400" />
         <input 
           type="text" 
-          placeholder="Search questions or keyword answers across all categories..."
+          placeholder={t("Search FAQs by question, answer, keywords...")}
           value={searchQuery}
           onChange={(e) => {
             setSearchQuery(e.target.value);
@@ -450,7 +463,7 @@ export default function FaqView({ initialCategoryFilter = 'all', onCategoryChang
           }`}
         >
           <HelpCircle className="w-4 h-4 shrink-0" />
-          <span>FAQ Bank</span>
+          <span>{t("Interactive Explorer")}</span>
         </button>
 
         <button

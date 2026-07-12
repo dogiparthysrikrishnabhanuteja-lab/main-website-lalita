@@ -31,7 +31,7 @@ export const awards: Award[] = [
     iconType: 'award'
   },
   {
-    year: 'JFM 2027',
+    year: 'JFM 2026',
     title: 'Quarter MDRT Leader',
     company: 'Tata AIA Life Insurance',
     iconType: 'trophy'
@@ -42,61 +42,73 @@ export const partners: Partner[] = [
   {
     name: 'AMFI',
     logoUrl: 'https://logo.clearbit.com/amfiindia.com?size=150&format=png',
+    officialLogoUrl: 'https://logo.clearbit.com/amfiindia.com?size=150&format=png',
     fallback: 'AMFI'
   },
   {
     name: 'IRDAI',
     logoUrl: 'https://logo.clearbit.com/irdai.gov.in?size=150&format=png',
+    officialLogoUrl: 'https://logo.clearbit.com/irdai.gov.in?size=150&format=png',
     fallback: 'IRDAI'
   },
   {
     name: 'TATA AIA Life Insurance',
     logoUrl: 'https://logo.clearbit.com/tataaia.com?size=150&format=png',
+    officialLogoUrl: 'https://logo.clearbit.com/tataaia.com?size=150&format=png',
     fallback: 'Tata AIA Life'
   },
   {
     name: 'ICICI Prudential',
     logoUrl: 'https://logo.clearbit.com/icicipruamc.com?size=150&format=png',
+    officialLogoUrl: 'https://logo.clearbit.com/icicipruamc.com?size=150&format=png',
     fallback: 'ICICI Prudential'
   },
   {
     name: 'HDFC Life',
     logoUrl: 'https://logo.clearbit.com/hdfclife.com?size=150&format=png',
+    officialLogoUrl: 'https://logo.clearbit.com/hdfclife.com?size=150&format=png',
     fallback: 'HDFC Life'
   },
   {
     name: 'Star Health Insurance',
     logoUrl: 'https://logo.clearbit.com/starhealth.in?size=150&format=png',
+    officialLogoUrl: 'https://logo.clearbit.com/starhealth.in?size=150&format=png',
     fallback: 'Star Health'
   },
   {
     name: 'Care Health Insurance',
     logoUrl: 'https://logo.clearbit.com/careinsurance.com?size=150&format=png',
+    officialLogoUrl: 'https://logo.clearbit.com/careinsurance.com?size=150&format=png',
     fallback: 'Care Health'
   },
   {
     name: 'TATA AIG General Insurance',
     logoUrl: 'https://logo.clearbit.com/tataaig.com?size=150&format=png',
+    officialLogoUrl: 'https://logo.clearbit.com/tataaig.com?size=150&format=png',
     fallback: 'TATA AIG'
   },
   {
     name: 'ICICI Lombard',
     logoUrl: 'https://logo.clearbit.com/icicilombard.com?size=150&format=png',
+    officialLogoUrl: 'https://logo.clearbit.com/icicilombard.com?size=150&format=png',
     fallback: 'ICICI Lombard'
   },
   {
     name: 'Niva Bupa Health',
     logoUrl: 'https://logo.clearbit.com/nivabupa.com?size=150&format=png',
+    officialLogoUrl: 'https://logo.clearbit.com/nivabupa.com?size=150&format=png',
     fallback: 'Niva Bupa'
   },
   {
     name: 'HDFC Ergo',
     logoUrl: 'https://logo.clearbit.com/hdfcergo.com?size=150&format=png',
+    officialLogoUrl: 'https://logo.clearbit.com/hdfcergo.com?size=150&format=png',
     fallback: 'HDFC Ergo'
   },
   {
     name: 'Prudent Mutual Funds',
     logoUrl: 'https://logo.clearbit.com/prudentcorporate.com?size=150&format=png',
+    officialLogoUrl: 'https://logo.clearbit.com/prudentcorporate.com?size=150&format=png',
     fallback: 'Prudent FP'
   }
 ];

@@ -1,3 +1,8 @@
+/**
+ * @license
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
 import React, { useState } from 'react';
 import { partners } from '../data/financial_data';
 
@@ -24,7 +29,7 @@ export default function PartnerLogo({ name, className = "h-7 w-auto", logoUrl, o
   }
 
   if (finalLogoUrl && !imageError) {
-    // Generate a highly descriptive alt text derived from the company name
+    // Generate a highly descriptive alt text derived from the company name for accessibility
     const descriptiveAlt = `${name} Official Financial Partner Logo`;
     return (
       <img 

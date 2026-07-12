@@ -6,6 +6,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { PiggyBank, TrendingUp, Sparkles, HelpCircle, ArrowRightLeft, DollarSign, Wallet } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 import { 
   ResponsiveContainer, 
   AreaChart, 
@@ -20,6 +21,7 @@ import {
 type CalculatorMode = 'sip' | 'lumpsum' | 'swp' | 'compounding';
 
 export default function SipCalculator() {
+  const { language, t } = useLanguage();
   const [mode, setMode] = useState<CalculatorMode>('sip');
 
   // Common or specific State parameters
@@ -184,8 +186,12 @@ export default function SipCalculator() {
             <PiggyBank className="w-6 h-6 text-amber-500" />
           </div>
           <div>
-            <h3 className="text-lg sm:text-xl font-bold tracking-tight text-white font-display">Mutual Funds Calculator Suite</h3>
-            <p className="text-xs sm:text-sm text-slate-300">Model structured wealth creation and periodic income pathways</p>
+            <h3 className="text-lg sm:text-xl font-bold tracking-tight text-white font-display">
+              {language === 'en' ? "Mutual Funds Calculator Suite" : "మ్యూచువల్ ఫండ్స్ క్యాలిక్యులేటర్"}
+            </h3>
+            <p className="text-xs sm:text-sm text-slate-300">
+              {language === 'en' ? "Model structured wealth creation and periodic income pathways" : "నిర్ణీత సంపద సృష్టి మరియు ఆదాయ మార్గాలను అంచనా వేయండి"}
+            </p>
           </div>
         </div>
 
@@ -193,9 +199,9 @@ export default function SipCalculator() {
         <div className="flex flex-wrap bg-slate-950 p-1 rounded-xl border border-slate-800 self-start sm:self-auto gap-0.5 shrink-0">
           {[
             { id: 'sip', name: 'SIP' },
-            { id: 'lumpsum', name: 'Lumpsum' },
+            { id: 'lumpsum', name: language === 'en' ? 'Lumpsum' : 'లంప్‌సమ్' },
             { id: 'swp', name: 'SWP' },
-            { id: 'compounding', name: 'Early vs Late Start ⚡' }
+            { id: 'compounding', name: language === 'en' ? 'Early vs Late Start ⚡' : 'త్వరగా vs ఆలస్యంగా ⚡' }
           ].map((tab) => (
             <button
               key={tab.id}
@@ -593,7 +599,7 @@ export default function SipCalculator() {
                     onChange={(e) => setCompoundingMonthly(Number(e.target.value))}
                     className="w-full accent-amber-600 h-1.5 bg-slate-950 rounded-lg appearance-none cursor-pointer"
                   />
-                  <div className="flex justify-between text-[10px] text-slate-450 font-mono">
+                  <div className="flex justify-between text-[10px] text-slate-400 font-mono">
                     <span>₹1,000</span>
                     <span>₹25,000</span>
                     <span>₹50,000</span>
@@ -614,7 +620,7 @@ export default function SipCalculator() {
                     onChange={(e) => setCompoundingRate(Number(e.target.value))}
                     className="w-full accent-amber-600 h-1.5 bg-slate-950 rounded-lg appearance-none cursor-pointer"
                   />
-                  <div className="flex justify-between text-[10px] text-slate-450 font-mono">
+                  <div className="flex justify-between text-[10px] text-slate-400 font-mono">
                     <span>5%</span>
                     <span>12% (Balanced Equity)</span>
                     <span>18%</span>
@@ -692,12 +698,12 @@ export default function SipCalculator() {
                   <span className="w-2 h-2 rounded-full bg-emerald-500" /> 1. Early Starter (25-60)
                 </span>
                 <div className="space-y-1">
-                  <p className="text-[10px] text-slate-450">Estimated Retirement Wealth:</p>
+                  <p className="text-[10px] text-slate-400">Estimated Retirement Wealth:</p>
                   <h5 className="text-xl font-bold font-mono text-slate-100">
                     {formatCurrency(generateComparisonData()[7]["Early Starter (Start @ 25)"])}
                   </h5>
                 </div>
-                <div className="flex justify-between text-[10px] text-slate-450 border-t border-slate-800/80 pt-2 font-mono">
+                <div className="flex justify-between text-[10px] text-slate-400 border-t border-slate-800/80 pt-2 font-mono">
                   <span>Invested: {formatCurrency(generateComparisonData()[7]["Early Invested"])}</span>
                   <span>Compound Gains: {formatCurrency(Math.max(0, generateComparisonData()[7]["Early Starter (Start @ 25)"] - generateComparisonData()[7]["Early Invested"]))}</span>
                 </div>
@@ -708,12 +714,12 @@ export default function SipCalculator() {
                   <span className="w-2 h-2 rounded-full bg-amber-500" /> 2. Late Starter (35-60)
                 </span>
                 <div className="space-y-1">
-                  <p className="text-[10px] text-slate-450">Estimated Retirement Wealth:</p>
+                  <p className="text-[10px] text-slate-400">Estimated Retirement Wealth:</p>
                   <h5 className="text-xl font-bold font-mono text-slate-100">
                     {formatCurrency(generateComparisonData()[7]["Late Starter (Start @ 35)"])}
                   </h5>
                 </div>
-                <div className="flex justify-between text-[10px] text-slate-450 border-t border-slate-800/80 pt-2 font-mono">
+                <div className="flex justify-between text-[10px] text-slate-400 border-t border-slate-800/80 pt-2 font-mono">
                   <span>Invested: {formatCurrency(generateComparisonData()[7]["Late Invested"])}</span>
                   <span>Compound Gains: {formatCurrency(Math.max(0, generateComparisonData()[7]["Late Starter (Start @ 35)"] - generateComparisonData()[7]["Late Invested"]))}</span>
                 </div>
