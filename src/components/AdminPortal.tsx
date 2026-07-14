@@ -248,7 +248,7 @@ export default function AdminPortal() {
                   value={pin}
                   onChange={(e) => setPin(e.target.value.replace(/\D/g, ''))}
                   className="appearance-none rounded-2xl relative block w-full px-4 py-3.5 border border-slate-800 bg-slate-900 text-white placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-amber-500 focus:border-amber-500 text-center text-2xl tracking-[1em] font-bold outline-none"
-                  placeholder="••••"
+                  placeholder=""
                 />
               </div>
             </div>
@@ -270,9 +270,6 @@ export default function AdminPortal() {
           </form>
 
           <div className="mt-4 pt-4 border-t border-slate-900 text-center space-y-1.5">
-            <p className="text-[10px] text-slate-500 font-mono">
-              Default Access PIN is <span className="text-amber-500 font-bold">9885</span> (first 4 digits of Swamy's hotline).
-            </p>
             <p className="text-[10px] text-slate-500">
               Only authorized staff of D T V S SWAMY should access this administrative dashboard.
             </p>
@@ -312,15 +309,6 @@ export default function AdminPortal() {
           >
             <FileSpreadsheet className="w-3.5 h-3.5" />
             <span>CSV Export</span>
-          </button>
-          
-          <button
-            onClick={handleResetToMocks}
-            className="px-3.5 py-2 text-xs font-bold text-slate-600 dark:text-slate-300 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 rounded-xl transition-all flex items-center gap-1.5 cursor-pointer"
-            title="Load Mock Entries for testing"
-          >
-            <RotateCcw className="w-3.5 h-3.5" />
-            <span>Demo Leads</span>
           </button>
 
           <button
