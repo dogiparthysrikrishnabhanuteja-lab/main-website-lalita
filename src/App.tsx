@@ -49,7 +49,7 @@ export default function App() {
     
     if (targetPage === 'faq') {
       if (hash.startsWith('#faq-')) {
-        const cat = hash.split('-')[1] as any;
+        const cat = hash.split('-')[1] as 'all' | 'life' | 'health' | 'auto' | 'general' | 'investments' | 'tax';
         if (['life', 'health', 'auto', 'general', 'investments', 'tax'].includes(cat)) {
           setFaqInitialCategory(cat);
         }

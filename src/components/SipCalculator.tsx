@@ -39,6 +39,21 @@ import {
 
 type CalculatorMode = 'sip' | 'lumpsum' | 'swp' | 'compounding';
 
+interface SIPLumpsumBreakdownItem {
+  year: string;
+  "Invested Principal": number;
+  "Total Wealth": number;
+  Earnings: number;
+}
+
+interface SWPBreakdownItem {
+  year: string;
+  "Remaining Balance": number;
+  "Withdrawn Capital": number;
+}
+
+type ActiveBreakdownItem = SIPLumpsumBreakdownItem | SWPBreakdownItem;
+
 export default function SipCalculator() {
   const { language, t } = useLanguage();
   const [mode, setMode] = useState<CalculatorMode>('sip');
@@ -92,7 +107,7 @@ export default function SipCalculator() {
   }, []);
 
   // --- Render helpers ---
-  const activeBreakdownData = useMemo<any[]>(() => {
+  const activeBreakdownData = useMemo<ActiveBreakdownItem[]>(() => {
     if (mode === 'sip') {
       return sipDetails.yearlyBreakdown.map(item => ({
         year: `${item.year} ${language === 'en' ? 'Yr' : 'సం.'}`,
@@ -118,6 +133,7 @@ export default function SipCalculator() {
     }
     return [];
   }, [mode, sipDetails, lumpsumDetails, swpDetails, language]);
+
 
   return (
     <div className="bg-slate-900 border border-slate-800 text-white rounded-2xl p-6 sm:p-8 shadow-2xl max-w-4xl mx-auto selection:bg-amber-500/30">
