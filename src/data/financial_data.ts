@@ -41,74 +41,74 @@ export const awards: Award[] = [
 export const partners: Partner[] = [
   {
     name: 'AMFI',
-    logoUrl: 'https://img.logo.dev/name/amfi?token=pk_edIEheiBQL6aVnV9bxDBoA&format=webp&retina=true',
-    officialLogoUrl: 'https://img.logo.dev/name/amfi?token=pk_edIEheiBQL6aVnV9bxDBoA&format=webp&retina=true',
+    logoUrl: 'https://img.logo.dev/name/amfi?token=pk_edIEheiBQL6aVnV9bxDBoA&size=250&format=webp&retina=true',
+    officialLogoUrl: 'https://img.logo.dev/name/amfi?token=pk_edIEheiBQL6aVnV9bxDBoA&size=250&format=webp&retina=true',
     fallback: 'AMFI'
   },
   {
     name: 'IRDAI',
-    logoUrl: 'https://img.logo.dev/name/irdai?token=pk_edIEheiBQL6aVnV9bxDBoA&format=webp&retina=true',
-    officialLogoUrl: 'https://img.logo.dev/name/irdai?token=pk_edIEheiBQL6aVnV9bxDBoA&format=webp&retina=true',
+    logoUrl: 'https://img.logo.dev/name/irdai?token=pk_edIEheiBQL6aVnV9bxDBoA&size=250&format=webp&retina=true',
+    officialLogoUrl: 'https://img.logo.dev/name/irdai?token=pk_edIEheiBQL6aVnV9bxDBoA&size=250&format=webp&retina=true',
     fallback: 'IRDAI'
   },
   {
     name: 'TATA AIA Life Insurance',
-    logoUrl: 'https://img.logo.dev/name/tata%20aia%20life?token=pk_edIEheiBQL6aVnV9bxDBoA&format=webp&retina=true',
-    officialLogoUrl: 'https://img.logo.dev/name/tata%20aia%20life?token=pk_edIEheiBQL6aVnV9bxDBoA&format=webp&retina=true',
+    logoUrl: 'https://img.logo.dev/name/tata%20aia%20life?token=pk_edIEheiBQL6aVnV9bxDBoA&size=250&format=webp&retina=true',
+    officialLogoUrl: 'https://img.logo.dev/name/tata%20aia%20life?token=pk_edIEheiBQL6aVnV9bxDBoA&size=250&format=webp&retina=true',
     fallback: 'Tata AIA Life'
   },
   {
     name: 'Care Health Insurance',
-    logoUrl: 'https://img.logo.dev/name/care%20health%20insurance?token=pk_edIEheiBQL6aVnV9bxDBoA&format=webp&retina=true',
-    officialLogoUrl: 'https://img.logo.dev/name/care%20health%20insurance?token=pk_edIEheiBQL6aVnV9bxDBoA&format=webp&retina=true',
+    logoUrl: 'https://img.logo.dev/name/care%20health%20insurance?token=pk_edIEheiBQL6aVnV9bxDBoA&size=250&format=webp&retina=true',
+    officialLogoUrl: 'https://img.logo.dev/name/care%20health%20insurance?token=pk_edIEheiBQL6aVnV9bxDBoA&size=250&format=webp&retina=true',
     fallback: 'Care Health'
   },
   {
     name: 'TATA AIG General Insurance',
-    logoUrl: 'https://img.logo.dev/tataaig.com?token=pk_edIEheiBQL6aVnV9bxDBoA&format=webp&retina=true',
-    officialLogoUrl: 'https://img.logo.dev/tataaig.com?token=pk_edIEheiBQL6aVnV9bxDBoA&format=webp&retina=true',
+    logoUrl: 'https://img.logo.dev/tataaig.com?token=pk_edIEheiBQL6aVnV9bxDBoA&size=250&format=webp&retina=true',
+    officialLogoUrl: 'https://img.logo.dev/tataaig.com?token=pk_edIEheiBQL6aVnV9bxDBoA&size=250&format=webp&retina=true',
     fallback: 'TATA AIG'
   },
   {
     name: 'ICICI Prudential',
-    logoUrl: 'https://img.logo.dev/iciciprulife.com?token=pk_edIEheiBQL6aVnV9bxDBoA&format=webp&retina=true',
-    officialLogoUrl: 'https://img.logo.dev/iciciprulife.com?token=pk_edIEheiBQL6aVnV9bxDBoA&format=webp&retina=true',
+    logoUrl: 'https://img.logo.dev/iciciprulife.com?token=pk_edIEheiBQL6aVnV9bxDBoA&size=250&format=webp&retina=true',
+    officialLogoUrl: 'https://img.logo.dev/iciciprulife.com?token=pk_edIEheiBQL6aVnV9bxDBoA&size=250&format=webp&retina=true',
     fallback: 'ICICI Prudential'
   },
   {
     name: 'HDFC Life',
-    logoUrl: 'https://img.logo.dev/hdfclife.com?token=pk_edIEheiBQL6aVnV9bxDBoA&format=webp&retina=true',
-    officialLogoUrl: 'https://img.logo.dev/hdfclife.com?token=pk_edIEheiBQL6aVnV9bxDBoA&format=webp&retina=true',
+    logoUrl: 'https://img.logo.dev/hdfclife.com?token=pk_edIEheiBQL6aVnV9bxDBoA&size=250&format=webp&retina=true',
+    officialLogoUrl: 'https://img.logo.dev/hdfclife.com?token=pk_edIEheiBQL6aVnV9bxDBoA&size=250&format=webp&retina=true',
     fallback: 'HDFC Life'
   },
   {
     name: 'Star Health Insurance',
-    logoUrl: 'https://img.logo.dev/starhealth.in?token=pk_edIEheiBQL6aVnV9bxDBoA&format=webp&retina=true',
-    officialLogoUrl: 'https://img.logo.dev/starhealth.in?token=pk_edIEheiBQL6aVnV9bxDBoA&format=webp&retina=true',
+    logoUrl: 'https://img.logo.dev/starhealth.in?token=pk_edIEheiBQL6aVnV9bxDBoA&size=250&format=webp&retina=true',
+    officialLogoUrl: 'https://img.logo.dev/starhealth.in?token=pk_edIEheiBQL6aVnV9bxDBoA&size=250&format=webp&retina=true',
     fallback: 'Star Health'
   },
   {
     name: 'ICICI Lombard',
-    logoUrl: 'https://img.logo.dev/name/icici%20lombard?token=pk_edIEheiBQL6aVnV9bxDBoA&format=webp&retina=true',
-    officialLogoUrl: 'https://img.logo.dev/name/icici%20lombard?token=pk_edIEheiBQL6aVnV9bxDBoA&format=webp&retina=true',
+    logoUrl: 'https://img.logo.dev/name/icici%20lombard?token=pk_edIEheiBQL6aVnV9bxDBoA&size=250&format=webp&retina=true',
+    officialLogoUrl: 'https://img.logo.dev/name/icici%20lombard?token=pk_edIEheiBQL6aVnV9bxDBoA&size=250&format=webp&retina=true',
     fallback: 'ICICI Lombard'
   },
   {
     name: 'Niva Bupa Health',
-    logoUrl: 'https://img.logo.dev/nivabupa.com?token=pk_edIEheiBQL6aVnV9bxDBoA&format=webp&retina=true',
-    officialLogoUrl: 'https://img.logo.dev/nivabupa.com?token=pk_edIEheiBQL6aVnV9bxDBoA&format=webp&retina=true',
+    logoUrl: 'https://img.logo.dev/nivabupa.com?token=pk_edIEheiBQL6aVnV9bxDBoA&size=250&format=webp&retina=true',
+    officialLogoUrl: 'https://img.logo.dev/nivabupa.com?token=pk_edIEheiBQL6aVnV9bxDBoA&size=250&format=webp&retina=true',
     fallback: 'Niva Bupa'
   },
   {
     name: 'HDFC Ergo',
-    logoUrl: 'https://img.logo.dev/name/hdfc%20ergo?token=pk_edIEheiBQL6aVnV9bxDBoA&format=webp&retina=true',
-    officialLogoUrl: 'https://img.logo.dev/name/hdfc%20ergo?token=pk_edIEheiBQL6aVnV9bxDBoA&format=webp&retina=true',
+    logoUrl: 'https://img.logo.dev/name/hdfc%20ergo?token=pk_edIEheiBQL6aVnV9bxDBoA&size=250&format=webp&retina=true',
+    officialLogoUrl: 'https://img.logo.dev/name/hdfc%20ergo?token=pk_edIEheiBQL6aVnV9bxDBoA&size=250&format=webp&retina=true',
     fallback: 'HDFC Ergo'
   },
   {
     name: 'Prudent Mutual Funds',
-    logoUrl: 'https://img.logo.dev/prudentcorporate.com?token=pk_edIEheiBQL6aVnV9bxDBoA&format=webp&retina=true',
-    officialLogoUrl: 'https://img.logo.dev/prudentcorporate.com?token=pk_edIEheiBQL6aVnV9bxDBoA&format=webp&retina=true',
+    logoUrl: 'https://img.logo.dev/prudentcorporate.com?token=pk_edIEheiBQL6aVnV9bxDBoA&size=250&format=webp&retina=true',
+    officialLogoUrl: 'https://img.logo.dev/prudentcorporate.com?token=pk_edIEheiBQL6aVnV9bxDBoA&size=250&format=webp&retina=true',
     fallback: 'Prudent'
   }
 ];
