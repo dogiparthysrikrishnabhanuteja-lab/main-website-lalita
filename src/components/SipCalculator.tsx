@@ -92,7 +92,7 @@ export default function SipCalculator() {
   }, []);
 
   // --- Render helpers ---
-  const activeBreakdownData = useMemo(() => {
+  const activeBreakdownData = useMemo<any[]>(() => {
     if (mode === 'sip') {
       return sipDetails.yearlyBreakdown.map(item => ({
         year: `${item.year} ${language === 'en' ? 'Yr' : 'సం.'}`,

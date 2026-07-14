@@ -240,7 +240,7 @@ export default function FaqView({ initialCategoryFilter = 'all', onCategoryChang
         staggerChildren: 0.04
       }
     }
-  };
+  } as const;
 
   const categoryButtonVariants = {
     hidden: { opacity: 0, x: -15 },
@@ -248,12 +248,12 @@ export default function FaqView({ initialCategoryFilter = 'all', onCategoryChang
       opacity: 1, 
       x: 0,
       transition: { 
-        type: 'spring', 
+        type: 'spring' as const, 
         stiffness: 110, 
         damping: 14 
       } 
     }
-  };
+  } as const;
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -263,7 +263,7 @@ export default function FaqView({ initialCategoryFilter = 'all', onCategoryChang
         staggerChildren: 0.05
       }
     }
-  };
+  } as const;
 
   const cardVariants = {
     hidden: { opacity: 0, y: 15 },
@@ -271,12 +271,12 @@ export default function FaqView({ initialCategoryFilter = 'all', onCategoryChang
       opacity: 1, 
       y: 0,
       transition: { 
-        type: 'spring', 
+        type: 'spring' as const, 
         stiffness: 110, 
         damping: 16 
       } 
     }
-  };
+  } as const;
 
   // ==========================================
   // STATE FOR TAB B: INTERACTIVE ADVISOR ASSISTANT ("ASK SWAMY")
