@@ -41,75 +41,75 @@ export const awards: Award[] = [
 export const partners: Partner[] = [
   {
     name: 'AMFI',
-    logoUrl: 'https://logo.clearbit.com/amfiindia.com?size=150&format=png',
-    officialLogoUrl: 'https://logo.clearbit.com/amfiindia.com?size=150&format=png',
+    logoUrl: 'https://img.logo.dev/name/amfi?token=pk_edIEheiBQL6aVnV9bxDBoA&format=webp&retina=true',
+    officialLogoUrl: 'https://img.logo.dev/name/amfi?token=pk_edIEheiBQL6aVnV9bxDBoA&format=webp&retina=true',
     fallback: 'AMFI'
   },
   {
     name: 'IRDAI',
-    logoUrl: 'https://logo.clearbit.com/irdai.gov.in?size=150&format=png',
-    officialLogoUrl: 'https://logo.clearbit.com/irdai.gov.in?size=150&format=png',
+    logoUrl: 'https://img.logo.dev/name/irdai?token=pk_edIEheiBQL6aVnV9bxDBoA&format=webp&retina=true',
+    officialLogoUrl: 'https://img.logo.dev/name/irdai?token=pk_edIEheiBQL6aVnV9bxDBoA&format=webp&retina=true',
     fallback: 'IRDAI'
   },
   {
     name: 'TATA AIA Life Insurance',
-    logoUrl: 'https://logo.clearbit.com/tataaia.com?size=150&format=png',
-    officialLogoUrl: 'https://logo.clearbit.com/tataaia.com?size=150&format=png',
+    logoUrl: 'https://img.logo.dev/name/tata%20aia%20life?token=pk_edIEheiBQL6aVnV9bxDBoA&format=webp&retina=true',
+    officialLogoUrl: 'https://img.logo.dev/name/tata%20aia%20life?token=pk_edIEheiBQL6aVnV9bxDBoA&format=webp&retina=true',
     fallback: 'Tata AIA Life'
   },
   {
-    name: 'ICICI Prudential',
-    logoUrl: 'https://logo.clearbit.com/icicipruamc.com?size=150&format=png',
-    officialLogoUrl: 'https://logo.clearbit.com/icicipruamc.com?size=150&format=png',
-    fallback: 'ICICI Prudential'
-  },
-  {
-    name: 'HDFC Life',
-    logoUrl: 'https://logo.clearbit.com/hdfclife.com?size=150&format=png',
-    officialLogoUrl: 'https://logo.clearbit.com/hdfclife.com?size=150&format=png',
-    fallback: 'HDFC Life'
-  },
-  {
-    name: 'Star Health Insurance',
-    logoUrl: 'https://logo.clearbit.com/starhealth.in?size=150&format=png',
-    officialLogoUrl: 'https://logo.clearbit.com/starhealth.in?size=150&format=png',
-    fallback: 'Star Health'
-  },
-  {
     name: 'Care Health Insurance',
-    logoUrl: 'https://logo.clearbit.com/careinsurance.com?size=150&format=png',
-    officialLogoUrl: 'https://logo.clearbit.com/careinsurance.com?size=150&format=png',
+    logoUrl: 'https://img.logo.dev/name/care%20health%20insurance?token=pk_edIEheiBQL6aVnV9bxDBoA&format=webp&retina=true',
+    officialLogoUrl: 'https://img.logo.dev/name/care%20health%20insurance?token=pk_edIEheiBQL6aVnV9bxDBoA&format=webp&retina=true',
     fallback: 'Care Health'
   },
   {
     name: 'TATA AIG General Insurance',
-    logoUrl: 'https://logo.clearbit.com/tataaig.com?size=150&format=png',
-    officialLogoUrl: 'https://logo.clearbit.com/tataaig.com?size=150&format=png',
+    logoUrl: 'https://img.logo.dev/tataaig.com?token=pk_edIEheiBQL6aVnV9bxDBoA&format=webp&retina=true',
+    officialLogoUrl: 'https://img.logo.dev/tataaig.com?token=pk_edIEheiBQL6aVnV9bxDBoA&format=webp&retina=true',
     fallback: 'TATA AIG'
   },
   {
+    name: 'ICICI Prudential',
+    logoUrl: 'https://img.logo.dev/iciciprulife.com?token=pk_edIEheiBQL6aVnV9bxDBoA&format=webp&retina=true',
+    officialLogoUrl: 'https://img.logo.dev/iciciprulife.com?token=pk_edIEheiBQL6aVnV9bxDBoA&format=webp&retina=true',
+    fallback: 'ICICI Prudential'
+  },
+  {
+    name: 'HDFC Life',
+    logoUrl: 'https://img.logo.dev/hdfclife.com?token=pk_edIEheiBQL6aVnV9bxDBoA&format=webp&retina=true',
+    officialLogoUrl: 'https://img.logo.dev/hdfclife.com?token=pk_edIEheiBQL6aVnV9bxDBoA&format=webp&retina=true',
+    fallback: 'HDFC Life'
+  },
+  {
+    name: 'Star Health Insurance',
+    logoUrl: 'https://img.logo.dev/starhealth.in?token=pk_edIEheiBQL6aVnV9bxDBoA&format=webp&retina=true',
+    officialLogoUrl: 'https://img.logo.dev/starhealth.in?token=pk_edIEheiBQL6aVnV9bxDBoA&format=webp&retina=true',
+    fallback: 'Star Health'
+  },
+  {
     name: 'ICICI Lombard',
-    logoUrl: 'https://logo.clearbit.com/icicilombard.com?size=150&format=png',
-    officialLogoUrl: 'https://logo.clearbit.com/icicilombard.com?size=150&format=png',
+    logoUrl: 'https://img.logo.dev/name/icici%20lombard?token=pk_edIEheiBQL6aVnV9bxDBoA&format=webp&retina=true',
+    officialLogoUrl: 'https://img.logo.dev/name/icici%20lombard?token=pk_edIEheiBQL6aVnV9bxDBoA&format=webp&retina=true',
     fallback: 'ICICI Lombard'
   },
   {
     name: 'Niva Bupa Health',
-    logoUrl: 'https://logo.clearbit.com/nivabupa.com?size=150&format=png',
-    officialLogoUrl: 'https://logo.clearbit.com/nivabupa.com?size=150&format=png',
+    logoUrl: 'https://img.logo.dev/nivabupa.com?token=pk_edIEheiBQL6aVnV9bxDBoA&format=webp&retina=true',
+    officialLogoUrl: 'https://img.logo.dev/nivabupa.com?token=pk_edIEheiBQL6aVnV9bxDBoA&format=webp&retina=true',
     fallback: 'Niva Bupa'
   },
   {
     name: 'HDFC Ergo',
-    logoUrl: 'https://logo.clearbit.com/hdfcergo.com?size=150&format=png',
-    officialLogoUrl: 'https://logo.clearbit.com/hdfcergo.com?size=150&format=png',
+    logoUrl: 'https://img.logo.dev/name/hdfc%20ergo?token=pk_edIEheiBQL6aVnV9bxDBoA&format=webp&retina=true',
+    officialLogoUrl: 'https://img.logo.dev/name/hdfc%20ergo?token=pk_edIEheiBQL6aVnV9bxDBoA&format=webp&retina=true',
     fallback: 'HDFC Ergo'
   },
   {
     name: 'Prudent Mutual Funds',
-    logoUrl: 'https://logo.clearbit.com/prudentcorporate.com?size=150&format=png',
-    officialLogoUrl: 'https://logo.clearbit.com/prudentcorporate.com?size=150&format=png',
-    fallback: 'Prudent FP'
+    logoUrl: 'https://img.logo.dev/prudentcorporate.com?token=pk_edIEheiBQL6aVnV9bxDBoA&format=webp&retina=true',
+    officialLogoUrl: 'https://img.logo.dev/prudentcorporate.com?token=pk_edIEheiBQL6aVnV9bxDBoA&format=webp&retina=true',
+    fallback: 'Prudent'
   }
 ];
 
@@ -143,7 +143,7 @@ export const services: ServiceElement[] = [
       'Guaranteed Regular Income Plans',
       'Endowment & Capital Safeguard Portfolios'
     ],
-    partners: ['ICICI PRUDENTIAL', 'TATA AIA LIFE', 'HDFC LIFE', 'KOTAK LIFE', 'BAJAJ LIFE', 'AXIS MAX LIFE'],
+    partners: ['TATA AIA LIFE', 'ICICI PRUDENTIAL', 'HDFC LIFE', 'KOTAK LIFE', 'BAJAJ LIFE', 'AXIS MAX LIFE'],
     category: 'life'
   },
   {
@@ -157,7 +157,7 @@ export const services: ServiceElement[] = [
       'Top-Up and Super Top-Up Enhancers',
       'Critical Illness Diagnostic Capital Shield'
     ],
-    partners: ['MANIPAL CIGNA', 'CARE HEALTH', 'HDFC ERGO', 'TATA AIG', 'NIVA BUPA HEALTH', 'ADITYA BIRLA', 'ICICI LOMBARD', 'STAR HEALTH'],
+    partners: ['CARE HEALTH', 'TATA AIG',  'STAR HEALTH', 'HDFC ERGO', 'MANIPAL CIGNA', 'NIVA BUPA HEALTH', 'ADITYA BIRLA', 'ICICI LOMBARD'],
     category: 'health'
   },
   {
@@ -171,7 +171,7 @@ export const services: ServiceElement[] = [
       'Robust Third-Party Legal Liability Shielding',
       'Immediate 24/7 Roadside Mechanical Breakdown Aid'
     ],
-    partners: ['TATA AIG', 'HDFC GENERAL INSURANCE', 'ICICI LOMBARD', 'ROYAL SUNDARAM', 'GODIGIT', 'LIBERTY'],
+    partners: ['TATA AIG', 'HDFC GENERAL INSURANCE', 'ICICI LOMBARD', 'ROYAL SUNDARAM', 'GODIGIT'],
     category: 'auto'
   },
   {
@@ -199,7 +199,7 @@ export const services: ServiceElement[] = [
       'Systematic Withdrawal (SWP) Income Streams',
       'Dual Tax-Savings and Growth (ELSS) Portfolios'
     ],
-    partners: ['Prudent Platform', 'FundzBazaar Wealth Engines'],
+    partners: ['Prudent', 'FundzBazaar'],
     category: 'investments'
   }
 ];
