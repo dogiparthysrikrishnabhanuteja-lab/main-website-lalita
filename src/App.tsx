@@ -12,6 +12,7 @@ import HomeView from './components/HomeView';
 import ServicesView from './components/ServicesView';
 import FaqView from './components/FaqView';
 import ResourcesView from './components/ResourcesView';
+import AdminPortal from './components/AdminPortal';
 
 declare global {
   interface Window {
@@ -31,6 +32,7 @@ export default function App() {
   const getPageFromHash = (hash: string): string => {
     if (!hash || hash === '#' || hash === '#home') return 'home';
     if (hash === '#resources') return 'resources';
+    if (hash === '#admin') return 'admin';
     if (hash.startsWith('#faq')) return 'faq';
     if (hash.startsWith('#services') || ['#life-insurance', '#health-insurance', '#car-insurance', '#general-insurance', '#mutual-funds'].some(h => hash.startsWith(h))) return 'services';
     if (['#hero', '#about', '#why-choose-us', '#stats', '#awards', '#partners', '#testimonials', '#contact'].includes(hash)) return 'home';
@@ -74,6 +76,8 @@ export default function App() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     } else if (targetPage === 'resources') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (targetPage === 'admin') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
@@ -175,7 +179,7 @@ export default function App() {
         const page = event.state.page;
         const hash = event.state.hash || '';
         const sectionId = event.state.sectionId || null;
-        if (['home', 'services', 'faq', 'resources'].includes(page)) {
+        if (['home', 'services', 'faq', 'resources', 'admin'].includes(page)) {
           updateStateForPageAndHash(page, hash, sectionId);
         } else {
           const fallbackPage = getPageFromHash(window.location.hash);
@@ -365,6 +369,18 @@ export default function App() {
                 onSetContactMessage={handleNavigateToContact}
                 onNavigateToFaqCategory={handleNavigateToFaqCategory}
               />
+            </motion.div>
+          )}
+
+          {currentPage === 'admin' && (
+            <motion.div
+              key="admin"
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.98 }}
+              transition={{ duration: 0.25 }}
+            >
+              <AdminPortal />
             </motion.div>
           )}
         </AnimatePresence>

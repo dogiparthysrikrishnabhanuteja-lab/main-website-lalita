@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { Phone, MapPin, Clock, Facebook, MessageSquare, Linkedin } from 'lucide-react';
+import { Phone, MapPin, Clock, Facebook, MessageSquare, Linkedin, Lock } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 interface FooterProps {
@@ -100,6 +100,15 @@ export default function Footer({ setCurrentPage, onScrollToSection }: FooterProp
                   className="hover:text-amber-400 text-slate-300 transition-colors text-left outline-none cursor-pointer"
                 >
                   {t("Contact")}
+                </button>
+              </li>
+              <li className="pt-2 border-t border-slate-800/50">
+                <button 
+                  onClick={() => handleLinkClick('admin')} 
+                  className="hover:text-amber-400 text-slate-400 hover:text-amber-500 transition-colors text-left outline-none cursor-pointer flex items-center gap-1.5 text-xs font-mono"
+                >
+                  <Lock className="w-3 h-3 text-amber-500/60" />
+                  <span>{language === 'en' ? 'ADVISOR PORTAL' : 'సలహాదారు పోర్టల్'}</span>
                 </button>
               </li>
             </ul>

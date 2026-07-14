@@ -12,6 +12,7 @@ import {
 import { awards, partners, testimonials } from '../data/financial_data';
 import { useLanguage } from '../context/LanguageContext';
 import PartnerLogo from './PartnerLogos';
+import { InquiryService } from '../utils/inquiryService';
 
 const getBrandTheme = (name: string) => {
   const lowercase = name.toLowerCase();
@@ -97,6 +98,19 @@ export default function HomeView({ preFilledMessage, setPreFilledMessage, onNavi
     setSubmitStatus('idle');
 
     setTimeout(() => {
+      // Save submission data to InquiryService store
+      try {
+        InquiryService.saveInquiry({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          interest: formData.interest,
+          message: formData.message
+        });
+      } catch (err) {
+        console.error('Error saving consultation request:', err);
+      }
+
       setSubmitting(false);
       setSubmitStatus('success');
       setFormData({ name: '', email: '', phone: '', interest: '', message: '' });
