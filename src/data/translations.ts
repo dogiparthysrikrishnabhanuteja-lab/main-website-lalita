@@ -164,7 +164,7 @@ export const uiTranslations: TranslationDict = {
   },
   "With years of exemplary service in financial advisory, D T V S SWAMY has earned the highly prestigious MDRT (Million Dollar Round Table) recognition, representing the top 1% of global financial advisors. His practice is anchored in the core values of absolute transparency, empathetic listening, and strict adherence to client cash flow compatibility.": {
     en: "With years of exemplary service in financial advisory, D T V S SWAMY has earned the highly prestigious MDRT (Million Dollar Round Table) recognition, representing the top 1% of global financial advisors. His practice is anchored in the core values of absolute transparency, empathetic listening, and strict adherence to client cash flow compatibility.",
-    te: "ఆర్థిక సలహా రంగంలో సంవత్సరాల తరబడి అందించిన విశిష్ట సేవలతో, డి టి వి ఎస్ స్వామి గారు ప్రతిష్టాత్మకమైన MDRT (మిలియన్ డాలర్ రౌండ్ టేబుల్) గుర్తింపును పొందారు, ఇది ప్రపంచవ్యాప్తంగా అగ్రశ్రేణి 1% ఆర్థిక సలహాదారులకు మాత్రమే లభిస్తుంది. పూర్తి పారదర్శకత, సానుభూతితో వినడం మరియు క్లయింట్ల ఆదాయ వ్యయాలకు సరిపోయే విధంగా ప్లాన్ చేయడం ఆయన పనితీరు యొక్క ముఖ్య విలువల."
+    te: "ఆర్థిక సలహా రంగంలో సంవత్సరాల తరబడి అందించిన విశిష్ట సేవలతో, డి టి వి ఎస్ స్వామి గారు ప్రతిష్టాత్మకమైన MDRT (మిలియన్ డాలర్ రౌండ్ టేబుల్) గుర్తింపును పొందారు, ఇది ప్రపంచవ్యాప్తంగా అగ్రశ్రేణి 1% ఆర్థిక సలహాదారులకు మాత్రమే లభిస్తుంది. పూర్తి పారదర్శకత, సానుభూతితో వినడం మరియు క్లయింట్ల ఆదాయ వ్యయాలకు సరిపోయే విధంగా ప్లాన్ చేయడం ఆయన పనితీరు యొక్క ముఖ్య విలువలు."
   },
   "Unlike direct-selling channels, Swamy approaches financial security as a lifelong trust. From structuring MWPA (Married Women's Property Act) covenants for family term plans to guiding claims resolution during unexpected medical crises, his focus remains entirely on safeguarding your generational assets.": {
     en: "Unlike direct-selling channels, Swamy approaches financial security as a lifelong trust. From structuring MWPA (Married Women's Property Act) covenants for family term plans to guiding claims resolution during unexpected medical crises, his focus remains entirely on safeguarding your generational assets.",
@@ -605,6 +605,118 @@ export const uiTranslations: TranslationDict = {
   "Home Link": {
     en: "Home",
     te: "హోమ్"
+  },
+  "Monthly Contribution": {
+    en: "Monthly Contribution",
+    te: "నెలవారీ పొదుపు"
+  },
+  "Expected Growth Rate (p.a.)": {
+    en: "Expected Growth Rate (p.a.)",
+    te: "ఆశించిన వార్షిక వృద్ధి రేటు (%)"
+  },
+  "Investment Tenure": {
+    en: "Investment Tenure",
+    te: "పెట్టుబడి కాలవ్యవధి"
+  },
+  "Total Contributions": {
+    en: "Total Contributions",
+    te: "మొత్తం పెట్టుబడి"
+  },
+  "Compounded Yield": {
+    en: "Compounded Yield",
+    te: "ఆశించిన వృద్ధి/లాభం"
+  },
+  "Projected Total Value": {
+    en: "Projected Total Value",
+    te: "మొత్తం అంచనా నిధి విలువ"
+  },
+  "Principal": {
+    en: "Principal",
+    te: "అసలు పెట్టుబడి"
+  },
+  "Earnings": {
+    en: "Earnings",
+    te: "ఆర్జించిన లాభం"
+  },
+  "One-Time Lump Sum Invested": {
+    en: "One-Time Lump Sum Invested",
+    te: "ఒకేసారి పెట్టుబడి పెట్టే మొత్తం"
+  },
+  "Expected Annual CAGR (%)": {
+    en: "Expected Annual CAGR (%)",
+    te: "ఆశించిన వార్షిక చక్రవృద్ధి రేటు (CAGR %)"
+  },
+  "Initial Premium Capital": {
+    en: "Initial Premium Capital",
+    te: "ప్రారంభ పెట్టుబడి మొత్తం"
+  },
+  "Generational Compound Yield": {
+    en: "Generational Compound Yield",
+    te: "చక్రవృద్ధి ద్వారా వచ్చిన లాభం"
+  },
+  "Projected Total Wealth": {
+    en: "Projected Total Wealth",
+    te: "మొత్తం అంచనా సంపద విలువ"
+  },
+  "Total Mutual Loan Capital Pool": {
+    en: "Total Mutual Loan Capital Pool",
+    te: "మొత్తం ప్రారంభ ఇన్వెస్ట్‌మెంట్ ఫండ్"
+  },
+  "Periodic Monthly Withdrawal": {
+    en: "Periodic Monthly Withdrawal",
+    te: "నెలవారీ తీసుకునే మొత్తం (విత్‌డ్రా)"
+  },
+  "Expected Returns (%)": {
+    en: "Expected Returns (%)",
+    te: "ఆశించిన వార్షిక లాభం (%)"
+  },
+  "Withdrawal Tenure": {
+    en: "Withdrawal Tenure",
+    te: "విత్‌డ్రా కాలవ్యవధి"
+  },
+  "Total Initial Nest-Egg": {
+    en: "Total Initial Nest-Egg",
+    te: "ప్రారంభ అసలు నిధి"
+  },
+  "Total Withdrawals Disbursed": {
+    en: "Total Withdrawals Disbursed",
+    te: "మొత్తం పొందిన నెలవారీ ఆదాయం"
+  },
+  "Remaining Account Balance": {
+    en: "Remaining Account Balance",
+    te: "మిగిలిన అకౌంట్ బ్యాలెన్స్"
+  },
+  "The Opportunity Cost": {
+    en: "The Opportunity Cost",
+    te: "ఆలస్యం చేయడం వల్ల కలిగే నష్టం (Opportunity Cost)"
+  },
+  "Expected CAGR (%)": {
+    en: "Expected CAGR (%)",
+    te: "ఆశించిన వార్షిక చక్రవృద్ధి వృద్ధి రేటు (%)"
+  },
+  "Wealth Growth Comparison Timeline": {
+    en: "Wealth Growth Comparison Timeline",
+    te: "ఆर्थिक వృద్ధి కాలక్రమ పోలిక"
+  },
+  "Estimated Retirement Wealth:": {
+    en: "Estimated Retirement Wealth:",
+    te: "అంచనా వేయబడిన రిటైర్మెంట్ సంపద:"
+  },
+  "Invested:": {
+    en: "Invested:",
+    te: "మొత్తం పెట్టుబడి పెట్టబడినది:"
+  },
+  "Compound Gains:": {
+    en: "Compound Gains:",
+    te: "చక్రవడ్డీ ద్వారా వచ్చిన లాభం:"
+  },
+  "THE COMPOUNDING PREMIUM": {
+    en: "THE COMPOUNDING PREMIUM",
+    te: "చక్రవడ్డీ యొక్క అదనపు ప్రయోజనం"
+  },
+  "Net Wealth Advantage": {
+    en: "Net Wealth Advantage",
+    te: "నికర సంపద లాభం"
   }
 };
 

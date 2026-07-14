@@ -25,6 +25,13 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     return 'en';
   });
 
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      document.documentElement.lang = language;
+      document.documentElement.setAttribute('data-lang', language);
+    }
+  }, [language]);
+
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
     if (typeof window !== 'undefined') {

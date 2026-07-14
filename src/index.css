@@ -266,3 +266,48 @@ html[data-theme='dark'] .gold-gradient-light {
   min-height: 44px;
   min-width: 44px;
 }
+
+/* 
+ * Elegant Telugu Typography Polish
+ * Resolves layout, line height, overlapping characters, and squishing issues.
+ */
+html[data-lang="te"] {
+  --font-sans: "Noto Sans Telugu", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Noto Sans Telugu", "Outfit", ui-sans-serif, system-ui, sans-serif;
+}
+
+html[data-lang="te"] body {
+  line-height: 1.65;
+}
+
+/* Headings in Telugu must never be squished; cancel negative letter-spacing and expand line-height */
+html[data-lang="te"] h1,
+html[data-lang="te"] h2,
+html[data-lang="te"] h3,
+html[data-lang="te"] h4,
+html[data-lang="te"] h5,
+html[data-lang="te"] h6 {
+  line-height: 1.45 !important;
+  letter-spacing: normal !important;
+  word-spacing: 0.05em;
+}
+
+/* Ensure Telugu buttons and inputs have proper height and slightly smaller font sizing for longer strings */
+html[data-lang="te"] button,
+html[data-lang="te"] input,
+html[data-lang="te"] select,
+html[data-lang="te"] textarea {
+  line-height: 1.5;
+}
+
+html[data-lang="te"] nav a,
+html[data-lang="te"] nav button {
+  font-size: 0.95em;
+}
+
+/* Prevent clipping of vowels/subscripts inside cards or items with overflow-hidden */
+html[data-lang="te"] .overflow-hidden {
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+

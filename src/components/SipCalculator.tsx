@@ -232,7 +232,7 @@ export default function SipCalculator() {
             <div className="md:col-span-7 space-y-6">
               <div className="space-y-2">
                 <div className="flex justify-between items-center text-sm font-medium">
-                  <span className="text-slate-300">Monthly Contribution</span>
+                  <span className="text-slate-300">{t("Monthly Contribution")}</span>
                   <span className="text-amber-500 font-mono text-base font-bold">{formatCurrency(sipMonthly)}</span>
                 </div>
                 <input
@@ -253,7 +253,7 @@ export default function SipCalculator() {
 
               <div className="space-y-2">
                 <div className="flex justify-between items-center text-sm font-medium">
-                  <span className="text-slate-300">Expected Growth Rate (p.a.)</span>
+                  <span className="text-slate-300">{t("Expected Growth Rate (p.a.)")}</span>
                   <span className="text-amber-500 font-mono text-base font-bold">{sipRate}%</span>
                 </div>
                 <input
@@ -267,15 +267,15 @@ export default function SipCalculator() {
                 />
                 <div className="flex justify-between text-[10px] text-slate-400 font-mono">
                   <span>1%</span>
-                  <span>12% (Equity Standard)</span>
+                  <span>12% ({language === 'en' ? 'Equity Standard' : 'ఈక్విటీ స్టాండర్డ్'})</span>
                   <span>30%</span>
                 </div>
               </div>
 
               <div className="space-y-2">
                 <div className="flex justify-between items-center text-sm font-medium">
-                  <span className="text-slate-300">Investment Tenure</span>
-                  <span className="text-amber-500 font-mono text-base font-bold">{sipYears} Years</span>
+                  <span className="text-slate-300">{t("Investment Tenure")}</span>
+                  <span className="text-amber-500 font-mono text-base font-bold">{sipYears} {language === 'en' ? 'Years' : 'సంవత్సరాలు'}</span>
                 </div>
                 <input
                   type="range"
@@ -287,9 +287,9 @@ export default function SipCalculator() {
                   className="w-full accent-amber-600 h-1.5 bg-slate-950 rounded-lg appearance-none cursor-pointer"
                 />
                 <div className="flex justify-between text-[10px] text-slate-400 font-mono">
-                  <span>1 Year</span>
-                  <span>20 Years</span>
-                  <span>40 Years</span>
+                  <span>1 {language === 'en' ? 'Year' : 'సంవత్సరం'}</span>
+                  <span>20 {language === 'en' ? 'Years' : 'సంవత్సరాలు'}</span>
+                  <span>40 {language === 'en' ? 'Years' : 'సంవత్సరాలు'}</span>
                 </div>
               </div>
             </div>
@@ -298,18 +298,18 @@ export default function SipCalculator() {
             <div className="md:col-span-5 bg-slate-950 border border-slate-800 rounded-xl p-6 flex flex-col justify-between h-full">
               <div className="space-y-5">
                 <div>
-                  <p className="text-[10px] tracking-wider text-slate-400 uppercase font-bold mb-1">Total Contributions</p>
+                  <p className="text-[10px] tracking-wider text-slate-400 uppercase font-bold mb-1">{t("Total Contributions")}</p>
                   <h4 className="text-lg font-bold font-mono text-slate-100">{formatCurrency(calculateSIPDetails().totalInvested)}</h4>
                 </div>
                 <div>
                   <div className="flex items-center gap-1.5 text-[10px] tracking-wider text-slate-400 uppercase font-bold mb-1">
-                    <span>Compounded Yield</span>
+                    <span>{t("Compounded Yield")}</span>
                     <TrendingUp className="w-3.5 h-3.5 text-emerald-500" />
                   </div>
                   <h4 className="text-lg font-bold font-mono text-emerald-400">{formatCurrency(calculateSIPDetails().estimatedReturns)}</h4>
                 </div>
                 <div className="pt-4 border-t border-slate-800">
-                  <p className="text-[10px] tracking-wider text-amber-500 uppercase font-bold mb-1">Projected Total Value</p>
+                  <p className="text-[10px] tracking-wider text-amber-500 uppercase font-bold mb-1">{t("Projected Total Value")}</p>
                   <h4 className="text-2xl font-black font-mono text-amber-400">{formatCurrency(calculateSIPDetails().totalValue)}</h4>
                 </div>
               </div>
@@ -324,8 +324,8 @@ export default function SipCalculator() {
                   <div className="flex-1 bg-emerald-500 h-full" />
                 </div>
                 <div className="flex justify-between text-[10px] text-slate-200 font-medium">
-                  <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-amber-500 inline-block"/> Principal</span>
-                  <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-emerald-500 inline-block"/> Earnings</span>
+                  <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-amber-500 inline-block"/> {t("Principal")}</span>
+                  <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-emerald-500 inline-block"/> {t("Earnings")}</span>
                 </div>
               </div>
             </div>
@@ -345,7 +345,7 @@ export default function SipCalculator() {
             <div className="md:col-span-7 space-y-6">
               <div className="space-y-2">
                 <div className="flex justify-between items-center text-sm font-medium">
-                  <span className="text-slate-300">One-Time Lump Sum Invested</span>
+                  <span className="text-slate-300">{t("One-Time Lump Sum Invested")}</span>
                   <span className="text-amber-500 font-mono text-base font-bold">{formatCurrency(lumpsumAmount)}</span>
                 </div>
                 <input
@@ -359,14 +359,14 @@ export default function SipCalculator() {
                 />
                 <div className="flex justify-between text-[10px] text-slate-400 font-mono">
                   <span>₹5k</span>
-                  <span>₹25 Lakhs</span>
-                  <span>₹50 Lakhs</span>
+                  <span>₹25 {language === 'en' ? 'Lakhs' : 'లక్షలు'}</span>
+                  <span>₹50 {language === 'en' ? 'Lakhs' : 'లక్షలు'}</span>
                 </div>
               </div>
 
               <div className="space-y-2">
                 <div className="flex justify-between items-center text-sm font-medium">
-                  <span className="text-slate-300">Expected Annual CAGR (%)</span>
+                  <span className="text-slate-300">{t("Expected Annual CAGR (%)")}</span>
                   <span className="text-amber-500 font-mono text-base font-bold">{lumpsumRate}%</span>
                 </div>
                 <input
@@ -380,15 +380,15 @@ export default function SipCalculator() {
                 />
                 <div className="flex justify-between text-[10px] text-slate-400 font-mono">
                   <span>1%</span>
-                  <span>12% (Balanced)</span>
+                  <span>12% ({language === 'en' ? 'Balanced' : 'సమతుల్యమైనది'})</span>
                   <span>30%</span>
                 </div>
               </div>
 
               <div className="space-y-2">
                 <div className="flex justify-between items-center text-sm font-medium">
-                  <span className="text-slate-300">Investment tenure</span>
-                  <span className="text-amber-500 font-mono text-base font-bold">{lumpsumYears} Years</span>
+                  <span className="text-slate-300">{t("Investment Tenure")}</span>
+                  <span className="text-amber-500 font-mono text-base font-bold">{lumpsumYears} {language === 'en' ? 'Years' : 'సంవత్సరాలు'}</span>
                 </div>
                 <input
                   type="range"
@@ -400,9 +400,9 @@ export default function SipCalculator() {
                   className="w-full accent-amber-600 h-1.5 bg-slate-950 rounded-lg appearance-none cursor-pointer"
                 />
                 <div className="flex justify-between text-[10px] text-slate-400 font-mono">
-                  <span>1 Year</span>
-                  <span>20 Years</span>
-                  <span>40 Years</span>
+                  <span>1 {language === 'en' ? 'Year' : 'సంవత్సరం'}</span>
+                  <span>20 {language === 'en' ? 'Years' : 'సంవత్సరాలు'}</span>
+                  <span>40 {language === 'en' ? 'Years' : 'సంవత్సరాలు'}</span>
                 </div>
               </div>
             </div>
@@ -411,18 +411,18 @@ export default function SipCalculator() {
             <div className="md:col-span-5 bg-slate-950 border border-slate-800 rounded-xl p-6 flex flex-col justify-between h-full">
               <div className="space-y-5">
                 <div>
-                  <p className="text-[10px] tracking-wider text-slate-400 uppercase font-bold mb-1">Initial Premium Capital</p>
+                  <p className="text-[10px] tracking-wider text-slate-400 uppercase font-bold mb-1">{t("Initial Premium Capital")}</p>
                   <h4 className="text-lg font-bold font-mono text-slate-100">{formatCurrency(calculateLumpsumDetails().totalInvested)}</h4>
                 </div>
                 <div>
                   <div className="flex items-center gap-1.5 text-[10px] tracking-wider text-slate-400 uppercase font-bold mb-1">
-                    <span>Generational Compound Yield</span>
+                    <span>{t("Generational Compound Yield")}</span>
                     <TrendingUp className="w-3.5 h-3.5 text-emerald-500" />
                   </div>
                   <h4 className="text-lg font-bold font-mono text-emerald-400">{formatCurrency(calculateLumpsumDetails().estimatedReturns)}</h4>
                 </div>
                 <div className="pt-4 border-t border-slate-800">
-                  <p className="text-[10px] tracking-wider text-amber-500 uppercase font-bold mb-1">Projected Total Wealth</p>
+                  <p className="text-[10px] tracking-wider text-amber-500 uppercase font-bold mb-1">{t("Projected Total Wealth")}</p>
                   <h4 className="text-2xl font-black font-mono text-amber-400">{formatCurrency(calculateLumpsumDetails().totalValue)}</h4>
                 </div>
               </div>
@@ -437,8 +437,8 @@ export default function SipCalculator() {
                   <div className="flex-1 bg-emerald-500 h-full" />
                 </div>
                 <div className="flex justify-between text-[10px] text-slate-200 font-medium">
-                  <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-amber-500 inline-block"/> Principal</span>
-                  <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-emerald-500 inline-block"/> Earnings</span>
+                  <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-amber-500 inline-block"/> {t("Principal")}</span>
+                  <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-emerald-500 inline-block"/> {t("Earnings")}</span>
                 </div>
               </div>
             </div>
@@ -457,7 +457,7 @@ export default function SipCalculator() {
             <div className="md:col-span-7 space-y-5">
               <div className="space-y-2">
                 <div className="flex justify-between items-center text-sm font-medium">
-                  <span className="text-slate-300">Total Mutual Loan Capital Pool</span>
+                  <span className="text-slate-300">{t("Total Mutual Loan Capital Pool")}</span>
                   <span className="text-amber-500 font-mono text-base font-bold">{formatCurrency(swpCapital)}</span>
                 </div>
                 <input
@@ -471,14 +471,14 @@ export default function SipCalculator() {
                 />
                 <div className="flex justify-between text-[10px] text-slate-400 font-mono">
                   <span>₹50k</span>
-                  <span>₹50 Lakhs</span>
-                  <span>₹1 Crore</span>
+                  <span>₹50 {language === 'en' ? 'Lakhs' : 'లక్షలు'}</span>
+                  <span>₹1 {language === 'en' ? 'Crore' : 'కోటి'}</span>
                 </div>
               </div>
 
               <div className="space-y-2">
                 <div className="flex justify-between items-center text-sm font-medium">
-                  <span className="text-slate-300">Periodic Monthly Withdrawal</span>
+                  <span className="text-slate-300">{t("Periodic Monthly Withdrawal")}</span>
                   <span className="text-amber-500 font-mono text-base font-bold">{formatCurrency(swpWithdrawal)}</span>
                 </div>
                 <input
@@ -492,15 +492,15 @@ export default function SipCalculator() {
                 />
                 <div className="flex justify-between text-[10px] text-slate-400 font-mono">
                   <span>₹1,000</span>
-                  <span>₹1 Lakh</span>
-                  <span>₹2 Lakhs / Mo</span>
+                  <span>₹1 {language === 'en' ? 'Lakh' : 'లక్ష'}</span>
+                  <span>₹2 {language === 'en' ? 'Lakhs' : 'లక్షలు'} / {language === 'en' ? 'Mo' : 'నెల'}</span>
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <div className="flex justify-between items-center text-xs font-medium text-slate-300">
-                    <span>Expected Returns (%)</span>
+                    <span>{t("Expected Returns (%)")}</span>
                     <span className="text-amber-500 font-mono font-bold">{swpRate}%</span>
                   </div>
                   <input
@@ -516,8 +516,8 @@ export default function SipCalculator() {
 
                 <div className="space-y-2">
                   <div className="flex justify-between items-center text-xs font-medium text-slate-300">
-                    <span>Withdrawal Tenure</span>
-                    <span className="text-amber-500 font-mono font-bold">{swpYears} Years</span>
+                    <span>{t("Withdrawal Tenure")}</span>
+                    <span className="text-amber-500 font-mono font-bold">{swpYears} {language === 'en' ? 'Years' : 'సంవత్సరాలు'}</span>
                   </div>
                   <input
                     type="range"
@@ -536,18 +536,18 @@ export default function SipCalculator() {
             <div className="md:col-span-5 bg-slate-950 border border-slate-800 rounded-xl p-6 flex flex-col justify-between h-full">
               <div className="space-y-4">
                 <div>
-                  <p className="text-[10px] tracking-wider text-slate-400 uppercase font-bold mb-1">Total Initial Nest-Egg</p>
+                  <p className="text-[10px] tracking-wider text-slate-400 uppercase font-bold mb-1">{t("Total Initial Nest-Egg")}</p>
                   <h4 className="text-lg font-bold font-mono text-slate-100">{formatCurrency(calculateSWPDetails().totalInvested)}</h4>
                 </div>
                 <div>
                   <div className="flex items-center gap-1.5 text-[10px] tracking-wider text-slate-400 uppercase font-bold mb-1">
-                    <span>Total Withdrawals Disbursed</span>
+                    <span>{t("Total Withdrawals Disbursed")}</span>
                     <Wallet className="w-3.5 h-3.5 text-emerald-500" />
                   </div>
                   <h4 className="text-lg font-bold font-mono text-emerald-400">{formatCurrency(calculateSWPDetails().totalWithdrawn)}</h4>
                 </div>
                 <div className="pt-4 border-t border-slate-800">
-                  <p className="text-[10px] tracking-wider text-amber-550 uppercase font-bold mb-1">Remaining Account Balance</p>
+                  <p className="text-[10px] tracking-wider text-amber-550 uppercase font-bold mb-1">{t("Remaining Account Balance")}</p>
                   <h4 className="text-2xl font-black font-mono text-amber-400">{formatCurrency(calculateSWPDetails().finalBalance)}</h4>
                 </div>
               </div>
@@ -555,11 +555,19 @@ export default function SipCalculator() {
               {/* Warnings or depletion metrics if the fund clears out quickly */}
               {calculateSWPDetails().isDepleted ? (
                 <div className="mt-6 p-3.5 bg-red-500/15 border border-red-500/30 text-rose-300 rounded-lg text-[11px] leading-relaxed">
-                  ⚠️ Fund Depleted Early! Nest-egg capital was completely exhausted in <strong className="text-white font-semibold">{calculateSWPDetails().yearsLasted} years and {calculateSWPDetails().remainingMonthsLasted} months</strong>. Try enlarging starting Capital or reducing monthly withdrawals.
+                  {language === 'en' ? (
+                    <>⚠️ Fund Depleted Early! Nest-egg capital was completely exhausted in <strong className="text-white font-semibold">{calculateSWPDetails().yearsLasted} years and {calculateSWPDetails().remainingMonthsLasted} months</strong>. Try enlarging starting Capital or reducing monthly withdrawals.</>
+                  ) : (
+                    <>⚠️ నిధి త్వరగా అయిపోయింది! ప్రారంభ అసలు నిధి <strong className="text-white font-semibold">{calculateSWPDetails().yearsLasted} సంవత్సరాలు మరియు {calculateSWPDetails().remainingMonthsLasted} నెలల్లో</strong> పూర్తిగా ఖర్చయింది. ప్రారంభ నిధిని పెంచడానికి లేదా నెలవారీ విత్‌డ్రాలను తగ్గించడానికి ప్రయత్నించండి.</>
+                  )}
                 </div>
               ) : (
                 <div className="mt-6 p-3.5 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 rounded-lg text-[11px] leading-relaxed">
-                  ✓ Safe Withdrawal Stream! Capital successfully sustains withdrawals throughout the entire <strong className="text-white font-semibold">{swpYears} Years</strong> period, leaving a compounding balance cushion.
+                  {language === 'en' ? (
+                    <>✓ Safe Withdrawal Stream! Capital successfully sustains withdrawals throughout the entire <strong className="text-white font-semibold">{swpYears} Years</strong> period, leaving a compounding balance cushion.</>
+                  ) : (
+                    <>✓ సురక్షితమైన ఉపసంహరణ విధానం! ఎంచుకున్న <strong className="text-white font-semibold">{swpYears} సంవత్సరాల</strong> పాటు ఈ నిధి విజయవంతంగా నెలవారీ ఆదాయాన్ని అందిస్తూ, చివరికి అదనపు సంపదను కూడా మిగులుస్తుంది.</>
+                  )}
                 </div>
               )}
             </div>
@@ -579,15 +587,19 @@ export default function SipCalculator() {
               {/* Sliders on Left Side */}
               <div className="lg:col-span-4 space-y-6">
                 <div className="p-4 bg-slate-950/50 rounded-xl border border-slate-800">
-                  <h4 className="text-xs font-bold text-amber-500 font-mono tracking-wider uppercase mb-2">The Opportunity Cost</h4>
+                  <h4 className="text-xs font-bold text-amber-500 font-mono tracking-wider uppercase mb-2">{t("The Opportunity Cost")}</h4>
                   <p className="text-xs text-slate-300 leading-relaxed font-sans">
-                    Compare starting to save at age <strong className="text-emerald-400">25</strong> (Early) vs. age <strong className="text-amber-500">35</strong> (Late). Both save the exact same monthly amount until retirement at <strong className="text-white">60</strong>. See how a brief 10-year headstart expands final corpus values by more than 300%.
+                    {language === 'en' ? (
+                      <>Compare starting to save at age <strong className="text-emerald-400">25</strong> (Early) vs. age <strong className="text-amber-500">35</strong> (Late). Both save the exact same monthly amount until retirement at <strong className="text-white">60</strong>. See how a brief 10-year headstart expands final corpus values by more than 300%.</>
+                    ) : (
+                      <>వయస్సు <strong className="text-emerald-400">25</strong> సంవత్సరాల నుండే పొదుపు చేయడం (త్వరగా) మరియు <strong className="text-amber-500">35</strong> సంవత్సరాల వయస్సులో ప్రారంభించడం (ఆలస్యంగా) మధ్య వ్యత్యాసాన్ని పోల్చండి. ఇద్దరూ రిటైర్మెంట్ వయస్సు <strong className="text-white">60</strong> వచ్చే వరకు నెలకు ఒకే మొత్తాన్ని పొదుపు చేస్తారు. కేవలం ఈ 10 సంవత్సరాల త్వరగా ప్రారంభం మీ చివరి నిధిని 300% కంటే ఎక్కువగా ఎలా పెంచుతుందో చూడండి.</>
+                    )}
                   </p>
                 </div>
 
                 <div className="space-y-2">
                   <div className="flex justify-between items-center text-xs font-medium">
-                    <span className="text-slate-300 font-sans">Monthly Contribution</span>
+                    <span className="text-slate-300 font-sans">{t("Monthly Contribution")}</span>
                     <span className="text-amber-500 font-mono text-sm font-bold">{formatCurrency(compoundingMonthly)}</span>
                   </div>
                   <input
@@ -608,7 +620,7 @@ export default function SipCalculator() {
 
                 <div className="space-y-2">
                   <div className="flex justify-between items-center text-xs font-medium">
-                    <span className="text-slate-300 font-sans">Expected CAGR (%)</span>
+                    <span className="text-slate-300 font-sans">{t("Expected CAGR (%)")}</span>
                     <span className="text-amber-500 font-mono text-sm font-bold">{compoundingRate}%</span>
                   </div>
                   <input
@@ -622,7 +634,7 @@ export default function SipCalculator() {
                   />
                   <div className="flex justify-between text-[10px] text-slate-400 font-mono">
                     <span>5%</span>
-                    <span>12% (Balanced Equity)</span>
+                    <span>12% ({language === 'en' ? 'Balanced Equity' : 'సమతుల్య ఈక్విటీ'})</span>
                     <span>18%</span>
                   </div>
                 </div>
@@ -631,7 +643,7 @@ export default function SipCalculator() {
               {/* Chart on Right Side */}
               <div className="lg:col-span-8 bg-slate-950 border border-slate-800 rounded-xl p-4 sm:p-5">
                 <div className="flex justify-between items-center mb-3">
-                  <h4 className="text-[10px] uppercase font-mono tracking-wider font-extrabold text-slate-400">Wealth Growth Comparison Timeline</h4>
+                  <h4 className="text-[10px] uppercase font-mono tracking-wider font-extrabold text-slate-400">{t("Wealth Growth Comparison Timeline")}</h4>
                   <span className="text-[9px] bg-emerald-500/10 text-emerald-400 font-mono px-2 py-0.5 rounded font-bold uppercase border border-emerald-500/20">Recharts Engine</span>
                 </div>
                 <div className="h-64 sm:h-72 w-full">
@@ -651,7 +663,7 @@ export default function SipCalculator() {
                         </linearGradient>
                       </defs>
                       <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
-                      <XAxis dataKey="age" stroke="#94a3b8" fontSize={9} />
+                      <XAxis dataKey="age" stroke="#94a3b8" fontSize={9} tickFormatter={(v) => language === 'en' ? v : v.replace('Yrs', 'సం.')} />
                       <YAxis 
                         stroke="#94a3b8" 
                         fontSize={9} 
@@ -668,7 +680,7 @@ export default function SipCalculator() {
                         iconSize={8}
                       />
                       <Area 
-                        name="Early Starter (Age 25)" 
+                        name={language === 'en' ? "Early Starter (Age 25)" : "త్వరగా ప్రారంభించిన వారు (వయస్సు 25)"} 
                         type="monotone" 
                         dataKey="Early Starter (Start @ 25)" 
                         stroke="#10b981" 
@@ -677,7 +689,7 @@ export default function SipCalculator() {
                         fill="url(#colorEarly)" 
                       />
                       <Area 
-                        name="Late Starter (Age 35)" 
+                        name={language === 'en' ? "Late Starter (Age 35)" : "ఆలస్యంగా ప్రారంభించిన వారు (వయస్సు 35)"} 
                         type="monotone" 
                         dataKey="Late Starter (Start @ 35)" 
                         stroke="#f59e0b" 
@@ -695,41 +707,45 @@ export default function SipCalculator() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-slate-800">
               <div className="bg-slate-950 border border-slate-800 p-4 rounded-xl space-y-2">
                 <span className="block text-[10px] font-mono tracking-wider text-emerald-400 font-extrabold uppercase flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500" /> 1. Early Starter (25-60)
+                  <span className="w-2 h-2 rounded-full bg-emerald-500" /> {language === 'en' ? "1. Early Starter (25-60)" : "1. త్వరగా ప్రారంభించిన వారు (25-60)"}
                 </span>
                 <div className="space-y-1">
-                  <p className="text-[10px] text-slate-400">Estimated Retirement Wealth:</p>
+                  <p className="text-[10px] text-slate-400">{t("Estimated Retirement Wealth:")}</p>
                   <h5 className="text-xl font-bold font-mono text-slate-100">
                     {formatCurrency(generateComparisonData()[7]["Early Starter (Start @ 25)"])}
                   </h5>
                 </div>
                 <div className="flex justify-between text-[10px] text-slate-400 border-t border-slate-800/80 pt-2 font-mono">
-                  <span>Invested: {formatCurrency(generateComparisonData()[7]["Early Invested"])}</span>
-                  <span>Compound Gains: {formatCurrency(Math.max(0, generateComparisonData()[7]["Early Starter (Start @ 25)"] - generateComparisonData()[7]["Early Invested"]))}</span>
+                  <span>{t("Invested:")} {formatCurrency(generateComparisonData()[7]["Early Invested"])}</span>
+                  <span>{t("Compound Gains:")} {formatCurrency(Math.max(0, generateComparisonData()[7]["Early Starter (Start @ 25)"] - generateComparisonData()[7]["Early Invested"]))}</span>
                 </div>
               </div>
 
               <div className="bg-slate-950 border border-slate-800 p-4 rounded-xl space-y-2">
                 <span className="block text-[10px] font-mono tracking-wider text-amber-500 font-extrabold uppercase flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-amber-500" /> 2. Late Starter (35-60)
+                  <span className="w-2 h-2 rounded-full bg-amber-500" /> {language === 'en' ? "2. Late Starter (35-60)" : "2. ఆలస్యంగా ప్రారంభించిన వారు (35-60)"}
                 </span>
                 <div className="space-y-1">
-                  <p className="text-[10px] text-slate-400">Estimated Retirement Wealth:</p>
+                  <p className="text-[10px] text-slate-400">{t("Estimated Retirement Wealth:")}</p>
                   <h5 className="text-xl font-bold font-mono text-slate-100">
                     {formatCurrency(generateComparisonData()[7]["Late Starter (Start @ 35)"])}
                   </h5>
                 </div>
                 <div className="flex justify-between text-[10px] text-slate-400 border-t border-slate-800/80 pt-2 font-mono">
-                  <span>Invested: {formatCurrency(generateComparisonData()[7]["Late Invested"])}</span>
-                  <span>Compound Gains: {formatCurrency(Math.max(0, generateComparisonData()[7]["Late Starter (Start @ 35)"] - generateComparisonData()[7]["Late Invested"]))}</span>
+                  <span>{t("Invested:")} {formatCurrency(generateComparisonData()[7]["Late Invested"])}</span>
+                  <span>{t("Compound Gains:")} {formatCurrency(Math.max(0, generateComparisonData()[7]["Late Starter (Start @ 35)"] - generateComparisonData()[7]["Late Invested"]))}</span>
                 </div>
               </div>
 
               <div className="bg-gradient-to-br from-amber-600/10 to-slate-950 border border-amber-600/20 p-4 rounded-xl space-y-2 flex flex-col justify-between">
                 <div>
-                  <span className="block text-[10px] font-mono tracking-widest text-amber-500 font-extrabold uppercase">THE COMPOUNDING PREMIUM</span>
+                  <span className="block text-[10px] font-mono tracking-widest text-amber-500 font-extrabold uppercase">{t("THE COMPOUNDING PREMIUM")}</span>
                   <p className="text-[10px] text-slate-300 leading-normal mt-1">
-                    By starting just 10 years earlier, your final corpus expands by over <strong>3x more wealth</strong>, yielding an Early Advantage dividend of:
+                    {language === 'en' ? (
+                      <>By starting just 10 years earlier, your final corpus expands by over <strong>3x more wealth</strong>, yielding an Early Advantage dividend of:</>
+                    ) : (
+                      <>కేవలం 10 సంవత్సరాలు ముందుగా ప్రారంభించడం ద్వారా, మీ మొత్తం నిధి <strong>3 రెట్లు అధిక సంపదగా</strong> మారుతుంది. దీనివల్ల పొందే అదనపు లాభం:</>
+                    )}
                   </p>
                 </div>
                 <div className="pt-2">
@@ -738,7 +754,7 @@ export default function SipCalculator() {
                       generateComparisonData()[7]["Early Starter (Start @ 25)"] - generateComparisonData()[7]["Late Starter (Start @ 35)"]
                     )}
                   </h5>
-                  <span className="text-[9px] uppercase font-mono tracking-widest text-amber-700 font-bold block mt-0.5">Net Wealth Advantage</span>
+                  <span className="text-[9px] uppercase font-mono tracking-widest text-amber-700 font-bold block mt-0.5">{t("Net Wealth Advantage")}</span>
                 </div>
               </div>
             </div>
@@ -749,7 +765,11 @@ export default function SipCalculator() {
       <div className="mt-8 pt-4 border-t border-slate-800 flex items-start gap-2.5 text-xs text-slate-300 leading-relaxed">
         <Sparkles className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
         <p>
-          Note: Simulated compounding dynamics represent mathematical frameworks based on selected CAGR variables. Real-world returns depend on fund choice, market performance, and taxes. Coordinate a secure payout system with Chief Advisor <strong className="text-amber-400">D T V S SWAMY</strong> to build an optimum blueprint.
+          {language === 'en' ? (
+            <>Note: Simulated compounding dynamics represent mathematical frameworks based on selected CAGR variables. Real-world returns depend on fund choice, market performance, and taxes. Coordinate a secure payout system with Chief Advisor <strong className="text-amber-400">D T V S SWAMY</strong> to build an optimum blueprint.</>
+          ) : (
+            <>గమనిక: ఈ చక్రవడ్డీ గణనలు కేవలం ఎంచుకున్న CAGR శాతాల ఆధారంగా లెక్కించబడిన గణిత నమూనాలు. వాస్తవ లాభాలు మార్కెట్ పరిస్థితులు, ఎంచుకునే ఫండ్స్ మరియు పన్నులపై ఆధారపడి ఉంటాయి. మీ అవసరాలకు తగిన ఆర్థిక ప్రణాళికను రూపొందించుకోవడానికి ప్రధాన సలహాదారు <strong className="text-amber-400">డి టి వి ఎస్ స్వామి</strong> గారిని సంప్రదించండి.</>
+          )}
         </p>
       </div>
     </div>
