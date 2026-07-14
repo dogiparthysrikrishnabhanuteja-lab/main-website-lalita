@@ -7,7 +7,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { 
   ShieldCheck, UserCheck, Star, Award, Shield, Medal, Trophy, 
-  Send, Phone, MapPin, ArrowRight, CheckCircle2, User, HelpCircle, Sparkles
+  Send, Phone, MapPin, ArrowRight, CheckCircle2, User, Sparkles
 } from 'lucide-react';
 import { awards, partners, testimonials } from '../data/financial_data';
 import { useLanguage } from '../context/LanguageContext';

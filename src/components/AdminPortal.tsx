@@ -9,7 +9,6 @@ import {
   CheckCircle2, 
   Clock, 
   FileSpreadsheet, 
-  RotateCcw, 
   Database, 
   MessageSquare,
   ChevronDown,
@@ -90,13 +89,6 @@ export default function AdminPortal() {
       if (success) {
         setInquiries(InquiryService.getInquiries());
       }
-    }
-  };
-
-  const handleResetToMocks = () => {
-    if (window.confirm(language === 'en' ? 'Reset to demo inquiries? This will replace current entries.' : 'డెమో సంప్రదింపులతో రీసెట్ చేయాలా?')) {
-      const mocks = InquiryService.resetToMocks();
-      setInquiries(mocks);
     }
   };
 

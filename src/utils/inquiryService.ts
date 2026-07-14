@@ -78,7 +78,7 @@ export const InquiryService = {
     const inquiries = this.getInquiries();
     const newInquiry: Inquiry = {
       ...data,
-      id: `inq-${Math.random().toString(36).substr(2, 9)}`,
+      id: `inq-${Math.random().toString(36).slice(2, 11)}`,
       timestamp: Date.now(),
       status: 'new'
     };
