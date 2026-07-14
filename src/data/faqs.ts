@@ -11,7 +11,7 @@ export const faqs: FAQ[] = [
     id: 'l1',
     category: 'life',
     question: 'What types of Life Insurance do you offer?',
-    answer: 'We provide comprehensive Term Life Protection, Endowment Mutual Schemes, and Guaranteed Income Portfolios through our verified partners like ICICI Prudential, TATA AIA Life, HDFC Life, Kotak Life, Bajaj Life, and Axis Max Life. These plans are tailored to perfectly suit your family\'s dependency structure and future financial milestones.',
+    answer: 'We provide comprehensive Term Life Protection, Endowment Mutual Schemes, and Guaranteed Income Portfolios through our verified partners like TATA AIA Life, ICICI Prudential, HDFC Life, Kotak Life, Bajaj Life, and Axis Max Life. These plans are tailored to perfectly suit your family\'s dependency structure and future financial milestones.',
   },
   {
     id: 'l2',

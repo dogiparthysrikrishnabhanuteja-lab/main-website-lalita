@@ -157,7 +157,7 @@ export const services: ServiceElement[] = [
       'Top-Up and Super Top-Up Enhancers',
       'Critical Illness Diagnostic Capital Shield'
     ],
-    partners: ['CARE HEALTH', 'TATA AIG',  'STAR HEALTH', 'HDFC ERGO', 'MANIPAL CIGNA', 'NIVA BUPA HEALTH', 'ADITYA BIRLA', 'ICICI LOMBARD'],
+    partners: ['STAR HEALTH', 'CARE HEALTH', 'TATA AIG', 'ICICI LOMBARD', 'NIVA BUPA HEALTH', 'HDFC ERGO', 'MANIPAL CIGNA', 'ADITYA BIRLA'],
     category: 'health'
   },
   {
@@ -171,7 +171,7 @@ export const services: ServiceElement[] = [
       'Robust Third-Party Legal Liability Shielding',
       'Immediate 24/7 Roadside Mechanical Breakdown Aid'
     ],
-    partners: ['TATA AIG', 'HDFC GENERAL INSURANCE', 'ICICI LOMBARD', 'ROYAL SUNDARAM', 'GODIGIT'],
+    partners: ['TATA AIG', 'ICICI LOMBARD', 'HDFC GENERAL INSURANCE', 'ROYAL SUNDARAM', 'GODIGIT', 'LIBERTY'],
     category: 'auto'
   },
   {
@@ -199,7 +199,7 @@ export const services: ServiceElement[] = [
       'Systematic Withdrawal (SWP) Income Streams',
       'Dual Tax-Savings and Growth (ELSS) Portfolios'
     ],
-    partners: ['Prudent', 'FundzBazaar'],
+    partners: ['Prudent Platform', 'FundzBazaar Wealth Engines'],
     category: 'investments'
   }
 ];

@@ -149,8 +149,8 @@ export default function Footer({ setCurrentPage, onScrollToSection }: FooterProp
           </p>
           <p className="text-slate-500 max-w-2xl leading-relaxed font-sans">
             {language === 'en' 
-              ? "Represented associations include ICICI Prudential, Tata AIA Life, HDFC Life, Care Health, Niva Bupa, Star Health, TATA AIG, HDFC Ergo, Kotak Life, Bajaj Life, Axis Max Life, and Prudent corporate platforms." 
-              : "మేము ఐసిఐసిఐ ప్రుడెన్షియల్, టాటా ఎఐఎ లైఫ్, హెచ్‌డిఎఫ్‌సి లైఫ్, కేర్ హెల్త్, నివా బుపా, స్టార్ హెల్త్, టాటా ఎఐజి, హెచ్‌డిఎఫ్‌సి ఎర్గో, కోటక్ లైఫ్, బజాజ్ లైఫ్, యాక్సిస్ మ్యాక్స్ లైఫ్ మరియు ప్రుడెంట్ వంటి అగ్రశ్రేణి సంస్థలతో అనుబంధం కలిగి ఉన్నాము."}
+              ? "Represented associations include Tata AIA Life, Care Health, TATA AIG, ICICI Prudential, HDFC Life, Star Health, ICICI Lombard, Niva Bupa, HDFC Ergo, Kotak Life, Bajaj Life, Axis Max Life, and Prudent corporate platforms." 
+              : "మేము టాటా ఎఐఎ లైఫ్, కేర్ హెల్త్, టాటా ఎఐజి, ఐసిఐసిఐ ప్రుడెన్షియల్, హెచ్‌డిఎఫ్‌సి లైఫ్, స్టార్ హెల్త్, ఐసిఐసిఐ లంబార్డ్, నివా బుపా, హెచ్‌డిఎఫ్‌సి ఎర్గో, కోటక్ లైఫ్, బజాజ్ లైఫ్, యాక్సిస్ మ్యాక్స్ లైఫ్ మరియు ప్రుడెంట్ వంటి అగ్రశ్రేణి సంస్థలతో అనుబంధం కలిగి ఉన్నాము."}
           </p>
         </div>
       </div>

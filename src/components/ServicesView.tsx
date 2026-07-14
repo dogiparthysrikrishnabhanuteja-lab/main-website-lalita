@@ -30,6 +30,8 @@ interface ServicesViewProps {
 export default function ServicesView({ onNavigateToFaqCategory, onNavigateToContact }: ServicesViewProps) {
   const { language } = useLanguage();
   const [isLoading, setIsLoading] = useState(true);
+  const partnersSectionRef = React.useRef<HTMLDivElement>(null);
+  const [hasPreloadedLogos, setHasPreloadedLogos] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -37,6 +39,44 @@ export default function ServicesView({ onNavigateToFaqCategory, onNavigateToCont
     }, 850);
     return () => clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    if (typeof window === 'undefined' || !('IntersectionObserver' in window)) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        if (entry.isIntersecting && !hasPreloadedLogos) {
+          setHasPreloadedLogos(true);
+          // Preload official partner logos
+          partners.forEach((partner) => {
+            const url = partner.officialLogoUrl || partner.logoUrl;
+            if (url) {
+              const img = new Image();
+              img.src = url;
+            }
+          });
+        }
+      },
+      {
+        rootMargin: '200px',
+        threshold: 0
+      }
+    );
+
+    const currentRef = partnersSectionRef.current;
+    if (currentRef) {
+      observer.observe(currentRef);
+    }
+
+    return () => {
+      if (currentRef) {
+        observer.unobserve(currentRef);
+      }
+    };
+  }, [hasPreloadedLogos]);
   
   const getIcon = (name: string) => {
     switch (name) {
@@ -379,7 +419,7 @@ export default function ServicesView({ onNavigateToFaqCategory, onNavigateToCont
       </div>
 
       {/* 3. Associated Partners & Platforms Row */}
-      <div className="border-t border-slate-200 dark:border-slate-800 pt-16 mt-8 space-y-6">
+      <div ref={partnersSectionRef} className="border-t border-slate-200 dark:border-slate-800 pt-16 mt-8 space-y-6">
         <div className="text-center space-y-2">
           <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-amber-600 block">
             {language === 'en' ? "Our Advisory Coverage & Providers" : "మా భాగస్వామ్య సేవా సంస్థలు"}
@@ -395,18 +435,15 @@ export default function ServicesView({ onNavigateToFaqCategory, onNavigateToCont
         </div>
 
         <div className="w-full py-6 bg-slate-50/50 dark:bg-slate-900/20 rounded-2xl border border-slate-200 dark:border-slate-850 px-4">
-          <div className="flex flex-wrap gap-4 sm:gap-6 justify-center items-center">
+          <div className="flex flex-wrap gap-2.5 sm:gap-4 justify-center items-center">
             {isLoading ? (
               Array.from({ length: 12 }).map((_, idx) => (
                 <div 
                   key={idx} 
-                  className="flex items-center gap-3 bg-white dark:bg-slate-900 border border-slate-200/50 dark:border-slate-800 py-2 px-3.5 rounded-xl w-[180px] sm:w-[215px] h-[52px] animate-pulse"
+                  className="flex flex-col items-center justify-center p-2 sm:p-3 bg-white dark:bg-slate-900 border border-slate-200/50 dark:border-slate-800 rounded-xl w-[100px] xs:w-[110px] sm:w-[150px] md:w-[170px] h-[72px] sm:h-[90px] animate-pulse"
                 >
-                  <div className="w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-800 shrink-0" />
-                  <div className="flex-1 space-y-1.5">
-                    <div className="h-2.5 bg-slate-200 dark:bg-slate-800 rounded w-5/6" />
-                    <div className="h-2 bg-slate-100 dark:bg-slate-850 rounded w-2/5" />
-                  </div>
+                  <div className="h-7 sm:h-9 w-14 sm:w-24 bg-slate-200 dark:bg-slate-800 rounded-md mb-1.5" />
+                  <div className="h-2 w-10 sm:w-16 bg-slate-100 dark:bg-slate-850 rounded-md" />
                 </div>
               ))
             ) : (
@@ -414,9 +451,14 @@ export default function ServicesView({ onNavigateToFaqCategory, onNavigateToCont
                 <div 
                   key={idx} 
                   title={part.name}
-                  className="flex items-center justify-center p-3 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-xl w-[170px] sm:w-[200px] h-14 shrink-0 group hover:border-amber-500/35 dark:hover:border-amber-500/45 hover:shadow-[0_8px_24px_rgba(217,119,6,0.06)] grayscale hover:grayscale-0 opacity-65 hover:opacity-100 transition-all duration-500 cursor-pointer"
+                  className="flex flex-col items-center justify-center p-2 sm:p-3 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-xl w-[100px] xs:w-[110px] sm:w-[150px] md:w-[170px] h-[72px] sm:h-[90px] shrink-0 group hover:border-amber-500/35 dark:hover:border-amber-500/45 hover:shadow-[0_8px_24px_rgba(217,119,6,0.06)] grayscale hover:grayscale-0 opacity-80 hover:opacity-100 hover:scale-105 transition-all duration-500 cursor-pointer"
                 >
-                  <PartnerLogo name={part.name} className="h-7 sm:h-8 w-auto" />
+                  <div className="flex-1 flex items-center justify-center w-full min-h-0 px-1">
+                    <PartnerLogo name={part.name} className="h-8 xs:h-9 sm:h-11 max-w-full object-contain" />
+                  </div>
+                  <span className="text-[8px] sm:text-[10px] font-mono font-bold tracking-wider text-slate-500 dark:text-slate-400 mt-1 truncate max-w-full text-center uppercase block">
+                    {part.fallback || part.name}
+                  </span>
                 </div>
               ))
             )}

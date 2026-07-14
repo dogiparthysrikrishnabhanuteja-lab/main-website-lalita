@@ -111,6 +111,8 @@ export default function HomeView({ preFilledMessage, setPreFilledMessage, onNavi
 
   // State for logo skeleton initializing delay
   const [isLogosInitializing, setIsLogosInitializing] = useState(true);
+  const partnersSectionRef = useRef<HTMLElement>(null);
+  const [hasPreloadedLogos, setHasPreloadedLogos] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -118,6 +120,44 @@ export default function HomeView({ preFilledMessage, setPreFilledMessage, onNavi
     }, 750);
     return () => clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    if (typeof window === 'undefined' || !('IntersectionObserver' in window)) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        if (entry.isIntersecting && !hasPreloadedLogos) {
+          setHasPreloadedLogos(true);
+          // Preload official partner logos
+          partners.forEach((partner) => {
+            const url = partner.officialLogoUrl || partner.logoUrl;
+            if (url) {
+              const img = new Image();
+              img.src = url;
+            }
+          });
+        }
+      },
+      {
+        rootMargin: '200px',
+        threshold: 0
+      }
+    );
+
+    const currentRef = partnersSectionRef.current;
+    if (currentRef) {
+      observer.observe(currentRef);
+    }
+
+    return () => {
+      if (currentRef) {
+        observer.unobserve(currentRef);
+      }
+    };
+  }, [hasPreloadedLogos]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -614,7 +654,7 @@ export default function HomeView({ preFilledMessage, setPreFilledMessage, onNavi
       </section>
 
       {/* 6. ASSOCIATED PARTNERS LOGO MARQUEE */}
-      <section id="partners" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 md:py-20 space-y-6 sm:space-y-8 relative">
+      <section id="partners" ref={partnersSectionRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 md:py-20 space-y-6 sm:space-y-8 relative">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -648,7 +688,7 @@ export default function HomeView({ preFilledMessage, setPreFilledMessage, onNavi
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#0f172a_1px,transparent_1px),linear-gradient(to_bottom,#0f172a_1px,transparent_1px)] bg-[size:3.5rem_3.5rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_80%,transparent_100%)] opacity-20 pointer-events-none" />
 
           {/* Seamless Infinite Marquee Scroll Window */}
-          <div className="relative w-full overflow-hidden py-4 select-none flex items-center justify-start min-h-[96px] sm:min-h-[112px]" style={{ display: 'flex' }}>
+          <div className="relative w-full overflow-hidden py-4 select-none flex items-center justify-start min-h-[120px] sm:min-h-[150px]" style={{ display: 'flex' }}>
             {/* Linear gradient fade overlays for a premium, high-contrast fade look */}
             <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-28 bg-gradient-to-r from-slate-950 to-transparent z-20 pointer-events-none" />
             <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-28 bg-gradient-to-l from-slate-950 to-transparent z-20 pointer-events-none" />
@@ -658,7 +698,7 @@ export default function HomeView({ preFilledMessage, setPreFilledMessage, onNavi
                 {[1, 2, 3, 4, 5].map((num) => (
                   <div 
                     key={`shimmer-${num}`}
-                    className="flex flex-col items-center justify-center shrink-0 w-40 sm:w-48 h-14 sm:h-16 bg-slate-900/40 border border-slate-800/60 rounded-xl relative overflow-hidden"
+                    className="flex flex-col items-center justify-center shrink-0 w-28 sm:w-44 h-20 sm:h-24 bg-slate-900/40 border border-slate-800/60 rounded-xl relative overflow-hidden"
                     style={{ display: 'flex' }}
                   >
                     {/* Shimmer sweep animation overlay */}
@@ -666,7 +706,8 @@ export default function HomeView({ preFilledMessage, setPreFilledMessage, onNavi
                       className="absolute inset-0 bg-gradient-to-r from-transparent via-slate-800/40 to-transparent -translate-x-full animate-[shimmer_1.5s_infinite]" 
                       style={{ animation: 'shimmer 1.5s infinite' }}
                     />
-                    <div className="h-5 w-24 sm:w-28 bg-slate-800/65 rounded-md" />
+                    <div className="h-6 sm:h-8 w-16 sm:w-24 bg-slate-800/65 rounded-md mb-1.5" />
+                    <div className="h-2 w-10 sm:w-16 bg-slate-800/45 rounded-md" />
                   </div>
                 ))}
               </div>
@@ -681,12 +722,15 @@ export default function HomeView({ preFilledMessage, setPreFilledMessage, onNavi
                     <div 
                       key={`marquee1-${idx}`} 
                       title={part.name}
-                      className="flex flex-col items-center justify-center shrink-0 grayscale brightness-125 hover:grayscale-0 hover:brightness-100 opacity-70 hover:opacity-100 transition-all duration-500 cursor-pointer px-4 w-40 sm:w-48 h-14 sm:h-16"
+                      className="flex flex-col items-center justify-center shrink-0 grayscale brightness-125 hover:grayscale-0 hover:brightness-100 opacity-70 hover:opacity-100 hover:scale-105 transition-all duration-500 cursor-pointer px-3 w-28 sm:w-44 h-20 sm:h-24"
                       style={{ display: 'flex' }}
                     >
-                      <div className="h-10 sm:h-12 w-36 sm:w-44 flex items-center justify-center" style={{ display: 'flex' }}>
-                        <PartnerLogo name={part.name} logoUrl={part.logoUrl} officialLogoUrl={part.officialLogoUrl} className="h-8 sm:h-10 w-32 sm:w-40 text-white block" />
+                      <div className="h-10 sm:h-14 w-24 sm:w-40 flex items-center justify-center" style={{ display: 'flex' }}>
+                        <PartnerLogo name={part.name} logoUrl={part.logoUrl} officialLogoUrl={part.officialLogoUrl} className="h-9 sm:h-12 w-auto max-w-full object-contain block" />
                       </div>
+                      <span className="text-[9px] sm:text-[11px] font-mono font-bold tracking-wider text-slate-400 dark:text-slate-500 mt-1 truncate max-w-full uppercase">
+                        {part.fallback || part.name}
+                      </span>
                     </div>
                   ))}
                 </div>
@@ -697,12 +741,15 @@ export default function HomeView({ preFilledMessage, setPreFilledMessage, onNavi
                     <div 
                       key={`marquee2-${idx}`} 
                       title={part.name}
-                      className="flex flex-col items-center justify-center shrink-0 grayscale brightness-125 hover:grayscale-0 hover:brightness-100 opacity-70 hover:opacity-100 transition-all duration-500 cursor-pointer px-4 w-40 sm:w-48 h-14 sm:h-16"
+                      className="flex flex-col items-center justify-center shrink-0 grayscale brightness-125 hover:grayscale-0 hover:brightness-100 opacity-70 hover:opacity-100 hover:scale-105 transition-all duration-500 cursor-pointer px-3 w-28 sm:w-44 h-20 sm:h-24"
                       style={{ display: 'flex' }}
                     >
-                      <div className="h-10 sm:h-12 w-36 sm:w-44 flex items-center justify-center" style={{ display: 'flex' }}>
-                        <PartnerLogo name={part.name} logoUrl={part.logoUrl} officialLogoUrl={part.officialLogoUrl} className="h-8 sm:h-10 w-32 sm:w-40 text-white block" />
+                      <div className="h-10 sm:h-14 w-24 sm:w-40 flex items-center justify-center" style={{ display: 'flex' }}>
+                        <PartnerLogo name={part.name} logoUrl={part.logoUrl} officialLogoUrl={part.officialLogoUrl} className="h-9 sm:h-12 w-auto max-w-full object-contain block" />
                       </div>
+                      <span className="text-[9px] sm:text-[11px] font-mono font-bold tracking-wider text-slate-400 dark:text-slate-500 mt-1 truncate max-w-full uppercase">
+                        {part.fallback || part.name}
+                      </span>
                     </div>
                   ))}
                 </div>
