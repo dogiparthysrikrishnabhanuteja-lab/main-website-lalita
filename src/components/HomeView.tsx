@@ -204,7 +204,7 @@ export default function HomeView({ preFilledMessage, setPreFilledMessage, onNavi
           }, 15);
 
           const expInterval = setInterval(() => {
-            expProgress += 0.4;
+            expProgress += 0.25;
             if (expProgress >= 4) { // Inceptioned in 2022 (2022 to 2026)
               expProgress = 4;
               clearInterval(expInterval);
@@ -213,7 +213,7 @@ export default function HomeView({ preFilledMessage, setPreFilledMessage, onNavi
           }, 150);
 
           const retInterval = setInterval(() => {
-            retProgress += 1.45;
+            retProgress += 1.25;
             if (retProgress >= 98) {
               retProgress = 98;
               clearInterval(retInterval);
