@@ -147,8 +147,8 @@ export default function FaqView({ initialCategoryFilter = 'all', onCategoryChang
               curr = curr.offsetParent as HTMLElement | null;
             }
             window.scrollTo({
-              top: elementTop - headerOffset,
-              behavior: 'smooth'
+              top: Math.max(0, elementTop - headerOffset),
+              behavior: 'auto'
             });
             if (intervalId) clearInterval(intervalId);
           } else {

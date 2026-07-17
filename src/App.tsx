@@ -62,7 +62,25 @@ export default function App() {
     }
   }, [currentPage]);
 
+  const scrollToSectionImmediate = (sectionId: string, behavior: ScrollBehavior = 'smooth') => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const headerOffset = window.innerWidth < 768 ? 90 : 110;
+      let elementTop = 0;
+      let curr: HTMLElement | null = element;
+      while (curr) {
+        elementTop += curr.offsetTop;
+        curr = curr.offsetParent as HTMLElement | null;
+      }
+      window.scrollTo({
+        top: Math.max(0, elementTop - headerOffset),
+        behavior
+      });
+    }
+  };
+
   const updateStateForPageAndHash = (targetPage: string, hash: string, sectionIdFromState?: string | null) => {
+    const isSamePage = currentPage === targetPage;
     setCurrentPage(targetPage);
     
     if (targetPage === 'faq') {
@@ -73,32 +91,48 @@ export default function App() {
         }
       } else {
         setFaqInitialCategory('all');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0, behavior: 'auto' });
       }
     } else if (targetPage === 'services') {
       if (sectionIdFromState) {
-        setPendingScroll(sectionIdFromState);
+        if (isSamePage) {
+          scrollToSectionImmediate(sectionIdFromState, 'smooth');
+        } else {
+          setPendingScroll(sectionIdFromState);
+        }
       } else if (hash && hash !== '#services') {
         const sectionId = hash.substring(1);
-        setPendingScroll(sectionId);
+        if (isSamePage) {
+          scrollToSectionImmediate(sectionId, 'smooth');
+        } else {
+          setPendingScroll(sectionId);
+        }
       } else {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0, behavior: 'auto' });
       }
     } else if (targetPage === 'home') {
       if (sectionIdFromState) {
-        setPendingScroll(sectionIdFromState);
+        if (isSamePage) {
+          scrollToSectionImmediate(sectionIdFromState, 'smooth');
+        } else {
+          setPendingScroll(sectionIdFromState);
+        }
       } else if (hash && hash !== '#home' && hash !== '#') {
         const sectionId = hash.substring(1);
-        setPendingScroll(sectionId);
+        if (isSamePage) {
+          scrollToSectionImmediate(sectionId, 'smooth');
+        } else {
+          setPendingScroll(sectionId);
+        }
       } else {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0, behavior: 'auto' });
       }
     } else if (targetPage === 'resources') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: 'auto' });
     } else if (targetPage === 'admin') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: 'auto' });
     } else if (targetPage === 'legal') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: 'auto' });
     }
   };
 
@@ -276,8 +310,8 @@ export default function App() {
                 curr = curr.offsetParent as HTMLElement | null;
               }
               window.scrollTo({
-                top: elementTop - headerOffset,
-                behavior: 'smooth'
+                top: Math.max(0, elementTop - headerOffset),
+                behavior: 'auto'
               });
             }
           }, 100);
