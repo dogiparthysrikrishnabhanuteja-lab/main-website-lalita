@@ -297,7 +297,7 @@ export default function HomeView({ preFilledMessage, setPreFilledMessage, onNavi
       <section 
         id="hero" 
         ref={heroRef}
-        className="relative min-h-[92vh] flex items-center justify-center pt-24 pb-16 overflow-hidden bg-gradient-to-b from-amber-50/50 via-slate-50/20 to-white dark:from-slate-950 dark:via-slate-900/20 dark:to-slate-950"
+        className="scroll-mt-28 relative min-h-[92vh] flex items-center justify-center pt-24 pb-16 overflow-hidden bg-gradient-to-b from-amber-50/50 via-slate-50/20 to-white dark:from-slate-950 dark:via-slate-900/20 dark:to-slate-950"
       >
         <div className="absolute inset-0 z-0 pointer-events-none opacity-40 bg-[radial-gradient(120%_120%_at_50%_10%,_transparent_40%,_rgba(217,119,6,0.06)_100%)]" />
         
@@ -368,7 +368,7 @@ export default function HomeView({ preFilledMessage, setPreFilledMessage, onNavi
       </section>
 
       {/* 2. ABOUT ME SECTION */}
-      <section id="about" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 md:py-20">
+      <section id="about" className="scroll-mt-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 md:py-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
           {/* Avatar Image block */}
@@ -443,7 +443,7 @@ export default function HomeView({ preFilledMessage, setPreFilledMessage, onNavi
       </section>
 
       {/* 3. WHY CHOOSE US SECTION WITH SCROLL-UP CARD EFFECT */}
-      <section id="why-choose-us" className="bg-slate-50/50 dark:bg-slate-900/20 border-y border-slate-200/80 dark:border-slate-800/60 py-12 sm:py-20 relative">
+      <section id="why-choose-us" className="scroll-mt-28 bg-slate-50/50 dark:bg-slate-900/20 border-y border-slate-200/80 dark:border-slate-800/60 py-12 sm:py-20 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 sm:space-y-12 relative z-10">
           
           <motion.div 
@@ -523,7 +523,7 @@ export default function HomeView({ preFilledMessage, setPreFilledMessage, onNavi
       <section 
         id="stats" 
         ref={statsSectionRef}
-        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 md:py-20 relative"
+        className="scroll-mt-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 md:py-20 relative"
       >
         {/* Intense background glow to address the transition effects request */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-gradient-to-tr from-amber-500/10 to-yellow-500/5 rounded-full blur-[120px] pointer-events-none z-0" />
@@ -622,7 +622,7 @@ export default function HomeView({ preFilledMessage, setPreFilledMessage, onNavi
       </section>
 
       {/* 5. AWARDS & RECOGNITIONS SECTION */}
-      <section id="awards" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10 py-10 sm:py-16 md:py-20">
+      <section id="awards" className="scroll-mt-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10 py-10 sm:py-16 md:py-20">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -668,7 +668,7 @@ export default function HomeView({ preFilledMessage, setPreFilledMessage, onNavi
       </section>
 
       {/* 6. ASSOCIATED PARTNERS LOGO MARQUEE */}
-      <section id="partners" ref={partnersSectionRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 md:py-20 space-y-6 sm:space-y-8 relative">
+      <section id="partners" ref={partnersSectionRef} className="scroll-mt-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 md:py-20 space-y-6 sm:space-y-8 relative">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -790,7 +790,7 @@ export default function HomeView({ preFilledMessage, setPreFilledMessage, onNavi
       </section>
 
       {/* 7. CLIENT SUCCESS STORIES */}
-      <section id="testimonials" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10 py-10 sm:py-16 md:py-20">
+      <section id="testimonials" className="scroll-mt-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10 py-10 sm:py-16 md:py-20">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -833,7 +833,7 @@ export default function HomeView({ preFilledMessage, setPreFilledMessage, onNavi
       {/* 8. ELITE CONTACT & PERSONAL CONSULTATION PORTAL */}
       <section 
         id="contact" 
-        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 md:py-20 relative"
+        className="scroll-mt-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 md:py-20 relative"
       >
         {/* Glow backdrop to meet background glow request */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[350px] bg-gradient-to-tr from-amber-500/10 to-yellow-500/5 rounded-full blur-[100px] pointer-events-none z-0" />

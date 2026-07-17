@@ -162,6 +162,30 @@ export default function Footer({ setCurrentPage, onScrollToSection }: FooterProp
               : "మేము టాటా ఎఐఎ లైఫ్, కేర్ హెల్త్, టాటా ఎఐజి, ఐసిఐసిఐ ప్రుడెన్షియల్, హెచ్‌డిఎఫ్‌సి లైఫ్, స్టార్ హెల్త్, ఐసిఐసిఐ లంబార్డ్, నివా బుపా, హెచ్‌డిఎఫ్‌సి ఎర్గో, కోటక్ లైఫ్, బజాజ్ లైఫ్, యాక్సిస్ మ్యాక్స్ లైఫ్ మరియు ప్రుడెంట్ వంటి అగ్రశ్రేణి సంస్థలతో అనుబంధం కలిగి ఉన్నాము."}
           </p>
         </div>
+
+        {/* Legal Policies Links Row */}
+        <div className="mt-6 pt-4 border-t border-slate-800/50 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs">
+          <button 
+            onClick={() => { window.location.hash = '#privacy-policy'; setCurrentPage('legal'); }}
+            className="hover:text-amber-500 text-slate-400 transition-colors cursor-pointer outline-none font-semibold"
+          >
+            {language === 'en' ? "Privacy Policy" : "గోప్యతా విధానం"}
+          </button>
+          <span className="text-slate-700">|</span>
+          <button 
+            onClick={() => { window.location.hash = '#terms-of-service'; setCurrentPage('legal'); }}
+            className="hover:text-amber-500 text-slate-400 transition-colors cursor-pointer outline-none font-semibold"
+          >
+            {language === 'en' ? "Terms of Service" : "సేవా నిబంధనలు"}
+          </button>
+          <span className="text-slate-700">|</span>
+          <button 
+            onClick={() => { window.location.hash = '#cookie-policy'; setCurrentPage('legal'); }}
+            className="hover:text-amber-500 text-slate-400 transition-colors cursor-pointer outline-none font-semibold"
+          >
+            {language === 'en' ? "Cookie Policy" : "కుకీల విధానం"}
+          </button>
+        </div>
       </div>
     </footer>
   );

@@ -195,7 +195,7 @@ export default function ServicesView({ onNavigateToFaqCategory, onNavigateToCont
               boxShadow: "0 20px 40px -15px rgba(217, 119, 6, 0.18), 0 0 20px 1px rgba(217, 119, 6, 0.08)",
               borderColor: "rgba(217, 119, 6, 0.45)"
             }}
-            className="rounded-2xl bg-slate-50/50 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-850 p-6 sm:p-8 flex flex-col lg:flex-row items-stretch gap-6 lg:gap-10 transition-all duration-300 relative overflow-hidden group"
+            className="scroll-mt-28 rounded-2xl bg-slate-50/50 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-850 p-6 sm:p-8 flex flex-col lg:flex-row items-stretch gap-6 lg:gap-10 transition-all duration-300 relative overflow-hidden group"
           >
             {/* Background radial highlight */}
             <div className="absolute right-0 top-0 w-32 h-32 bg-amber-500/[0.01] rounded-full blur-2xl pointer-events-none group-hover:bg-amber-500/[0.03] transition-all" />

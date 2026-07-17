@@ -13,6 +13,7 @@ import ServicesView from './components/ServicesView';
 import FaqView from './components/FaqView';
 import ResourcesView from './components/ResourcesView';
 import AdminPortal from './components/AdminPortal';
+import LegalView from './components/LegalView';
 
 declare global {
   interface Window {
@@ -35,6 +36,7 @@ export default function App() {
     if (hash === '#admin') return 'admin';
     if (hash.startsWith('#faq')) return 'faq';
     if (hash.startsWith('#services') || ['#life-insurance', '#health-insurance', '#car-insurance', '#general-insurance', '#mutual-funds'].some(h => hash.startsWith(h))) return 'services';
+    if (['#privacy-policy', '#terms-of-service', '#cookie-policy', '#legal'].includes(hash)) return 'legal';
     if (['#hero', '#about', '#why-choose-us', '#stats', '#awards', '#partners', '#testimonials', '#contact'].includes(hash)) return 'home';
     return 'home';
   };
@@ -43,6 +45,22 @@ export default function App() {
   const [preFilledMessage, setPreFilledMessage] = useState<string>('');
   const [showScrollTop, setShowScrollTop] = useState<boolean>(false);
   const [pendingScroll, setPendingScroll] = useState<string | null>(null);
+  const [mainMinHeight, setMainMinHeight] = useState<string>('auto');
+
+  useEffect(() => {
+    // Capture current scroll height to prevent layout collapse and scroll jumping during page unmounts
+    if (typeof window !== 'undefined' && document.documentElement) {
+      const currentScrollHeight = document.documentElement.scrollHeight;
+      if (currentScrollHeight > window.innerHeight) {
+        setMainMinHeight(`${currentScrollHeight}px`);
+        
+        const timer = setTimeout(() => {
+          setMainMinHeight('auto');
+        }, 500); // Settle after the 300ms transition finishes
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [currentPage]);
 
   const updateStateForPageAndHash = (targetPage: string, hash: string, sectionIdFromState?: string | null) => {
     setCurrentPage(targetPage);
@@ -78,6 +96,8 @@ export default function App() {
     } else if (targetPage === 'resources') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else if (targetPage === 'admin') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (targetPage === 'legal') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
@@ -161,6 +181,9 @@ export default function App() {
 
   // Handle HTML5 History popstate event robustly
   useEffect(() => {
+    if (typeof window !== 'undefined' && 'scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
     const initialHash = window.location.hash;
     const initialPage = getPageFromHash(initialHash);
     
@@ -243,25 +266,31 @@ export default function App() {
         if (element) {
           // Allow layout transition animations (like page entries) to settle
           setTimeout(() => {
-            const headerOffset = 110; // Fixed header/navbar height offset
-            const elementPosition = element.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-            
-            window.scrollTo({
-              top: offsetPosition,
-              behavior: 'smooth'
-            });
-          }, 150);
+            const finalElement = document.getElementById(pendingScroll);
+            if (finalElement) {
+              const headerOffset = window.innerWidth < 768 ? 90 : 110;
+              let elementTop = 0;
+              let curr: HTMLElement | null = finalElement;
+              while (curr) {
+                elementTop += curr.offsetTop;
+                curr = curr.offsetParent as HTMLElement | null;
+              }
+              window.scrollTo({
+                top: elementTop - headerOffset,
+                behavior: 'smooth'
+              });
+            }
+          }, 100);
           setPendingScroll(null);
           clearInterval(interval);
         } else {
           attempts++;
-          if (attempts > 15) {
+          if (attempts > 20) {
             setPendingScroll(null);
             clearInterval(interval);
           }
         }
-      }, 100);
+      }, 50);
       return () => clearInterval(interval);
     }
   }, [currentPage, pendingScroll]);
@@ -307,7 +336,10 @@ export default function App() {
       />
 
       {/* 2. Primary Page Router View */}
-      <main className="flex-grow pt-16 w-full overflow-x-hidden">
+      <main 
+        className="flex-grow pt-16 w-full overflow-x-hidden"
+        style={{ minHeight: mainMinHeight }}
+      >
         <AnimatePresence mode="wait">
           {currentPage === 'home' && (
             <motion.div
@@ -381,6 +413,18 @@ export default function App() {
               transition={{ duration: 0.25 }}
             >
               <AdminPortal />
+            </motion.div>
+          )}
+
+          {currentPage === 'legal' && (
+            <motion.div
+              key="legal"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.3 }}
+            >
+              <LegalView />
             </motion.div>
           )}
         </AnimatePresence>

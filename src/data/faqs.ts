@@ -597,5 +597,365 @@ export const faqs: FAQ[] = [
     category: 'life',
     question: 'What is "Rider" cover in life insurance, and what are the most common riders available?',
     answer: 'Riders are optional, low-cost add-on benefits you can attach to your base life insurance policy to enhance protection. The most common riders include: 1) Accidental Death Benefit (pays an additional sum if the demise is due to an accident). 2) Critical Illness Rider (provides a lump-sum payout if diagnosed with a covered life-threatening disease like cancer or heart attack). 3) Waiver of Premium Rider (waives all future premium payments if the policyholder suffers a permanent disability, keeping the policy active).'
+  },
+  {
+    id: 'l22',
+    category: 'life',
+    question: 'What is the Married Women’s Property Act (MWPA), and why should I register my life insurance under it?',
+    answer: 'The Married Women\'s Property Act (MWPA), 1874, ensures that the life insurance policy benefits go strictly to your wife and children. If a policy is registered under MWPA, the sum assured cannot be claimed by creditors, family relatives, or be attached for any business liabilities or debt recovery. This is a vital asset-protection tool for business owners and salaried individuals alike to secure their immediate family\'s future.'
+  },
+  {
+    id: 'l23',
+    category: 'life',
+    question: 'What is Keyman Insurance, and how does it protect business owners?',
+    answer: 'Keyman Insurance is a life insurance policy taken out by a business on the life of an indispensable employee (or director) whose specialized knowledge, leadership, or skills are crucial to the company\'s financial success. The premium is paid by the company, and the claim payout goes to the company upon the key person\'s demise, helping offset operational disruption, loss of business profits, or costs of recruiting a suitable successor.'
+  },
+  {
+    id: 'l24',
+    category: 'life',
+    question: 'How does a Term Insurance with Return of Premium (TROP) plan work, and is it better than standard term plans?',
+    answer: 'A Term with Return of Premium (TROP) plan pays out the full death benefit if the insured passes away during the tenure, but unlike standard term plans, it refunds 100% of the total premiums paid if the insured survives the policy term. However, TROP premiums are significantly higher (often 1.5 to 2.5 times more) than standard pure term insurance. For most investors, buying a pure term plan and investing the saved premium difference in high-quality Mutual Funds yields far better wealth and protection outcomes.'
+  },
+  {
+    id: 'l25',
+    category: 'life',
+    question: 'Can I increase my Term Insurance sum assured at key life stages, and what are Life Stage Incremental plans?',
+    answer: 'Yes! Life Stage Incremental term plans allow you to increase your sum assured by a pre-agreed percentage (typically 25% to 50%) when you hit major life milestones—such as getting married or welcoming a newborn baby—without undergoing fresh medical underwriting or screenings. This option is highly recommended to easily adjust your coverage as your family dependencies grow.'
+  },
+  {
+    id: 'l26',
+    category: 'life',
+    question: 'What is a "Lapsed" policy, and how can I revive a lapsed life insurance policy?',
+    answer: 'A life insurance policy "lapses" when you fail to pay your renewal premiums within the official grace period, suspending your life cover. To revive a lapsed policy, most insurers allow a "revival period" of up to 5 consecutive years from the first unpaid premium date. You must submit a revival request, pay all accumulated outstanding premiums along with applicable late payment interest, and potentially undergo fresh medical examinations depending on the policyholder\'s health.'
+  },
+  {
+    id: 'l27',
+    category: 'life',
+    question: 'Does life insurance cover death due to natural disasters, war, or extreme adventure sports?',
+    answer: 'Standard life insurance covers deaths resulting from natural disasters (earthquakes, floods, storms) and pandemics (like Covid-19) without any extra charge. However, deaths due to war, military participation, nuclear hazards, self-inflicted injuries, or participation in extreme adventure sports (paragliding, mountaineering, skydiving) are standard exclusions. Professional athletes or adventure hobbyists must declare their activities and pay special risk premiums to be covered.'
+  },
+  {
+    id: 'l28',
+    category: 'life',
+    question: 'Can I change my nominee in a life insurance policy after issuance, and who can be a nominee?',
+    answer: 'Yes, you can change or update your nominee as many times as you wish during the policy term by submitting a nominal form. Legally, any close blood relative (spouse, children, parents) can be nominated. They are treated as "Beneficial Nominees" who are entitled to receive and own the claim benefits directly. If you nominate a distant relative or friend, they may be legally classified as a "Receiver Nominee," who holds the funds in trust for your legal heirs.'
+  },
+  {
+    id: 'l29',
+    category: 'life',
+    question: 'How does terminal illness coverage work within a standard term life insurance policy?',
+    answer: 'Most modern pure term insurance policies include built-in Terminal Illness benefits at no extra cost. If the insured is diagnosed by certified medical specialists with an incurable illness that is medically expected to result in death within a specified period (typically 6 to 12 months), the insurer accelerates and pays out a substantial portion (up to 100%) of the sum assured during the policyholder\'s lifetime to cover palliative care, medical expenses, or settle debts.'
+  },
+  {
+    id: 'l30',
+    category: 'life',
+    question: 'What is the difference between a participating and non-participating life insurance policy?',
+    answer: 'A Participating (Par) policy allows the policyholder to share in the insurance company\'s profits, receiving bonuses or dividends alongside guaranteed maturity benefits. A Non-Participating (Non-Par) policy does not pay bonuses or dividends; all benefits (death cover, survival cash flows, or maturity payout) are fixed, pre-calculated, and fully guaranteed at the time of policy inception, providing total predictability.'
+  },
+  {
+    id: 'l31',
+    category: 'life',
+    question: 'How are life insurance claims treated if the policyholder passes away outside of India?',
+    answer: 'Life insurance claims are fully valid even if the death occurs anywhere globally, provided the policy was active and the premiums were paid. To settle an overseas death claim, the nominee must submit the death certificate translated into English and authenticated/apostilled by the Indian Embassy or Consulate in that country, along with official hospital summaries or coroner reports.'
+  },
+  {
+    id: 'h24',
+    category: 'health',
+    question: 'What is Restoration Benefit in health insurance, and how does it protect my family?',
+    answer: 'Restoration Benefit (or Refill Benefit) automatically reinstates 100% of your base Sum Insured if it gets completely or partially exhausted due to hospitalizations during a single policy year. This is highly beneficial for family floater policies; if one member exhausts the entire cover for an illness, the cover is instantly restored to full capacity to protect other family members against unrelated ailments.'
+  },
+  {
+    id: 'h25',
+    category: 'health',
+    question: 'Are OPD expenses, diagnostic tests, and pharmacy bills covered under standard health insurance?',
+    answer: 'Standard indemnity health insurance only covers inpatient hospitalization (requiring at least 24 hours of admission) and day-care procedures (like cataracts or chemotherapy). Regular Out-Patient Department (OPD) expenses like doctor consultations, diagnostic blood tests, X-rays, and routine pharmacy bills are not covered under basic plans. However, you can opt for specialized OPD riders or premium plans that offer dedicated annual limits for outpatient treatments.'
+  },
+  {
+    id: 'h26',
+    category: 'health',
+    question: 'What is Consumable Cover in health insurance, and why is it highly recommended?',
+    answer: 'Consumables are single-use medical items used during hospitalization, such as PPE kits, masks, gloves, syringes, surgical tape, bandages, and housekeeping charges. Under standard health policies, these items (often accounting for 10% to 15% of your final hospital bill) are excluded from claims. A Consumable Cover add-on ensures the insurer pays for all these non-medical items, reducing your out-of-pocket hospital settlement bills to nearly zero.'
+  },
+  {
+    id: 'h27',
+    category: 'health',
+    question: 'Does health insurance cover maternity, newborn baby expenses, and vaccination costs?',
+    answer: 'Basic health insurance plans do not cover maternity, newborn, or vaccination charges. However, specialized maternity-focused plans or corporate group health policies do cover delivery charges (both normal and C-section) along with newborn care and primary childhood vaccinations, subject to a pre-defined waiting period typically ranging from 12 to 48 months from policy inception.'
+  },
+  {
+    id: 'h28',
+    category: 'health',
+    question: 'What is "Domiciliary Hospitalization" cover, and when can I claim for home treatment?',
+    answer: 'Domiciliary Hospitalization covers medical treatments for illnesses that would normally require hospital admission but are instead administered at home because: 1) The patient\'s physical condition is so severe that they cannot be safely moved to a hospital. 2) There is a non-availability of hospital beds in local facilities. To make a valid claim, the home treatment must continue for at least 3 consecutive days and be officially prescribed by a registered physician.'
+  },
+  {
+    id: 'h29',
+    category: 'health',
+    question: 'How does Ayush treatment (Ayurveda, Yoga, Unani, Siddha, Homeopathy) coverage work in health insurance?',
+    answer: 'Following IRDAI directives, standard health insurance plans cover alternative medical treatments under AYUSH (Ayurveda, Yoga, Unani, Siddha, and Homeopathy) on par with conventional Allopathic hospitalization claims. To qualify for cashless or reimbursement claims, the AYUSH treatment must be undergone in a government-recognized hospital or a healthcare facility accredited by the Quality Council of India or National Accreditation Board.'
+  },
+  {
+    id: 'h30',
+    category: 'health',
+    question: 'What are Room Rent Limits or Capping, and how can they impact my final hospital bill claim?',
+    answer: 'Room Rent Limits are caps on the daily hospital room charges covered by your policy, usually expressed as a percentage of your Sum Insured (e.g., 1% for a standard room, 2% for ICU). Exceeding this limit triggers "proportionate deduction," meaning the insurer will reduce your entire claim—including doctor consultation fees, surgery charges, and nursing fees—proportionately, leaving you to pay a massive difference out of pocket. We highly recommend buying plans with "No Room Rent Capping."'
+  },
+  {
+    id: 'h31',
+    category: 'health',
+    question: 'What is the No Claim Bonus Protect add-on, and how does it safeguard my accumulated bonus?',
+    answer: 'Under standard health plans, filing a single claim during a policy year will instantly reduce your accumulated No Claim Bonus (NCB) by 20% to 50%. The NCB Protect (or NCB Shield) add-on guarantees that your hard-earned cumulative bonus remains completely untouched and intact, even if you make a hospitalization claim during the year, preserving your enhanced safety net.'
+  },
+  {
+    id: 'h32',
+    category: 'health',
+    question: 'How does health insurance portability work, and will I lose my accumulated waiting period credits?',
+    answer: 'Health Insurance Portability allows you to switch your policy from one insurer to another without losing your hard-earned benefits. The new insurer must legally carry forward your accumulated credits for pre-existing disease waiting periods and No Claim Bonuses. To port successfully, you must submit a portability application to the new insurer at least 45 days before your current policy\'s official expiry date.'
+  },
+  {
+    id: 'h33',
+    category: 'health',
+    question: 'What is a Global Health Cover, and does it provide medical treatment outside India?',
+    answer: 'Standard health insurance only covers medical treatments administered within the geographical boundaries of India. Global Health Cover is a premium international add-on or dedicated plan designed for individuals who travel frequently or seek advanced medical treatments abroad. It covers emergency medical care, planned specialized surgeries, and international medical evacuations globally, subject to custom sub-limits.'
+  },
+  {
+    id: 'i16',
+    category: 'investments',
+    question: 'What is the difference between Active and Passive (Index) Mutual Funds, and which is better?',
+    answer: 'Active Mutual Funds are managed by professional fund managers who actively research, buy, and sell individual stocks to outperform a benchmark index (like Nifty 50). Passive (Index) Funds simply replicate a benchmark index, matching its composition and performance at a much lower cost (expense ratio). Active funds are ideal for sectors where specialized stock-picking can deliver heavy alpha, while passive index funds are best for low-cost, consistent large-cap market exposure.'
+  },
+  {
+    id: 'i17',
+    category: 'investments',
+    question: 'What are Mutual Fund "Sectors" or "Thematic" funds, and what are their associated risks?',
+    answer: 'Sectoral or Thematic funds invest strictly in companies belonging to a specific industry (like IT, Banking, Infrastructure, or Healthcare). While they can deliver extraordinary short-term returns during industry booms, they carry exceptionally high risk because they lack sectoral diversification. A downturn in that specific sector can cause severe portfolio losses. They are recommended only for aggressive, experienced investors and should be restricted to a minor portion of your overall portfolio.'
+  },
+  {
+    id: 'i18',
+    category: 'investments',
+    question: 'How does a Systematic Transfer Plan (STP) work, and when should I use it?',
+    answer: 'An STP allows you to invest a lump sum of capital into a stable, low-risk fund (like a Liquid or Ultra Short Duration Fund) and automatically transfer a fixed amount regularly (e.g., monthly) into an equity fund. This is an exceptional strategy when you receive a large lump sum (like a bonus, inheritance, or property sale proceeds) and want to invest in equity markets systematically without risking a lump-sum entry at a market peak.'
+  },
+  {
+    id: 'i19',
+    category: 'investments',
+    question: 'What is the Expense Ratio in mutual funds, and how does it affect long-term returns?',
+    answer: 'The Expense Ratio is the annual fee charged by a mutual fund company to manage the fund, covering management fees, administrative costs, and marketing. It is expressed as a percentage of the fund\'s total Assets Under Management (AUM) and is deducted daily from the fund\'s NAV. A higher expense ratio can quietly eat into your compounding returns over a 15 to 20-year horizon, making it crucial to evaluate alongside fund performance.'
+  },
+  {
+    id: 'i20',
+    category: 'investments',
+    question: 'What are Arbitrage Mutual Funds, and how do they provide low-risk tax-efficient returns?',
+    answer: 'Arbitrage Funds exploit price differences of the same stock between the cash market (spot market) and the derivative market (futures market) to generate completely risk-free gains. Because they maintain a high allocation in equities to execute these arbitrage trades, they are legally classified as Equity Funds for taxation, providing highly tax-efficient, low-risk short-term returns that are superior to standard bank savings accounts.'
+  },
+  {
+    id: 'i21',
+    category: 'investments',
+    question: 'What is Net Asset Value (NAV) in mutual funds, and does a lower NAV mean a fund is cheap?',
+    answer: 'Net Asset Value (NAV) represents the per-unit market value of a mutual fund scheme, calculated by dividing the net assets of the scheme by the total number of outstanding units. A lower NAV (e.g., ₹10) does NOT make a mutual fund "cheaper" or better than a fund with a higher NAV (e.g., ₹100). Both funds investing in the same stocks will deliver identical percentage returns on your invested capital; the only difference is the number of units allocated to your account.'
+  },
+  {
+    id: 'i22',
+    category: 'investments',
+    question: 'What is an Asset Management Company (AMC), and what happens if a mutual fund company shuts down?',
+    answer: 'An Asset Management Company (AMC) is the financial firm that manages mutual fund schemes. If an AMC shuts down, faces insolvency, or decides to wind up operations, your invested capital remains completely safe. Legally, the mutual fund\'s assets are held in a separate Trust and managed by independent Trustees. Your money is invested in the underlying stocks/bonds, which are liquidated and paid back to the investors, or the schemes are transferred to another capable AMC.'
+  },
+  {
+    id: 'i23',
+    category: 'investments',
+    question: 'What is Portfolio Rebalancing, and how does it help optimize risk and returns?',
+    answer: 'Portfolio Rebalancing is the practice of adjusting the weightings of different assets in your portfolio back to your target asset allocation (e.g., 60% equity and 40% debt). If equity markets rally, your equity allocation might shift to 70%. Rebalancing involves selling 10% of equities (booking profits at highs) and buying debt (accumulating stable assets), ensuring you maintain your preferred risk profile throughout market cycles.'
+  },
+  {
+    id: 'i24',
+    category: 'investments',
+    question: 'How does a Liquid Fund work, and is it a safe alternative to a bank savings account?',
+    answer: 'Liquid Funds are debt mutual funds that invest in highly secure, very short-term money market instruments (like commercial papers and certificates of deposit) with a maturity of up to 91 days. They offer exceptionally high liquidity (redemption proceeds are credited within 24 hours), zero lock-in, and carry negligible risk, making them an excellent, higher-yielding alternative to standard bank savings accounts for parking your emergency corpus.'
+  },
+  {
+    id: 'i25',
+    category: 'investments',
+    question: 'What is the difference between Growth and Income Distribution cum Capital Withdrawal (IDCW) options in mutual funds?',
+    answer: 'Under the Growth option, all profits made by the scheme are automatically reinvested back into the fund, compounding your wealth over time and increasing your NAV. Under the IDCW (formerly Dividend) option, a portion of the accumulated profits is periodically paid out to the investor as payouts. Growth options are highly recommended for long-term wealth creation, whereas IDCW is suited only for investors seeking regular cash flows.'
+  },
+  {
+    id: 't11',
+    category: 'tax',
+    question: 'What is Section 80EEA, and can first-time home buyers get extra tax savings on home loan interest?',
+    answer: 'Section 80EEA was introduced to promote affordable housing, offering an additional tax deduction of up to ₹1.5 Lakhs per year on the interest paid for home loans. This deduction is over and above the ₹2 Lakh limit of Section 24(b). To claim this benefit, the individual must be a first-time home buyer, the home\'s stamp value must be under ₹45 Lakhs, and the loan must have been sanctioned within designated regulatory timelines.'
+  },
+  {
+    id: 't12',
+    category: 'tax',
+    question: 'How are Capital Gains taxed under the New Tax Regime vs. Old Tax Regime?',
+    answer: 'Capital Gains taxation rules are completely identical across both the New Tax Regime and the Old Tax Regime. The choice of tax regime only impacts your personal income tax slab rates and exemptions (like HRA, 80C, or 80D). Capital gains on assets like equity mutual funds (12.5% LTCG, 20% STCG) and real estate remain governed by their independent capital gains tax slabs under both regimes.'
+  },
+  {
+    id: 't13',
+    category: 'tax',
+    question: 'What is Section 80GG, and can I claim a tax deduction for rent paid if I do not receive HRA?',
+    answer: 'Yes! If you are a salaried or self-employed individual who lives in a rented house but does not receive House Rent Allowance (HRA) as part of your salary structure, you can legally claim a tax deduction for rent paid under Section 80GG. The maximum deduction is capped at a flat limit of ₹5,000 per month (₹60,000 per financial year), subject to custom eligibility calculations.'
+  },
+  {
+    id: 't14',
+    category: 'tax',
+    question: 'What is the tax implication of selling an inherited property or gold in India?',
+    answer: 'Inheriting property or gold does not attract any direct income tax in India. However, if you decide to sell the inherited asset later, you must pay Capital Gains Tax. The holding period to determine short-term or long-term gains is calculated from the date the original owner purchased the asset. You are eligible to claim "indexation benefits" to adjust the original purchase price against inflation, substantially reducing your taxable gains.'
+  },
+  {
+    id: 't15',
+    category: 'tax',
+    question: 'What is Section 80U and 80DD, and how do they offer tax relief for individuals with disabilities?',
+    answer: 'These sections offer valuable tax relief to support families caring for individuals with disabilities. Section 80U allows a flat tax deduction of ₹75,000 (up to ₹1.25 Lakhs for severe disability) directly from the taxable income of a person with a certified physical disability. Section 80DD offers an identical flat deduction to a resident individual who incurs medical expenditures or pays premiums for maintenance of a dependent disabled family member.'
+  },
+  {
+    id: 't16',
+    category: 'tax',
+    question: 'How is interest earned on Public Provident Fund (PPF) and National Savings Certificates (NSC) taxed?',
+    answer: 'Interest earned on the Public Provident Fund (PPF) is fully tax-exempt under Section 10(11) of the Income Tax Act, and the entire maturity amount is completely tax-free. For National Savings Certificates (NSC), the interest earned is taxable, but since the annual interest is automatically reinvested back into the scheme, it qualifies for a fresh tax deduction under Section 80C for the first 4 years of its tenure.'
+  },
+  {
+    id: 't17',
+    category: 'tax',
+    question: 'What is Section 80E, and can I claim tax deductions on education loans for myself or my children?',
+    answer: 'Yes! Under Section 80E of the Income Tax Act, you can claim a tax deduction for the entire interest paid on an education loan taken for higher studies for yourself, your spouse, your children, or any student for whom you are the legal guardian. There is no upper monetary limit on the interest amount you can claim. The deduction is available for a maximum period of 8 consecutive years.'
+  },
+  {
+    id: 't18',
+    category: 'tax',
+    question: 'What are the tax implications on Dividends earned from Indian stocks and Mutual Funds?',
+    answer: 'Dividends received from Indian company stocks or Equity/Debt Mutual Schemes are fully taxable in the hands of the investor. The dividend income is added directly to your overall taxable income and is taxed at your applicable personal income tax slab rate. Additionally, if the total dividend paid by a company/mutual fund to an individual exceeds ₹5,050 in a financial year, a TDS of 10% is deducted at source.'
+  },
+  {
+    id: 't19',
+    category: 'tax',
+    question: 'What is Section 80G, and how can I claim tax deductions for charitable donations?',
+    answer: 'Section 80G allows taxpayers to claim tax deductions for contributions made to recognized charitable organizations, trusts, and government relief funds. Depending on the specific institution, you can claim a deduction of either 50% or 100% of the donated amount, subject to a maximum qualifying limit of 10% of your adjusted gross total income. Cash donations exceeding ₹2,000 are not eligible for tax benefits.'
+  },
+  {
+    id: 't20',
+    category: 'tax',
+    question: 'How does Tax-Loss Harvesting work in equity mutual funds to reduce my net tax liability?',
+    answer: 'Tax-Loss Harvesting involves selling some of your equity mutual fund units that are currently running at a loss to offset the taxable capital gains you realized from other profitable investments. By locking in these paper losses before March 31st, you reduce your net taxable gains for the financial year. You can immediately reinvest the proceeds back into similar funds to keep your long-term asset allocation strategy intact.'
+  },
+  {
+    id: 'a18',
+    category: 'auto',
+    question: 'What is a Return to Invoice (RTI) add-on cover, and when should I purchase it?',
+    answer: 'The Return to Invoice (RTI) is an exceptionally valuable add-on cover that ensures that in the event of a total loss (such as theft or severe damage beyond repair), the insurer pays you the original on-road purchase price of the vehicle (including road tax and registration charges), rather than just the depreciated IDV. It is highly recommended for brand new cars up to 3 years old, especially in theft-prone regions.'
+  },
+  {
+    id: 'a19',
+    category: 'auto',
+    question: 'What is Consumables Cover in motor insurance, and what items are covered under it?',
+    answer: 'Consumables Cover pays for single-use materials that are completely consumed or become unusable during accident repairs. Covered items include engine oil, gear oil, brake oil, lubricants, grease, air filter, coolants, nuts, bolts, screws, and washers. Standard motor policies exclude these items from claims, leaving you to pay for them out of pocket. This add-on is a perfect companion to a Zero-Depreciation cover.'
+  },
+  {
+    id: 'a20',
+    category: 'auto',
+    question: 'Does car insurance cover damage caused by rodents, rats, or stray animals chewing wires?',
+    answer: 'Yes! A comprehensive car insurance policy (or a stand-alone Own Damage policy) fully covers physical damages caused by rats, rodents, or stray animals chewing internal engine wiring, seats, or seatbelts. To ensure a successful claim, document the chew marks and droppings with photos, and do not crank the engine if wire short-circuits are suspected, as consequential engine damages may be excluded.'
+  },
+  {
+    id: 'a21',
+    category: 'auto',
+    question: 'What is a "Compulsory Deductible" vs. a "Voluntary Deductible" in motor insurance, and how do they affect my premium?',
+    answer: 'Compulsory Deductible is a nominal flat fee (typically ₹1,000 to ₹2,000 depending on engine capacity) mandated by the regulator that you must pay for every claim filed; it does not affect your premium. Voluntary Deductible is an additional amount you voluntarily agree to pay out of pocket during a claim. Choosing a voluntary deductible substantially reduces your annual policy premium, but is recommended only for safe, experienced drivers.'
+  },
+  {
+    id: 'a22',
+    category: 'auto',
+    question: 'How does Personal Accident Cover for Owner-Driver work, and is it legally mandatory?',
+    answer: 'Yes, as mandated by the IRDAI, a Personal Accident (PA) Cover for Owner-Driver with a minimum sum insured of ₹15 Lakhs is legally compulsory to operate any vehicle in India. It provides 100% financial compensation in the event of accidental death or permanent total disability suffered by the owner-driver. If you already hold an independent active PA cover or have one attached to another vehicle, you can legally opt out.'
+  },
+  {
+    id: 'a23',
+    category: 'auto',
+    question: 'Is car insurance valid if the vehicle is driven by someone other than the owner during an accident?',
+    answer: 'Yes, your car insurance policy remains fully valid and active even if a friend, relative, or hired driver was driving the vehicle during an accident, provided: 1) The person driving held a valid, active driving license suitable for that class of vehicle at the time of the event. 2) The vehicle was being driven with the explicit or implied permission of the registered owner and not for illegal or commercial purposes.'
+  },
+  {
+    id: 'a24',
+    category: 'auto',
+    question: 'What is Key Replacement Cover in car insurance, and how do I file a claim for lost smart keys?',
+    answer: 'Modern vehicle smart keys are highly sophisticated, and replacing them can cost anywhere from ₹10,000 to ₹35,000. Key Replacement Cover pays for the cost of replacement keys, locksets, and locksmith charges if your keys are lost, stolen, or damaged. To file a claim, you must submit an FIR in case of theft, along with the original invoice of the new key and lock system from an authorized workshop.'
+  },
+  {
+    id: 'a25',
+    category: 'auto',
+    question: 'How does the No Claim Bonus (NCB) Protect add-on safeguard my premium discounts?',
+    answer: 'No Claim Bonus (NCB) Protect is a highly recommended add-on. Under standard rules, filing even a single small claim will instantly reset your accumulated NCB discount (which can be up to 50%) back to 0%. The NCB Protect add-on allows you to file a specific number of claims (usually 1 or 2 during a policy year) without losing your hard-earned bonus discount, preserving your low premium renewal rates.'
+  },
+  {
+    id: 'a26',
+    category: 'auto',
+    question: 'What is a Tyres and Alloy Protective Cover, and is tyre damage covered under standard comprehensive motor insurance?',
+    answer: 'Standard comprehensive insurance only covers tyre damages if the vehicle also suffers a concurrent accident. Stand-alone tyre damage (such as sidewall cuts, bulges, bursts, or alloy wheel cracks caused by deep potholes) is entirely excluded. A Tyre and Alloy Protective Cover add-on ensures the insurer pays for the replacement cost of damaged tyres and alloy wheels, protecting you from heavy wear-and-tear replacement costs.'
+  },
+  {
+    id: 'a27',
+    category: 'auto',
+    question: 'What happens to my car insurance policy if I install a CNG or LPG kit in my vehicle?',
+    answer: 'If you install an eco-friendly CNG or LPG kit, you must legally notify both your local RTO to endorse it on your Registration Certificate (RC), and your insurance company within 14 days. Insurers will update your policy with a "fuel kit endorsement" and charge a nominal extra premium (typically 4% to 5% of the kit\'s value). Failing to declare a retrofitted fuel kit can lead to immediate claim rejection.'
+  },
+  {
+    id: 'g14',
+    category: 'general',
+    question: 'What is Business Interruption Insurance, and how does it protect my shop or factory during forced closures?',
+    answer: 'While standard property insurance covers physical damages to your shop or factory building, Business Interruption Insurance covers the lost income and fixed operating expenses (like employee salaries, rent, and loan EMIs) during the period your business is forced to remain shut down due to a covered peril (such as a fire, flood, or cyclone), ensuring business survival.'
+  },
+  {
+    id: 'g15',
+    category: 'general',
+    question: 'What is Cyber Liability Insurance, and why is it crucial for modern SMEs and digital businesses?',
+    answer: 'Cyber Liability Insurance protects modern businesses from the financially crippling aftermath of data breaches, ransomware attacks, and cybercrimes. It covers expenses related to forensic investigations, data recovery, legal defense fees, regulatory penalties, public relations management, and business interruption losses resulting from a cyber incident, safeguarding your digital capital.'
+  },
+  {
+    id: 'g16',
+    category: 'general',
+    question: 'Does standard Home Insurance cover damages caused by a tenant, or only natural calamities?',
+    answer: 'Standard home insurance policies only cover physical structures and contents against accidental perils like fires, lightning, earthquakes, storms, burglaries, and aircraft damage. They do NOT cover intentional, malicious, or wear-and-tear damages caused by a tenant. Landlords can opt for specialized "Landlord Protection" add-ons or clauses that cover tenant-inflicted damages and lost rental income.'
+  },
+  {
+    id: 'g17',
+    category: 'general',
+    question: 'What is Product Liability Insurance, and who needs it in the manufacturing or retail sector?',
+    answer: 'Product Liability Insurance protects manufacturers, distributors, exporters, and retailers from legal lawsuits and compensation claims arising from bodily injury, illness, or property damage suffered by consumers due to a defective, contaminated, or unsafely designed product. It is highly essential for pharmaceutical, food and beverage, electronics, and consumer goods enterprises.'
+  },
+  {
+    id: 'g18',
+    category: 'general',
+    question: 'What is Marine Transit Insurance (Single Voyage vs. Open Policy), and how do they differ?',
+    answer: 'A Single Voyage Policy is designed to cover a single specific consignment of goods from point A to point B; the policy expires once the cargo reaches its destination. An Open Policy (or Open Cover) is an annual contract that automatically covers all shipments made by the business throughout the year, offering immense administrative ease and continuous transit protection for active trade merchants.'
+  },
+  {
+    id: 'g19',
+    category: 'general',
+    question: 'What is Contractor’s All Risk (CAR) Insurance, and how does it protect under-construction building sites?',
+    answer: 'CAR Insurance is a comprehensive policy designed specifically for real estate developers and civil contractors. It protects under-construction buildings, machinery, and raw materials on-site against physical damage caused by fires, floods, landslides, collapses, or theft. Additionally, it includes Third-Party Liability cover to handle compensation claims for accidental injuries or surrounding property damages.'
+  },
+  {
+    id: 'g20',
+    category: 'general',
+    question: 'How does Fidelity Guarantee Insurance protect business owners from employee fraud or dishonesty?',
+    answer: 'Fidelity Guarantee Insurance is a specialized commercial cover that protects business owners from direct financial losses resulting from acts of fraud, embezzlement, forgery, theft of money, or dishonesty committed by their employees during their course of employment. This is highly recommended for businesses handling high cash volumes, retail inventories, or sensitive financial transactions.'
+  },
+  {
+    id: 'g21',
+    category: 'general',
+    question: 'What is Credit Insurance, and how does it protect businesses from bad debts or customer insolvencies?',
+    answer: 'Trade Credit Insurance protects B2B enterprises from the risk of non-payment of trade debts by their business buyers. If a buyer defaults on payment due to commercial insolvency, bankruptcy, or political risks, the insurer compensates the business for up to 90% of the unpaid invoice value, securing the business\'s cash flow and accounts receivable portfolio.'
+  },
+  {
+    id: 'g22',
+    category: 'general',
+    question: 'What is a Burglary and Housebreaking Insurance policy, and does it require evidence of forcible entry?',
+    answer: 'Yes, a standard Burglary and Housebreaking Insurance policy covers loss or damage to business stocks, furniture, and fixtures resulting from theft, but it legally requires evidence that the entry was made by violent, forcible, or external means. Losses due to "larceny" or theft without forcible entry (e.g., walk-in theft, shoplifting, or internal employee theft) are typically excluded unless covered under a specialized retail policy.'
+  },
+  {
+    id: 'g23',
+    category: 'general',
+    question: 'What is Public Liability (Industrial vs. Non-Industrial) Insurance, and how do they differ?',
+    answer: 'Industrial Public Liability is designed for high-risk manufacturing plants, factories, and warehouses, covering liabilities arising from industrial accidents, chemical leakages, or explosions on surrounding environments and people. Non-Industrial Public Liability is tailored for lower-risk commercial properties like hotels, hospitals, IT parks, and schools, covering everyday guest slips, elevator mishaps, or building facility accidents.'
   }
 ];

@@ -46,28 +46,12 @@ export default function Navbar({ currentPage, setCurrentPage, onScrollToSection,
   }, []);
 
   const handleNavClick = (page: string, sectionId?: string) => {
-    setCurrentPage(page);
     setIsOpen(false);
     
-    if (page === 'home') {
-      if (sectionId) {
-        // Scroll to specific section on Home Page
-        setTimeout(() => {
-          onScrollToSection(sectionId);
-        }, 100);
-      } else {
-        // Scroll to top
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
+    if (sectionId) {
+      onScrollToSection(sectionId);
     } else {
-      // For Services / FAQ / Resources
-      if (sectionId) {
-        setTimeout(() => {
-          onScrollToSection(sectionId);
-        }, 100);
-      } else {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
+      setCurrentPage(page);
     }
   };
 

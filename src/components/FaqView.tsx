@@ -108,9 +108,10 @@ export default function FaqView({ initialCategoryFilter = 'all', onCategoryChang
   const [searchQuery, setSearchQuery] = useState('');
   const [expandedFaqId, setExpandedFaqId] = useState<string | null>(null);
   const questionsRef = useRef<HTMLDivElement>(null);
+  const faqContainerRef = useRef<HTMLDivElement>(null);
   const lastInitialCategoryRef = useRef<string | undefined>(undefined);
 
-  // Sync category filter if changed externally and scroll the selected FAQ question into view immediately on load
+  // Sync category filter if changed externally and scroll the top of the FAQ section into view immediately on load
   useEffect(() => {
     // Only synchronize if the external prop actually changed to avoid parent-triggered reset loops
     if (initialCategoryFilter !== lastInitialCategoryRef.current) {
@@ -124,49 +125,45 @@ export default function FaqView({ initialCategoryFilter = 'all', onCategoryChang
         const firstFaqOfCategory = faqs.find(faq => faq.category === initialCategoryFilter);
         if (firstFaqOfCategory) {
           setExpandedFaqId(firstFaqOfCategory.id);
-          
-          let attempts = 0;
-          // Wait for the route transition (300ms) to complete before measuring positions
-          const delayTimeout = setTimeout(() => {
-            const interval = setInterval(() => {
-              const faqElement = document.getElementById(`faq-card-${firstFaqOfCategory.id}`);
-              if (faqElement) {
-                const headerOffset = 110; // Account for the fixed header height
-                const elementPosition = faqElement.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-                
-                window.scrollTo({
-                  top: offsetPosition,
-                  behavior: 'smooth'
-                });
-                clearInterval(interval);
-              } else {
-                attempts++;
-                if (attempts > 12) { // 1.2s timeout fallback
-                  if (questionsRef.current) {
-                    const headerOffset = 110;
-                    const elementPosition = questionsRef.current.getBoundingClientRect().top;
-                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-                    window.scrollTo({
-                      top: offsetPosition,
-                      behavior: 'smooth'
-                    });
-                  }
-                  clearInterval(interval);
-                }
-              }
-            }, 100);
-            
-            return () => clearInterval(interval);
-          }, 350);
-          
-          return () => clearTimeout(delayTimeout);
         } else {
           setExpandedFaqId(null);
         }
       } else {
         setExpandedFaqId(null);
       }
+
+      let attempts = 0;
+      let intervalId: NodeJS.Timeout | null = null;
+      
+      // Wait for the route transition to finish rendering, then scroll to the very top of the FAQ container
+      const delayTimeout = setTimeout(() => {
+        intervalId = setInterval(() => {
+          if (faqContainerRef.current) {
+            const headerOffset = window.innerWidth < 768 ? 90 : 110;
+            let elementTop = 0;
+            let curr: HTMLElement | null = faqContainerRef.current;
+            while (curr) {
+              elementTop += curr.offsetTop;
+              curr = curr.offsetParent as HTMLElement | null;
+            }
+            window.scrollTo({
+              top: elementTop - headerOffset,
+              behavior: 'smooth'
+            });
+            if (intervalId) clearInterval(intervalId);
+          } else {
+            attempts++;
+            if (attempts > 15) {
+              if (intervalId) clearInterval(intervalId);
+            }
+          }
+        }, 50);
+      }, 100);
+
+      return () => {
+        clearTimeout(delayTimeout);
+        if (intervalId) clearInterval(intervalId);
+      };
     }
   }, [initialCategoryFilter]);
 
@@ -402,7 +399,7 @@ export default function FaqView({ initialCategoryFilter = 'all', onCategoryChang
   };
 
   return (
-    <div className="space-y-12 py-12 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-100 transition-colors duration-300">
+    <div ref={faqContainerRef} className="space-y-12 py-12 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-100 transition-colors duration-300">
       
       {/* 1. Header description */}
       <motion.div 
@@ -452,7 +449,17 @@ export default function FaqView({ initialCategoryFilter = 'all', onCategoryChang
             setActiveTab('explorer');
             setTimeout(() => {
               if (questionsRef.current) {
-                questionsRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                const headerOffset = window.innerWidth < 768 ? 90 : 110;
+                let elementTop = 0;
+                let curr: HTMLElement | null = questionsRef.current;
+                while (curr) {
+                  elementTop += curr.offsetTop;
+                  curr = curr.offsetParent as HTMLElement | null;
+                }
+                window.scrollTo({
+                  top: elementTop - headerOffset,
+                  behavior: 'smooth'
+                });
               }
             }, 80);
           }}
@@ -471,7 +478,17 @@ export default function FaqView({ initialCategoryFilter = 'all', onCategoryChang
             setActiveTab('assistant');
             setTimeout(() => {
               if (questionsRef.current) {
-                questionsRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                const headerOffset = window.innerWidth < 768 ? 90 : 110;
+                let elementTop = 0;
+                let curr: HTMLElement | null = questionsRef.current;
+                while (curr) {
+                  elementTop += curr.offsetTop;
+                  curr = curr.offsetParent as HTMLElement | null;
+                }
+                window.scrollTo({
+                  top: elementTop - headerOffset,
+                  behavior: 'smooth'
+                });
               }
             }, 80);
           }}
