@@ -186,9 +186,9 @@ export default function HomeView({ preFilledMessage, setPreFilledMessage, onNavi
           let retProgress = 0;
 
           const clientInterval = setInterval(() => {
-            clientProgress += 4;
-            if (clientProgress >= 200) {
-              clientProgress = 200;
+            clientProgress += 6;
+            if (clientProgress >= 210) {
+              clientProgress = 210;
               clearInterval(clientInterval);
             }
             setCounts(prev => ({ ...prev, clients: clientProgress }));
