@@ -65,7 +65,7 @@ export default function App() {
   const scrollToSectionImmediate = (sectionId: string, behavior: ScrollBehavior = 'smooth') => {
     const element = document.getElementById(sectionId);
     if (element) {
-      const headerOffset = window.innerWidth < 768 ? 90 : 110;
+      const headerOffset = window.innerWidth < 768 ? 60 : 72;
       let elementTop = 0;
       let curr: HTMLElement | null = element;
       while (curr) {
@@ -302,7 +302,7 @@ export default function App() {
           setTimeout(() => {
             const finalElement = document.getElementById(pendingScroll);
             if (finalElement) {
-              const headerOffset = window.innerWidth < 768 ? 90 : 110;
+              const headerOffset = window.innerWidth < 768 ? 60 : 72;
               let elementTop = 0;
               let curr: HTMLElement | null = finalElement;
               while (curr) {

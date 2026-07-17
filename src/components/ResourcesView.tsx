@@ -76,12 +76,54 @@ export default function ResourcesView({ onSetContactMessage, onNavigateToFaqCate
       definition = "మ్యూచువల్ ఫండ్ కంపెనీ మీ పెట్టుబడిని నిర్వహించినందుకు గాను సంవత్సరానికి వసూలు చేసే అతి తక్కువ నిర్వహణ రుసుము.";
       tag = "నిర్వహణ వ్యయ నిష్పత్తి";
       importance = "తక్కువ ఎక్స్‌పెన్స్ రేషియో ఉండటం వల్ల మీ చేతికి వచ్చే లాభాలు మెరుగ్గా ఉంటాయి.";
+    } else if (item.term === "Term Insurance") {
+      term = "Term Insurance (టర్మ్ ఇన్సూరెన్స్)";
+      definition = "అత్యంత తక్కువ ప్రీమియంతో అత్యధిక ఆర్థిక రక్షణను కల్పించే ఒక స్వచ్ఛమైన లైఫ్ ఇన్సూరెన్స్ ప్లాన్. పాలసీ కాలపరిమితిలో పాలసీదారునికి ఏదైనా జరిగితే నామినీకి పూర్తి బీమా మొత్తం అందుతుంది.";
+      tag = "స్వచ్ఛమైన జీవిత రక్షణ";
+      importance = "కుటుంబ ఆదాయ భద్రతకు మరియు అప్పుల తీర్చడానికి ఇది అత్యంత చౌకైన మార్గం.";
+    } else if (item.term === "Rupee Cost Averaging") {
+      term = "Rupee Cost Averaging (రూపాయి వ్యయ సగటు)";
+      definition = "SIP పెట్టుబడులలో లభించే ఒక సహజ ప్రయోజనం. మార్కెట్ ధరలు తక్కువగా ఉన్నప్పుడు ఎక్కువ యూనిట్లను, మార్కెట్ ధరలు ఎక్కువగా ఉన్నప్పుడు తక్కువ యూనిట్లను ఆటోమేటిక్‌గా కొనుగోలు చేయడం ద్వారా సగటు కొనుగోలు ధరను తగ్గిస్తుంది.";
+      tag = "మార్కెట్ హెచ్చుతగ్గుల రక్షణ";
+      importance = "మార్కెట్ గమనాన్ని అంచనా వేసే ఒత్తిడి లేకుండా పెట్టుబడి వ్యయాన్ని సమతుల్యం చేస్తుంది.";
+    } else if (item.term === "Endowment Policy") {
+      term = "Endowment Policy (ఎండోమెంట్ పాలసీ)";
+      definition = "భద్రత మరియు పొదుపు రెండింటినీ కలిపి అందించే సంప్రదాయ బీమా ప్లాన్. పాలసీ కాలపరిమితి ముగిసిన తర్వాత లేదా పాలసీదారుని మరణానంతరం గ్యారెంటీ మొత్తాన్ని అందిస్తుంది.";
+      tag = "పొదుపు మరియు రక్షణ";
+      importance = "పిల్లల పెళ్లిళ్లు, చదువుల వంటి దీర్ఘకాలిక లక్ష్యాల కోసం క్రమబద్ధమైన పొదుపును ప్రోత్సహిస్తుంది.";
+    } else if (item.term === "Premium Rider") {
+      term = "Premium Rider (ప్రీమియం రైడర్)";
+      definition = "ప్రధాన బీమా పాలసీకి అదనపు రక్షణ కల్పించే ప్రత్యేక నిబంధన (ఉదా: ప్రమాదవశాత్తు మరణం, తీవ్ర అనారోగ్యం, ప్రీమియం మినహాయింపు). దీని కోసం స్వల్ప అదనపు ప్రీమియం చెల్లించాల్సి ఉంటుంది.";
+      tag = "అదనపు రక్షణ సాధనం";
+      importance = "వేరే కొత్త పాలసీలు కొనకుండానే, ఉన్న పాలసీతోనే విపత్కర పరిస్థితులకు అదనపు రక్షణను పొందే వీలు కల్పిస్తుంది.";
+    } else if (item.term === "ULIP (Unit Linked Insurance Plan)") {
+      term = "ULIP (యూనిట్ లింక్డ్ ఇన్సూరెన్స్ ప్లాన్)";
+      definition = "బీమా రక్షణ మరియు మార్కెట్ ఆధారిత పెట్టుబడి రెండింటినీ కలిపి అందించే ఒక సంకర (హైబ్రిడ్) ఆర్థిక సాధనం. ప్రీమియంలో కొంత భాగం జీవిత రక్షణకు, మిగిలిన భాగం మ్యూచువల్ ఫండ్స్ తరహా మార్కెట్ ఫండ్స్ లో పెట్టుబడిగా మళ్ళించబడుతుంది.";
+      tag = "మార్కెట్ అనుసంధాన రక్షణ";
+      importance = "ఈక్విటీ మరియు డెట్ ఫండ్స్ మధ్య ఉచితంగా మారే సదుపాయంతో పాటు పెట్టుబడి వృద్ధికి తోడ్పడుతుంది.";
+    } else if (item.term === "Waiting Period") {
+      term = "Waiting Period (వేచి ఉండే కాల వ్యవధి)";
+      definition = "ఆరోగ్య బీమా తీసుకున్న తర్వాత కొన్ని నిర్దిష్ట వ్యాధులు లేదా ముందు నుంచి ఉన్న అనారోగ్యాలకు (Pre-existing diseases) సంబంధించి చికిత్స ఖర్చులను క్లెయిమ్ చేయడానికి వేచి ఉండాల్సిన కాలపరిమితి.";
+      tag = "క్λειమ్ నిరోధక కాలం";
+      importance = "పాలసీ కొనేముందు తప్పక తెలుసుకోవాలి, సాధారణంగా ఇది సాధారణ వ్యాధులకు 30 రోజులు మరియు పాత వ్యాధులకు 2 నుండి 4 సంవత్సరాల వరకు ఉంటుంది.";
+    } else if (item.term === "Liquid Mutual Fund") {
+      term = "Liquid Mutual Fund (లిక్విడ్ మ్యూచువల్ ఫండ్)";
+      definition = "అత్యంత తక్కువ నష్టభయం గల డెట్ మ్యూచువల్ ఫండ్ రకం. ఇది కేవలం 91 రోజుల లోపు గడువు ముగిసే ప్రభుత్వ మరియు కార్పొరేట్ సురక్షిత పత్రాలలో పెట్టుబడి పెడుతుంది.";
+      tag = "అత్యంత సురక్షిత పెట్టుబడి";
+      importance = "సేవింగ్స్ బ్యాంక్ ఖాతాల కంటే ఎక్కువ వడ్డీని అందిస్తూనే, అత్యవసర సమయాల్లో వెనువెంటనే నగదును పొందే వీలు కల్పిస్తుంది.";
+    } else if (item.term === "Grievance Redressal") {
+      term = "Grievance Redressal (ఫిర్యాదుల పరిష్కార వ్యవస్థ)";
+      definition = "పాలసీదారుల ఫిర్యాదులు, వివాదాలు లేదా క్లెయిమ్ తిరస్కరణలను పరిష్కరించడానికి బీమా సంస్థలు మరియు IRDAI ఏర్పాటు చేసిన చట్టబద్ధమైన మరియు అధికారిక ఫిర్యాదుల పరిష్కార విభాగం.";
+      tag = "వినియోగదారుల హక్కుల రక్షణ";
+      importance = "కోర్టుల చుట్టూ తిరగాల్సిన అవసరం లేకుండానే, బీమా వివాదాలను వేగంగా మరియు ఉచితంగా పరిష్కరించుకునేందుకు దోహదపడుతుంది.";
     }
 
     return { ...item, term, definition, tag, importance };
   });
 
-  const filteredGlossaryTerms = localizedGlossaryTerms.filter((item) => {
+  const sortedGlossaryTerms = [...localizedGlossaryTerms].sort((a, b) => a.term.localeCompare(b.term));
+
+  const filteredGlossaryTerms = sortedGlossaryTerms.filter((item) => {
     const matchesCategory = activeFilter === 'all' || item.category === activeFilter;
     const matchesQuery = 
       item.term.toLowerCase().includes(searchQuery.toLowerCase()) || 
@@ -425,5 +467,61 @@ const GLOSSARY_TERMS: GlossaryTerm[] = [
     category: "investment",
     tag: "Operational fees Efficiency",
     importance: "Directly relates to final asset yields, where lower costs equal higher dynamic compound value."
+  },
+  {
+    term: "Term Insurance",
+    definition: "A pure and highly affordable financial protection plan that provides substantial life coverage for a specified term. It has no maturity value but secures your family's future at the lowest cost.",
+    category: "insurance",
+    tag: "Pure Life Protection",
+    importance: "The most cost-effective way to replace income and secure outstanding liabilities for your family."
+  },
+  {
+    term: "Rupee Cost Averaging",
+    definition: "An inherent dynamic investment benefit of Systematic Investment Plans (SIP) where you automatically buy more mutual fund units when the market price (NAV) is low and fewer units when it is high, lowering your average cost over time.",
+    category: "investment",
+    tag: "Market Timing Shield",
+    importance: "Removes the risk of timing the market by capitalizing on market volatility to lower overall unit costs."
+  },
+  {
+    term: "Endowment Policy",
+    definition: "A traditional insurance plan that combines life coverage with savings. It guarantees a lump-sum payout either upon completing the policy term (maturity) or in the unfortunate event of death, ensuring a blend of safety and growth.",
+    category: "insurance",
+    tag: "Savings & Security Dual Plan",
+    importance: "Encourages disciplined long-term savings while guaranteeing a fixed sum for future goals like children's marriage or education."
+  },
+  {
+    term: "Premium Rider",
+    definition: "An optional, supplementary add-on benefit that can be attached to a primary life or health insurance policy to expand coverage for specific risks (like Critical Illness, Accidental Death, or Waiver of Premium) at a small extra premium cost.",
+    category: "insurance",
+    tag: "Custom Coverage Boosters",
+    importance: "Allows tailored customization of standard policies to cover extreme health or accidental contingencies without buying separate plans."
+  },
+  {
+    term: "ULIP (Unit Linked Insurance Plan)",
+    definition: "A hybrid financial instrument that integrates investment growth and life insurance. A portion of the premium is allocated toward life cover, while the remaining balance is invested in equity, debt, or balanced market funds based on your choice.",
+    category: "investment",
+    tag: "Market-Linked Protection",
+    importance: "Offers investment flexibility and tax-free switching between equity and debt funds under Section 10(10D) guidelines."
+  },
+  {
+    term: "Waiting Period",
+    definition: "A contractually defined timeline in health insurance policies during which specific medical treatments or pre-existing diseases (PED) are not covered. Once this period expires, all benefits are fully accessible.",
+    category: "insurance",
+    tag: "Policy Maturation Waiting",
+    importance: "Crucial to understand before claiming, usually ranging from 30 days for accidents to 2-4 years for pre-existing illnesses like diabetes or hypertension."
+  },
+  {
+    term: "Liquid Mutual Fund",
+    definition: "An extremely low-risk debt mutual fund scheme that invests in highly secure, short-term money market securities with maturities of up to 91 days. It prioritizes capital safety and high liquidity over aggressive returns.",
+    category: "investment",
+    tag: "Safe Emergency Cache",
+    importance: "Provides a much better yield alternative than conventional savings bank accounts while offering instant redemption for urgent financial emergencies."
+  },
+  {
+    term: "Grievance Redressal",
+    definition: "The legally mandated institutional channel and structured procedure set up by insurance companies and IRDAI to address, investigate, and formally resolve policyholder disputes, complaints, or unfair claim rejections.",
+    category: "insurance",
+    tag: "Consumer Rights Protection",
+    importance: "Empowers policyholders with a clear legal path to challenge unfair service delays or dispute settlements without high court costs."
   }
 ];

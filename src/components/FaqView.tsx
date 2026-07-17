@@ -135,13 +135,16 @@ export default function FaqView({ initialCategoryFilter = 'all', onCategoryChang
       let attempts = 0;
       let intervalId: NodeJS.Timeout | null = null;
       
-      // Wait for the route transition to finish rendering, then scroll to the very top of the FAQ container
+      // Wait for the route transition to finish rendering, then scroll to the categories container or FAQ container
       const delayTimeout = setTimeout(() => {
         intervalId = setInterval(() => {
-          if (faqContainerRef.current) {
-            const headerOffset = window.innerWidth < 768 ? 90 : 110;
+          const target = (initialCategoryFilter && initialCategoryFilter !== 'all')
+            ? (document.getElementById('faq-categories-list') || faqContainerRef.current)
+            : faqContainerRef.current;
+          if (target) {
+            const headerOffset = window.innerWidth < 768 ? 60 : 72;
             let elementTop = 0;
-            let curr: HTMLElement | null = faqContainerRef.current;
+            let curr: HTMLElement | null = target;
             while (curr) {
               elementTop += curr.offsetTop;
               curr = curr.offsetParent as HTMLElement | null;
@@ -449,7 +452,7 @@ export default function FaqView({ initialCategoryFilter = 'all', onCategoryChang
             setActiveTab('explorer');
             setTimeout(() => {
               if (questionsRef.current) {
-                const headerOffset = window.innerWidth < 768 ? 90 : 110;
+                const headerOffset = window.innerWidth < 768 ? 60 : 72;
                 let elementTop = 0;
                 let curr: HTMLElement | null = questionsRef.current;
                 while (curr) {
@@ -457,7 +460,7 @@ export default function FaqView({ initialCategoryFilter = 'all', onCategoryChang
                   curr = curr.offsetParent as HTMLElement | null;
                 }
                 window.scrollTo({
-                  top: elementTop - headerOffset,
+                  top: Math.max(0, elementTop - headerOffset),
                   behavior: 'smooth'
                 });
               }
@@ -478,7 +481,7 @@ export default function FaqView({ initialCategoryFilter = 'all', onCategoryChang
             setActiveTab('assistant');
             setTimeout(() => {
               if (questionsRef.current) {
-                const headerOffset = window.innerWidth < 768 ? 90 : 110;
+                const headerOffset = window.innerWidth < 768 ? 60 : 72;
                 let elementTop = 0;
                 let curr: HTMLElement | null = questionsRef.current;
                 while (curr) {
@@ -486,7 +489,7 @@ export default function FaqView({ initialCategoryFilter = 'all', onCategoryChang
                   curr = curr.offsetParent as HTMLElement | null;
                 }
                 window.scrollTo({
-                  top: elementTop - headerOffset,
+                  top: Math.max(0, elementTop - headerOffset),
                   behavior: 'smooth'
                 });
               }
@@ -514,7 +517,7 @@ export default function FaqView({ initialCategoryFilter = 'all', onCategoryChang
           className="space-y-8"
         >
           {/* Categories Tab Pill slider with slide-in staggered animation */}
-          <div className="space-y-6">
+          <div className="space-y-6" id="faq-categories-list">
             <motion.div 
               role="tablist"
               aria-label="FAQ Categories"
