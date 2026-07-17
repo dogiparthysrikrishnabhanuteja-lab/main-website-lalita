@@ -186,7 +186,7 @@ export default function HomeView({ preFilledMessage, setPreFilledMessage, onNavi
           let retProgress = 0;
 
           const clientInterval = setInterval(() => {
-            clientProgress += 10;
+            clientProgress += 5;
             if (clientProgress >= 200) {
               clientProgress = 200;
               clearInterval(clientInterval);
@@ -195,7 +195,7 @@ export default function HomeView({ preFilledMessage, setPreFilledMessage, onNavi
           }, 30);
 
           const sumAssuredInterval = setInterval(() => {
-            sumAssuredProgress += 5;
+            sumAssuredProgress += 3;
             if (sumAssuredProgress >= 120) {
               sumAssuredProgress = 120;
               clearInterval(sumAssuredInterval);
