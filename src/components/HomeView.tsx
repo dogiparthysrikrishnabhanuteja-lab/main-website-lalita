@@ -186,7 +186,7 @@ export default function HomeView({ preFilledMessage, setPreFilledMessage, onNavi
           let retProgress = 0;
 
           const clientInterval = setInterval(() => {
-            clientProgress += 5;
+            clientProgress += 2;
             if (clientProgress >= 200) {
               clientProgress = 200;
               clearInterval(clientInterval);
@@ -195,7 +195,7 @@ export default function HomeView({ preFilledMessage, setPreFilledMessage, onNavi
           }, 30);
 
           const sumAssuredInterval = setInterval(() => {
-            sumAssuredProgress += 3;
+            sumAssuredProgress += 1.25;
             if (sumAssuredProgress >= 120) {
               sumAssuredProgress = 120;
               clearInterval(sumAssuredInterval);
@@ -204,7 +204,7 @@ export default function HomeView({ preFilledMessage, setPreFilledMessage, onNavi
           }, 15);
 
           const expInterval = setInterval(() => {
-            expProgress += 1;
+            expProgress += 0.4;
             if (expProgress >= 4) { // Inceptioned in 2022 (2022 to 2026)
               expProgress = 4;
               clearInterval(expInterval);
@@ -213,7 +213,7 @@ export default function HomeView({ preFilledMessage, setPreFilledMessage, onNavi
           }, 150);
 
           const retInterval = setInterval(() => {
-            retProgress += 2;
+            retProgress += 1.45;
             if (retProgress >= 98) {
               retProgress = 98;
               clearInterval(retInterval);
